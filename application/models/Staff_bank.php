@@ -11,29 +11,27 @@
  *
  * @author Ajilore Raphael
  */
-class User extends My_Model {
+class Staff_bank extends My_Model {
 
 
-    public $user_id;
+    public $staff_bank_id;
 
-    public $username;
-
-    public $password;
-
-    public $password2;
+    public $staff_name;
     
-    public $image;
+    public $staff_acc_name;
     
-    public $role;
+    public $staff_acc_number;
+    
+    public $staff_bank;
 
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'user';
+    protected $table = 'staff_bank';
 
-    protected $primary = 'user_id';
+    protected $primary = 'staff_bank_id';
 
     /**
      * Column definition
@@ -41,41 +39,34 @@ class User extends My_Model {
      * @var array
      */
     public $columns = array(
-        'user_id' => array(
+        'staff_bank_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
             'auto_increment' => TRUE
         ),
         
-        'username' => array(
+        'staff_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'password' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'image' => array(
+        'staff_acc_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'role' => array(
+        'staff_acc_number' => array(
             'type' => 'varchar',
-            'constraint' => '50',
+            'constraint' => '250',
             'null' => true
+        ),
+        
+        'staff_bank' => array(
+            'type' => 'varchar',
+            'constraint' => '100'
         ),
         
         'create_time' => array(

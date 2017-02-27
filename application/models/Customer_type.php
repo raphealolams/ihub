@@ -11,29 +11,21 @@
  *
  * @author Ajilore Raphael
  */
-class User extends My_Model {
+class Customer_type extends My_Model {
 
 
-    public $user_id;
+    public $customer_type_id;
 
-    public $username;
-
-    public $password;
-
-    public $password2;
-    
-    public $image;
-    
-    public $role;
+    public $customer_type_name;
 
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'user';
+    protected $table = 'customer_type';
 
-    protected $primary = 'user_id';
+    protected $primary = 'customer_type_id';
 
     /**
      * Column definition
@@ -41,40 +33,16 @@ class User extends My_Model {
      * @var array
      */
     public $columns = array(
-        'user_id' => array(
+        'customer_type_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
             'auto_increment' => TRUE
         ),
         
-        'username' => array(
+        'customer_type_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
-            'null' => true
-        ),
-        
-        'password' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'image' => array(
-            'type' => 'varchar',
-            'constraint' => '250',
-            'null' => true
-        ),
-        
-        'role' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
             'null' => true
         ),
         

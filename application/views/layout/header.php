@@ -3,27 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Easy Wash | </title>
+  <title>Easy Wash | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css')?>">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.css')?>">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/select2.min.css')?>">
-  <!-- Bootstrap 3.3.6 Modal-->
-  <!-- <link rel="stylesheet" href="../../bootstrap/js/bootstrap.min.js"> -->
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/AdminLTE.min.css')?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css')?>">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/flat/blue.css')?>">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/morris/morris.css')?>">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css')?>">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datepicker/datepicker3.css')?>">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/daterangepicker/daterangepicker.css')?>">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,7 +42,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -48,9 +53,6 @@
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </a>
 
       <div class="navbar-custom-menu">
@@ -58,13 +60,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg')?>" class="user-image" alt="User Image">
+              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -105,6 +107,7 @@
       </div>
     </nav>
   </header>
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -112,13 +115,14 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
-        <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
         <div class="pull-left info">
           <p>Alexander Pierce</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
+
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -132,15 +136,15 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">SITE NAVIGATION</li>
-        <li class="treeview">
-          <a href="../../index.php">
+        <li class="header">Site Navigation</li>
+        <li class="active treeview">
+          <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
@@ -150,22 +154,22 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../pages/customer/all_customer.php"><i class="fa fa-user"></i> Mange Customer</a></li>
-            <li><a href="../../pages/customer/manage_type.php"><i class="fa fa-user"></i> Add Customer Type</a></li>
+            <li><a href="pages/customer/all_customer.php"><i class="fa fa-user"></i> Mange Customer</a></li>
+            <li><a href="pages/customer/manage_type.php"><i class="fa fa-user"></i> Add Customer Type</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-pie-chart"></i>
+            <i class="fa fa-briefcase"></i>
             <span>Drop Off</span>
             <span class="pull-right-container">
               <i class=" label label-primary pull-right">3</i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../pages/drop off/drop_off.php"><i class="fa fa-circle-o"></i> Manage Drop Off</a></li>
-            <li><a href="../../pages/drop off/all_items.php"><i class="fa fa-circle-o"></i> Add Items</a></li>
+            <li><a href="pages/drop off/drop_off.php"><i class="fa fa-circle-o"></i> Manage Drop Off</a></li>
+            <li><a href="pages/drop off/all_items.php"><i class="fa fa-circle-o"></i> Add Items</a></li>
             <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Manage Drop of Invoice</a></li>
           </ul>
         </li>
@@ -179,8 +183,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../pages/pick up/"><i class="fa fa-circle-o"></i> Manage Pick Up</a></li>
-            <li><a href="../../pages/pick up/"><i class="fa fa-circle-o"></i> Reciept</a></li>
+            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Manage Pick Up</a></li>
+            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Reciept</a></li>
           </ul>
         </li>
 
@@ -191,6 +195,11 @@
               <i class="label label-primary pull-right">1</i>
             </span>
           </a>
+          <ul class="treeview-menu">
+            <!-- <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li> -->
+          </ul>
         </li>
 
         <li class="treeview">
@@ -234,9 +243,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../pages/staff/all_staff.php"><i class="fa fa-circle-o"></i> Manage Staff</a></li>
-            <li><a href="../../pages/staff/staff_bank.php"><i class="fa fa-circle-o"></i> Staff Bank Details</a></li>
-            <li><a href="../../pages/staff/staff_item.php"><i class="fa fa-circle-o"></i> Add Staff Item</a></li>
+            <li><a href="pages/staff/all_staff.php"><i class="fa fa-circle-o"></i> Manage Staff</a></li>
+            <li><a href="pages/staff/staff_bank.php"><i class="fa fa-circle-o"></i> Staff Bank Details</a></li>
+            <li><a href="pages/staff/staff_item.php"><i class="fa fa-circle-o"></i> Add Staff Item</a></li>
           </ul>
         </li>
 

@@ -11,29 +11,28 @@
  *
  * @author Ajilore Raphael
  */
-class User extends My_Model {
+
+class Staff_items extends My_Model {
 
 
-    public $user_id;
+    public $staff_item_id;
 
-    public $username;
-
-    public $password;
-
-    public $password2;
+    public $staff_type;
     
-    public $image;
+    public $staff_dept;
     
-    public $role;
-
+    public $staff_level;
+    
+    public $staff_status;
+    
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'user';
+    protected $table = 'staff_items';
 
-    protected $primary = 'user_id';
+    protected $primary = 'staff_items_id';
 
     /**
      * Column definition
@@ -41,47 +40,41 @@ class User extends My_Model {
      * @var array
      */
     public $columns = array(
-        'user_id' => array(
+        'staff_items_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
             'auto_increment' => TRUE
         ),
         
-        'username' => array(
+        'staff_type' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'password' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'image' => array(
+        'staff_dept' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'role' => array(
+        'staff_level' => array(
             'type' => 'varchar',
-            'constraint' => '50',
+            'constraint' => '250',
             'null' => true
+        ),
+        
+        'staff_status' => array(
+            'type' => 'varchar',
+            'constraint' => '100'
         ),
         
         'create_time' => array(
             'type' => 'datetime',
             'null' => true
         ),
+        
         'edit_time' => array(
             'type' => 'datetime',
             'null' => true

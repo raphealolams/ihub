@@ -11,70 +11,39 @@
  *
  * @author Ajilore Raphael
  */
-class User extends My_Model {
+class Customer_status extends My_Model {
 
 
-    public $user_id;
+    public $customer_status_id;
 
-    public $username;
-
-    public $password;
-
-    public $password2;
-    
-    public $image;
-    
-    public $role;
+    public $customer_status_name;
 
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'user';
+    protected $table = 'customer_status';
 
-    protected $primary = 'user_id';
+    protected $primary = 'customer_status_id';
 
     /**
      * Column definition
      *
      * @var array
      */
+    
     public $columns = array(
-        'user_id' => array(
+            'customer_status_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
             'auto_increment' => TRUE
         ),
         
-        'username' => array(
+        'customer_status_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
-            'null' => true
-        ),
-        
-        'password' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'image' => array(
-            'type' => 'varchar',
-            'constraint' => '250',
-            'null' => true
-        ),
-        
-        'role' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
             'null' => true
         ),
         
@@ -82,6 +51,7 @@ class User extends My_Model {
             'type' => 'datetime',
             'null' => true
         ),
+        
         'edit_time' => array(
             'type' => 'datetime',
             'null' => true

@@ -11,29 +11,27 @@
  *
  * @author Ajilore Raphael
  */
-class User extends My_Model {
+class Items extends My_Model {
 
 
-    public $user_id;
+    public $items_id;
 
-    public $username;
-
-    public $password;
-
-    public $password2;
+    public $category;
     
-    public $image;
+    public $item_name;
     
-    public $role;
+    public $price;
+    
+    public $comment;
 
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'user';
+    protected $table = 'items';
 
-    protected $primary = 'user_id';
+    protected $primary = 'items_id';
 
     /**
      * Column definition
@@ -41,41 +39,34 @@ class User extends My_Model {
      * @var array
      */
     public $columns = array(
-        'user_id' => array(
+        'items_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
             'auto_increment' => TRUE
         ),
         
-        'username' => array(
+        'category' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'password' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'image' => array(
+        'item_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'role' => array(
+        'price' => array(
             'type' => 'varchar',
-            'constraint' => '50',
+            'constraint' => '100'
+        ),
+        
+        'comment' => array(
+            'type' => 'text',
             'null' => true
+    
         ),
         
         'create_time' => array(

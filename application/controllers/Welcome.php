@@ -23,15 +23,4 @@ class Welcome extends CI_Controller {
 		$this->load->view('index');
 	}
 
-	public function message()
-	{
-		  $this->load->model('user');
-			$this->load->helper('array');
-			$users = $this->user->getUsers();
-
-	  	$this->load->view('index' , [
-				'users' => $users,
-				'message' => 'My Message'
-			]);
-	}
 }

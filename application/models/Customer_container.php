@@ -9,31 +9,30 @@
 /**
  * Description of User
  *
- * @author Ajilore Raphael
+ * @author Crystalhills
  */
-class User extends My_Model {
-
-
-    public $user_id;
-
-    public $username;
-
-    public $password;
-
-    public $password2;
+class Customer_container extends My_Model {
     
-    public $image;
+    public $customer_container_id;
+
+    public $item_id;
+
+    public $customer_id;
+
+    public $picked;
     
-    public $role;
+    public $invoice_number;
+    
+    public $picked_date;
 
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'user';
+    protected $table = 'customer_container';
 
-    protected $primary = 'user_id';
+    protected $primary = 'customer_container_id';
 
     /**
      * Column definition
@@ -41,40 +40,39 @@ class User extends My_Model {
      * @var array
      */
     public $columns = array(
-        'user_id' => array(
+        'customer_container_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
             'auto_increment' => TRUE
         ),
         
-        'username' => array(
+        'item_id' => array(
+            'type' => 'int',
+            'constraint' => '11',
+            'null' => true
+        ),
+        
+        'customer_id' => array(
+            'type' => 'int',
+            'constraint' => '11',
+            'null' => true
+        ),
+        
+        'picked' => array(
+            'type' => 'varchar',
+            'constraint' => '10',
+            'null' => true
+        ),
+        
+        'invoice_number' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
         ),
         
-        'password' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
-        'image' => array(
-            'type' => 'varchar',
-            'constraint' => '250',
-            'null' => true
-        ),
-        
-        'role' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
+        'picked_date' => array(
+            'type' => 'datetime',
             'null' => true
         ),
         
