@@ -1,301 +1,201 @@
-<?php
-include '../header.php';
-?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Manage Customer
-        <small> Record</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Customer</a></li>
-        <li class="active">Manage Customer </li>
-      </ol>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="nav nav-tabs-custom">
-              <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#all">All</a></li>
-                  <li><a data-toggle="tab" href="#add">Add New</a></li>
-              </ul>
-            </div>
+<div class="right_col" role="main">
 
-            <div class="box-body">
-            <div class="tab-content">
-            <div id="all" class="tab-pane fade in active">
-            <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                   <tr>
-                      <th>Surname</th>
-                      <th>Other Names</th>
-                      <th>Gender</th>
-                      <th>Telephone</th>
-                      <th>Email</th>
-                      <th>Address</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                    </thead>
-                   <tbody>
-                        <?php
-                        $sql = $pdo->prepare("SELECT * FROM customer");
-                        $sql->execute();
-                        while($result = $sql->fetch(PDO::FETCH_ASSOC)){
-                        ?>
-                        <tr>
-                        <td><?php echo $result['surname'];?></td>
-                        <td><?php echo $result['other_name'];?></td>
-                        <td><?php echo $result['gender'];?></td>
-                        <td><?php echo $result['phone_number'];?></td>
-                        <td><?php echo $result['email'];?></td>
-                        <td><?php echo $result['address'];?></td>
-                        <td><?php echo $result['status'];?></td>
-                        <td><button class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#mymodal<?php echo $result['customer_id'];?>"></button>
-                        <td></td>
-</td>
-                        </tr>
+    <div  class="alert alert-success alert-dismissable"> <?php echo $message ?></div>
 
-                        <div id="mymodal<?php echo $result['customer_id'];?>" class="modal fade" role="dialog">
-                       <form action="edit_customer.php" method="post" enctyp="multipart/form-data">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title">Edit Customer Details </h4>
-                          </div>
-                          <div class="modal-body">
-                            <div class="box box-info">
-                              <div class="box-header with-border">
-                                <h3 class="box-title"></h3>
-                         </div>
-                         <div class="box-body">
-                           <div class="form-group ">
-                              <label>Surname Name:</label>
-                                <input type="text" name="surname" class="form-control" value="<?php echo $result['surname'];?>">
-                            </div>
-                            <br/>
 
-                            <div class="form-group">
-                                <label>Other Name:</label>
-                                <input type="text" name="other_name" class="form-control" value="<?php echo $result['other_name'];?>">
-                            </div>
-                            <br/>
-
-                            <div class="form-group">
-                              <label>Gender</label>
-                              <select class="form-control select2" name="gender" style="width: 100%;">
-                                <option value="<?php echo $result['gender'];?>"><?php echo $result['gender'];?></option>
-                                <<option value=""></option>
-                                <option>Male</option>
-                                <option>Female</option>
-                              </select>
-                            </div>
-                            <br/>
-
-                            <div class="form-group">
-                              <label>Date Of Birth:</label>
-                              <input type="date" name="dob" class="form-control" value="<?php echo $result['dob'];?>">
-                            </div>
-                            <br/>
-
-                            <div class="form-group">
-                              <label>State of Origin</label>
-                              <select class="form-control select2" name="state" style="width: 100%;">
-                                <option value="<?php echo $result['state'];?>"><?php echo $result['state'];?></option>
-                                <?php foreach ($state as $key => $value):
-                                  echo '<option value="'.$key.'">'.$value.'</option>'; //close your tags!!
-                                  endforeach;
-                                  ?>
-                              </select>
-                            </div>
-                            <br/>
-                        <div class="form-group">
-                           <label>Address</label>
-                             <textarea class="form-control" name="address" rows="3" value="<?php echo $result['address'];?>"></textarea>
-                        </div>
-                          <br/>
-                          <div class="input-group">
-                            <div class="input-group-addon">
-                            <label>Phone</label><i class="glyphicon glyphicon-phone"></i>
-                            </div>
-                            <input type="text" class="form-control" name="phone_number" value="<?php echo $result['phone_number'];?>">
-                          </div>
-                          <br/>
-
-                          <div class="input-group">
-                            <div class="input-group-addon">
-                            <i class="">Email @</i>
-                            </div>
-                            <input type="email" class="form-control" name="email" id="exampleInputEmail1" value="<?php echo $result['email'];?>">
-                          </div>
-                          <br/>
-
-                          <div class="form-group">
-                               <label for="exampleInputFile">Picture</label>
-                               <input type="file" name="image" id="exampleInputFile">
-                          </div>
-                          <br/>
-
-                          <div class="form-group">
-                            <label>Status</label>
-                            <select class="form-control select2" name="status" style="width: 100%;">
-                              <<option value="<?php echo $result['status'];?>"></option>
-                              <option selected="selected">Select</option>
-                            </select>
-                          </div>
-                          <br/>
-                                  <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
-                             </div>
-                              </div>
-                            </div>
-                          </div>
-                          </div>
-                          <div class="modal-footer">
-                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                                   </form>
-                              </div>
-                        <!--- END OF MODAL -->
-                       <?php } ?>
-                     </tbody>
-
-                 </table>
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><?php echo $title ?></h3>
                 </div>
-
-
-          <div id="add" class="tab-pane fade">
-            <form action="add_customer.php" method="post" enctype="multipart/form-data">
-              <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"></h3>
-           </div>
-           <div class="box-body">
-             <div class="form-group ">
-                <label>Surname Name:</label>
-                  <input type="text" name="surname" class="form-control" placeholder="Adeoye">
-              </div>
-              <br/>
-
-              <div class="form-group">
-                  <label>Other Name:</label>
-                  <input type="text" name="other_name" class="form-control" placeholder="Raphael Olamide">
-              </div>
-              <br/>
-
-              <div class="form-group">
-                <label>Gender</label>
-                <select class="form-control select2" name="gender" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              </div>
-              <br/>
-
-              <div class="form-group">
-                <label>Date Of Birth:</label>
-                <input type="date" name="dob" class="form-control">
-              </div>
-              <br/>
-
-              <div class="form-group">
-                <label>State of Origin</label>
-                <select class="form-control select2" name="state" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                  <?php foreach ($state as $key):
-                    echo '<option value="'.$key.'">'.$key.'</option>'; //close your tags!!
-                    endforeach;
-                    ?>
-                </select>
-              </div>
-              <br/>
-          <div class="form-group">
-             <label>Address</label>
-               <textarea class="form-control" name="address" rows="3" placeholder="Enter ..."></textarea>
-          </div>
-            <br/>
-            <div class="input-group">
-              <div class="input-group-addon">
-              <label>Phone</label><i class="glyphicon glyphicon-phone"></i>
-              </div>
-              <input type="text" class="form-control" name="phone_number" data-inputmask='"mask": "99999999999"' data-mask>
             </div>
-            <br/>
 
-            <div class="input-group">
-              <div class="input-group-addon">
-              <i class="">Email @</i>
-              </div>
-              <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="someone@yahoo.com">
-            </div>
-            <br/>
+            <div class="clearfix"></div>
 
-            <div class="form-group">
-                 <label for="exampleInputFile">Picture</label>
-                 <input type="file" name="image" id="exampleInputFile">
-            </div>
-            <br/>
+            <div class="">
+    
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-bars"></i>Manage</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
 
-               <div class="form-group">
-              <label>Customer Type</label>
-              <select class="form-control select2" name="customer_type" style="width: 100%;">
-                <option selected="selected">Select</option>
-                <?php
-                $sql = "SELECT customer_type_name FROM customer_type";
-                $stmt = $pdo->prepare($sql);
-                          $stmt->execute();
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                if ($stmt->rowCount() > 0) { ?>
-                    <?php foreach ($results as $row) { ?>
-                      <option value="<?php echo $row['customer_type_name']; ?>"><?php echo $row['customer_type_name']; ?></option>
-                    <?php } ?>
-                <?php } ?>
-              </select>
-            </div>
-            <br/>
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"> <i class="fa-user"></i>Add New</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="all-tab" data-toggle="tab" aria-expanded="false"> <i class="fa-list"></i>All Customer</a>
+                        </li>
+                      </ul>
+                      </div>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <!-- Add Form Begins -->
+                           <br />
+                            <div class="row">
+                              <div class="form-horizontal form-label-left col-md-10">
+                        <?php echo form_open_multipart('customer/save') ?>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Surname</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="surname" placeholder="Ajilore" required="required" value="">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                        
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Other Names</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="other_name" placeholder="Olamide">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                        
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Gender</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <select class="form-control" id="select2" name="gender">
+                              <option>Male</option>
+                              <option>Female</option>
+                         </select>
+                        </div>
+                      </div>
+                        
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Date of Birth</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="date" class="form-control" name="dob">
+                        </div>
+                      </div>
+                        
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">State Of Origin</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <select class="form-control"  name="state">
+                              <option>Male</option>
+                         </select>
+                        </div>
+                      </div>
+                        
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Address</label> 
+                         <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea class="form-control" name="address"></textarea>
+                         </div>                        
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone Number</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" data-inputmask="'mask' : '99999999999'" name="phone_number">
+                          <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Email</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <input type="email" class="form-control" name="email">
+                            <span class="fa fa-email form-control-feedback right" aria-hidden="true">@</span>
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Image</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <input type="file" class="form-control" name="image">
+                            <span class="fa fa-image form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                  
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Type</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="customer_type">
+                                 <option> </option>
+                                <?php foreach ($types->result() as $type): ?>
+                            <option> <?php echo $type->customer_type_name ?></option>
+                                <?php endforeach ;?>
+                            </select>
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Status</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="status">
+                            <option> </option>
+                                <?php foreach ($status->result() as $stat): ?>
+                            <option> <?php echo $stat->customer_status_name ?></option>
+                                <?php endforeach ;?>
+                            </select>
+                        </div>
+                    </div>
+                        <br/>
+                        <center>
+                          <input type="submit" class="btn btn-success" value="submit" name="submit">
+                        </center>
+                            </div>
+                      <?php echo form_close() ?>
+<!--                    </form>-->
+                            <!-- Form Ends -->
+                        </div>  
+                            </div>
+                            
+                              <div class="clearfix"></div>
 
-            <div class="form-group">
-              <label>Status</label>
-              <select class="form-control select2" name="status" style="width: 100%;">
-                <option selected="selected">Select</option>
-                <option>New</option>
-                <option>Active</option>
-                <option>Inactive</option>
-                <option>Passive</option>
-              </select>
-            </div>
-            <br/>
-                    <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
+                          <!-- View Customer -->
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="all-tab">
+                     
+					  <p class="text-muted font-13 m-b-30">
+                      View Registered Customers in a glance
+                    </p>
+					
+                    <table id="datatable-responsive" class="datatable table table-striped table-hover table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                     
+                      <thead>
+                        <tr>
+                          <th>Surname</th>
+                          <th>Other Names</th>
+                          <th>Gender</th>
+                          <th>Phone Number</th>
+                          <th>Address</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                          <?php foreach ($query->result() as $customer): ?>
+                          <tr>
+                          <td><?php echo $customer->surname ?> </td>
+                          <td><?php echo $customer->other_name ?></td>
+                          <td><?php echo $customer->gender ?></td>
+                          <td><?php echo $customer->phone_number ?></td>
+                          <td><?php echo $customer->address ?> </td>   
+                          <td><?php echo $customer->status ?></td> 
+                          <td><a href="<?php echo site_url("customer/view/{$customer->customer_id}")?>" class="btn btn-form-modal btn-primary fa fa-link" data-toggle="modal" data-target=".bs-example-modal-lg">View</a>
+                              <a href="<?php echo site_url("customer/edit_customer/{$customer->customer_id}")?>" class="btn btn-form-modal btn-warning fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
+                              <a href="site_url('')" class="btn btn-danger fa fa-trash">Delete</a></td>
+                          </tr>
+                          <?php endforeach; ?>
+                     </tbody>
+                    </table>
+                        </div>
+                          
+                          <!-- Ends Here -->
+                      </div>
+                    </div>
+
                   </div>
                 </div>
-              </form>
-            </div>
-          <!--/ Tab content -->
-          </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+              </div>
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      </div>
-    </section>
-    <!-- /.content -->
-
-  </div>
-  <!-- /.content-wrapper -->
-<?php
-      include '../footer.php';
-?>

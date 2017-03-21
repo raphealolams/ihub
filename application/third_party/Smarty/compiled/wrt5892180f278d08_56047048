@@ -1,0 +1,48 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-01 18:17:03
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\expenses\expense_types.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:155945892180f230f15_95147249%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '9abf28b5337315754b46d26b703e8b865d786639' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\expenses\\expense_types.tpl',
+      1 => 1485969418,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '155945892180f230f15_95147249',
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_5892180f275a47_20195552',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_5892180f275a47_20195552')) {
+function content_5892180f275a47_20195552 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '155945892180f230f15_95147249';
+?>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+    <li><a data-toggle="tab" href="#add">Add New</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="all" class="tab-pane fade in active">
+
+    </div>
+    <div id="add" class="tab-pane fade">
+         <form method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="expensestype_name" class="form-control" id="expensestype_name">
+            </div>
+            <input type="submit" name="submit" class="btn btn-default"  value="Submit"   />
+        </form>
+    </div>
+</div>
+<?php }
+}
+?>

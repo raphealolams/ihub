@@ -1,0 +1,111 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-08 02:56:45
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\account\payment_modes.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:29998589a7add7db6a8_50311973%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2bbe4f0fbc34a589ea66e15353b37fc33dc006c4' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\account\\payment_modes.tpl',
+      1 => 1486518994,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '29998589a7add7db6a8_50311973',
+  'variables' => 
+  array (
+    'payment_modes' => 0,
+    'mode' => 0,
+    'bank' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_589a7add8554a1_77987844',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_589a7add8554a1_77987844')) {
+function content_589a7add8554a1_77987844 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '29998589a7add7db6a8_50311973';
+?>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+    <li><a data-toggle="tab" href="#edit">Add New</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="all" class="tab-pane fade in active">
+         <table class="data-table table table-responsive table-borderd table-condensed">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+$_from = $_smarty_tpl->tpl_vars['payment_modes']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['mode'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['mode']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['mode']->value) {
+$_smarty_tpl->tpl_vars['mode']->_loop = true;
+$foreach_mode_Sav = $_smarty_tpl->tpl_vars['mode'];
+?>
+                    <tr>
+                        <td><?php echo $_smarty_tpl->tpl_vars['mode']->value->paymentmode_name;?>
+</td>
+                        <td>
+                            <a href="<?php echo site_url("account/edit_bank/".((string)$_smarty_tpl->tpl_vars['bank']->value->bank_id));?>
+" class="btn-form-modal btn btn-warning"
+                               >Edit Bank</a>
+                            <a href="<?php echo site_url("account/delete_bank/".((string)$_smarty_tpl->tpl_vars['bank']->value->bank_id));?>
+" class=" btn btn-danger"
+                              >Delete Bank</a>
+                        </td>
+                    </tr>
+                <?php
+$_smarty_tpl->tpl_vars['mode'] = $foreach_mode_Sav;
+}
+?>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="edit" class="tab-pane fade">
+         <form method="POST">
+            <div class="form-group">
+                <label for="name">Bank Name:</label>
+                <input type="text" name="bank_name" class="form-control" id="bank_name">
+            </div>
+              <div class="form-group">
+                <label for="bank_acc">Bank Account Number:</label>
+                <input type="text" name="bank_acc" class="form-control" id="bank_acc">
+            </div>
+            <div class="form-group">
+                <label for="bank_dateadded">Date Added:</label>
+                <input type="date" name="bank_dateadded" class="form-control" id="bank_dateadded">
+
+            </div>
+            <div class="form-group">
+                <label for="bank_accname">Account Name:</label>
+                <input type="text" name="bank_accname" class="form-control" id="bank_accname">
+            </div>
+
+            <div class="form-group">
+                <label for="user_id">user id:</label>
+                <input type="text" name="user_id" class="form-control" id="user_id">
+            </div>
+
+            <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
+        </form>
+    </div>
+</div>
+<?php }
+}
+?>

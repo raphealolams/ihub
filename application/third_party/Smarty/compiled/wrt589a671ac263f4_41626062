@@ -1,0 +1,128 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-08 01:32:26
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\account\edit_school_fees_payment.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:26823589a671ab6f6f9_63758119%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6f2bb8a2c71b4204f26fde86a4e86e1539b799d2' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\account\\edit_school_fees_payment.tpl',
+      1 => 1486513943,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '26823589a671ab6f6f9_63758119',
+  'variables' => 
+  array (
+    'payment' => 0,
+    'students' => 0,
+    'student' => 0,
+    'banks' => 0,
+    'bank' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_589a671ac263f9_20520650',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_589a671ac263f9_20520650')) {
+function content_589a671ac263f9_20520650 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '26823589a671ab6f6f9_63758119';
+?>
+
+
+ <form method="POST">
+
+            <div class="form-group">
+                <label for="payment_tellerno">Teller Number:</label>
+                <input type="number" name="payment_tellerno" class="form-control"
+                    value="<?php echo $_smarty_tpl->tpl_vars['payment']->value->payment_tellerno;?>
+"
+                 id="schoolfeespayment_tellerno">
+            </div>
+
+            <div class="form-group">
+                <label for="payment_amount">Amount:</label>
+                <input type="text" name="payment_amount" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['payment']->value->payment_amount;?>
+"
+                 id="schoolfeespayment_amount">
+            </div>
+
+            <div>
+            <label>Payer</label>
+                <select name="payment_payer">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['students']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['student'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['student']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['student']->value) {
+$_smarty_tpl->tpl_vars['student']->_loop = true;
+$foreach_student_Sav = $_smarty_tpl->tpl_vars['student'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['student']->value->student_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['student']->value->student_sname;?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['student'] = $foreach_student_Sav;
+}
+?>
+                </select>
+            </div>
+
+             <div class="form-group">
+                <label for="payment_dateadded">Date:</label>
+                <input type="date" name="payment_dateadded" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['payment']->value->payment_dateadded;?>
+"
+                 id="schoolfeespayment_dateadded">
+            </div>
+
+            <div>
+            <label>Bank ID</label>
+                <select name="bank_id">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['banks']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['bank'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['bank']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['bank']->value) {
+$_smarty_tpl->tpl_vars['bank']->_loop = true;
+$foreach_bank_Sav = $_smarty_tpl->tpl_vars['bank'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['bank']->value->bank_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['bank']->value->bank_name;?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['bank'] = $foreach_bank_Sav;
+}
+?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="payment_statusid">Status ID:</label>
+                <input type="number" name="payment_statusid" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['payment']->value->status_id;?>
+"
+                 id="schoolfeespayment_statusid">
+            </div>
+
+            <div class="form-group">
+                <label for="payment_paymenttotal">Payment Total:</label>
+                <input type="text" name="payment_paymenttotal" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['payment']->value->payment_paymenttotal;?>
+"
+                 id="schoolfeespayment_paymenttotal">
+            </div>
+
+            <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
+</form><?php }
+}
+?>

@@ -1,0 +1,341 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-08 02:30:27
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\students\all.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:7081589a74b3c36896_33250579%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '3efb3bb61a58b9128c2defb74467bfe032710b18' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\students\\all.tpl',
+      1 => 1486517372,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '7081589a74b3c36896_33250579',
+  'variables' => 
+  array (
+    'students' => 0,
+    'schstudent' => 0,
+    'classes' => 0,
+    'class' => 0,
+    'status_options' => 0,
+    'status_num' => 0,
+    'title' => 0,
+    'parents' => 0,
+    'parent' => 0,
+    'states' => 0,
+    'state' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_589a74b3cf9126_99929258',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_589a74b3cf9126_99929258')) {
+function content_589a74b3cf9126_99929258 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '7081589a74b3c36896_33250579';
+?>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+    <li><a data-toggle="tab" href="#add">Add New</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="all" class="tab-pane fade in active">
+         <table class="data-table table table-responsive table-borderd table-condensed">
+            <thead>
+                <tr>
+                    <th>student SurName</th>
+                    <th>student Middle Name</th>
+                    <th>student Lastname</th>
+                    <th>student sex</th>
+                    <th> Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+$_from = $_smarty_tpl->tpl_vars['students']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['schstudent'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['schstudent']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['schstudent']->value) {
+$_smarty_tpl->tpl_vars['schstudent']->_loop = true;
+$foreach_schstudent_Sav = $_smarty_tpl->tpl_vars['schstudent'];
+?>
+                    <tr>
+                        <td><?php echo $_smarty_tpl->tpl_vars['schstudent']->value->student_fname;?>
+</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['schstudent']->value->student_mname;?>
+</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['schstudent']->value->student_sname;?>
+</td>
+                          <td><?php echo $_smarty_tpl->tpl_vars['schstudent']->value->student_sex;?>
+</td>
+                        <td>
+
+                          <a href="<?php echo site_url("students/view/".((string)$_smarty_tpl->tpl_vars['schstudent']->value->student_id));?>
+" class="btn-form-modal btn btn-success"
+                             >View</a>
+                            <a href="<?php echo site_url("students/edit/".((string)$_smarty_tpl->tpl_vars['schstudent']->value->student_id));?>
+" class="btn-form-modal btn btn-warning"
+                               >Edit</a>
+                            <a href="<?php echo site_url("students/delete/".((string)$_smarty_tpl->tpl_vars['schstudent']->value->student_id));?>
+" class="btn-form btn btn-danger"
+                              >Delete</a>
+                        </td>
+                    </tr>
+                <?php
+$_smarty_tpl->tpl_vars['schstudent'] = $foreach_schstudent_Sav;
+}
+?>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <div id="add" class="tab-pane fade">
+         <form method="POST">
+    <div class="container col-md-12">
+
+    <div class="form-group ">
+        <label>First Name:</label>
+        <input type="text" name="student_fname" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Middle Name:</label>
+        <input type="text" name="student_mname" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Surname:</label>
+        <input type="text" name="student_lname" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label >Sex:</label>
+        <br>
+
+        <input type="radio" name="student_sex" value="male" >Male
+        <input type="radio" name="student_sex" value="female" >Female
+    </div>
+
+    <label>Class:</label>
+    <div class="form-group">
+        <select name="class_id" class="form-control">
+            <option value="" class="form-control">Select</option>
+              <?php
+$_from = $_smarty_tpl->tpl_vars['classes']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['class'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['class']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['class']->value) {
+$_smarty_tpl->tpl_vars['class']->_loop = true;
+$foreach_class_Sav = $_smarty_tpl->tpl_vars['class'];
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['class']->value->id;?>
+"><?php echo $_smarty_tpl->tpl_vars['class']->value->name;?>
+</option>
+             <?php
+$_smarty_tpl->tpl_vars['class'] = $foreach_class_Sav;
+}
+?>
+        </select>
+    </div>
+
+     <div class="form-group">
+        <label>Status:</label>
+        <select name="status_id" class="form-control">
+            <option value="" class="form-control">Select</option>
+              <?php
+$_from = $_smarty_tpl->tpl_vars['status_options']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['title'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['title']->_loop = false;
+$_smarty_tpl->tpl_vars['status_num'] = new Smarty_Variable;
+foreach ($_from as $_smarty_tpl->tpl_vars['status_num']->value => $_smarty_tpl->tpl_vars['title']->value) {
+$_smarty_tpl->tpl_vars['title']->_loop = true;
+$foreach_title_Sav = $_smarty_tpl->tpl_vars['title'];
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['status_num']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
+</option>
+             <?php
+$_smarty_tpl->tpl_vars['title'] = $foreach_title_Sav;
+}
+?>
+        </select>
+    </div>
+
+     <div class="form-group">
+        <label>Parent:</label>
+        <select name="parent_id" class="form-control">
+            <option value="" class="form-control">Select</option>
+              <?php
+$_from = $_smarty_tpl->tpl_vars['parents']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['parent'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['parent']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
+$_smarty_tpl->tpl_vars['parent']->_loop = true;
+$foreach_parent_Sav = $_smarty_tpl->tpl_vars['parent'];
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['parent']->value->id;?>
+"><?php echo $_smarty_tpl->tpl_vars['parent']->value->getName();?>
+</option>
+             <?php
+$_smarty_tpl->tpl_vars['parent'] = $foreach_parent_Sav;
+}
+?>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Nationality:</label>
+        <input type="text" name="nationality" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>State of Origin:</label>
+        <select name="student_state" class="form-control">
+        <option value="" class="form-control">state</option>
+        <?php
+$_from = $_smarty_tpl->tpl_vars['states']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['state'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['state']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['state']->value) {
+$_smarty_tpl->tpl_vars['state']->_loop = true;
+$foreach_state_Sav = $_smarty_tpl->tpl_vars['state'];
+?>
+                    <option value="<?php echo $_smarty_tpl->tpl_vars['state']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['state']->value;?>
+</option>
+             <?php
+$_smarty_tpl->tpl_vars['state'] = $foreach_state_Sav;
+}
+?>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Student LGA:</label>
+        <input type="text" name="student_lga" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Date of Birth: </label>
+        <input type="date" name="student_dob" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Birth Place:</label>
+        <textarea name="birth_place" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Mother Tongue:</label>
+        <input type="text" name="mother_tongue" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Student Address:</label>
+      <textarea name="studuent_address" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>City:</label>
+        <input type="text" name="city" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Student Religion:</label>
+        <input type="text" name="student_religion" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number:</label>
+        <input type="text" name="phone" class="form-control">
+    </div>
+
+     <div class="form-group">
+        <label>Mobile Number:</label>
+        <input type="text" name="mobile" class="form-control">
+    </div>
+
+     <div class="form-group">
+        <label>Email:</label>
+        <input type="text" name="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Student Bloodgroup:</label>
+        <input type="email" name="student_bloodgroup" class="form-control">
+    </div>
+
+    <div class="form-group">
+          <label>Student Genotype</label>
+          <input type="text" name="student_genotype" class="form-control">
+      </div>
+
+      <div class="form-group">
+             <label>Image:</label>
+             <input type="file" name="student_img" class="form-control">
+         </div>
+
+         <div class="form-group">
+             <label>File No:</label>
+             <input type="text" name="file_no" class="form-control">
+         </div>
+
+         <div class="form-group">
+             <label>Boarder:</label>
+             <input type="text" name="boarder" class="form-control">
+         </div>
+
+         <div class="form-group">
+             <label>Admission Date:</label>
+             <input type="date" name="adm_date" class="form-control">
+         </div>
+
+     <div class="form-group">
+        <label>Left Notes</label>
+        <input type="text" name="left_notes" class="form-control">
+    </div>
+
+     <div class="form-group">
+        <label>User Id</label>
+        <input type="text" name="user_id" class="form-control">
+    </div>
+
+ <div class="form-group">
+        <label>Student Commmonaliment</label>
+        <input type="text" name="student_commmonaliment" class="form-control">
+    </div>
+
+
+      <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
+</form>
+
+</div>
+
+   </div>
+</div>
+<?php }
+}
+?>

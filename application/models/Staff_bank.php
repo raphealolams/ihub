@@ -11,7 +11,7 @@
  *
  * @author Ajilore Raphael
  */
-class Staff_bank extends My_Model {
+class Staff_bank extends MY_Model {
 
 
     public $staff_bank_id;

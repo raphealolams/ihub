@@ -1,0 +1,130 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-01 18:50:15
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\layouts\partials\nav_side.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:2335658921fd748ff71_32088796%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'cace44f1f46857ce3acb941950801c13e31a5ff5' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\layouts\\partials\\nav_side.tpl',
+      1 => 1485971267,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '2335658921fd748ff71_32088796',
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_58921fd74f6851_44231083',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_58921fd74f6851_44231083')) {
+function content_58921fd74f6851_44231083 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '2335658921fd748ff71_32088796';
+?>
+ <div id="left">
+    <div class="media user-media bg-dark dker">
+        <div class="user-media-toggleHover">
+            <span class="fa fa-user"></span>
+        </div>
+        <div class="user-wrapper bg-dark">
+                <a class="user-link" href="">
+                    <img class="media-object img-thumbnail user-img" alt="User Picture" src="<?php echo base_url("assets/dashboard/img/user.gif");?>
+")}">
+                    <span class="label label-danger user-label">16</span>
+                </a>
+
+                <!--
+                <div class="media-body">
+                    <h5 class="media-heading">Archie</h5>
+                    <ul class="list-unstyled user-info">
+                        <li><a href="">Administrator</a></li>
+                        <li>Last Access : <br>
+                            <small><i class="fa fa-calendar"></i>&nbsp;16 Mar 16:32</small>
+                        </li>
+                    </ul>
+                </div>
+                -->
+            </div>
+        </div>
+        <!-- #menu -->
+        <ul id="menu" class="bg-blue dker">
+            <li class="nav-header">Menu</li>
+            <li class="nav-divider"></li>
+            <li class="">
+                <a href="dashboard.html">
+                  <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span>
+                </a>
+              </li>
+
+                <!-- School Links -->
+                 <li class="">
+                        <a href="javascript:;">
+                            <i class="fa fa-building"></i>
+                            <span class="link-title">School</span>
+                            <span class="fa arrow"></span>
+                          </a>
+                     <ul class="collapse">
+                         <li>
+                          <a href="<?php echo site_url('school/arms');?>
+">
+                            <i class="fa fa-angle-right"></i>&nbsp; Arms </a>
+                        </li>
+                        <li>
+                          <a href="<?php echo site_url('school/sessions');?>
+">
+                            <i class="fa fa-angle-right"></i>&nbsp; Sessions </a>
+                        </li>
+                         <li>
+                          <a href="<?php echo site_url('school/terms');?>
+">
+                            <i class="fa fa-angle-right"></i>&nbsp; Terms </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- / School Links -->
+
+                <!-- Class Links -->
+                <li class="">
+                        <a href="javascript:;">
+                            <i class="fa fa-male"></i>
+                            <span class="link-title">Classes</span>
+                            <span class="fa arrow"></span>
+                          </a>
+                     <ul class="collapse">
+                        <li>
+                          <a href="<?php echo site_url('classes');?>
+">
+                            <i class="fa fa-angle-right"></i>&nbsp; Classes </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- Class Links -->
+                 <li class="">
+                  <a href="javascript:;">
+                    <i class="fa fa-users "></i>
+                    <span class="link-title">Staffs</span>
+                    <span class="fa arrow"></span>
+                  </a>
+                  <ul class="collapse">
+                        <li>
+                          <a href="<?php echo site_url('staff/add_staff');?>
+">
+                            <i class="fa fa-angle-right"></i>&nbsp; Add Staff </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('staff/all_staff');?>
+">
+                              <i class="fa fa-angle-right"></i>&nbsp; All Staff</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /#menu -->
+      </div>
+<?php }
+}
+?>

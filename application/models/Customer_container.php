@@ -11,7 +11,7 @@
  *
  * @author Crystalhills
  */
-class Customer_container extends My_Model {
+class Customer_container extends MY_Model {
     
     public $customer_container_id;
 

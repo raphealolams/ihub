@@ -11,7 +11,7 @@
  *
  * @author Ajilore Raphael
  */
-class Items extends My_Model {
+class Items extends MY_Model {
 
 
     public $items_id;

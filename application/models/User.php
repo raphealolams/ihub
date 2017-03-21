@@ -11,7 +11,7 @@
  *
  * @author Ajilore Raphael
  */
-class User extends My_Model {
+class User extends MY_Model {
 
 
     public $user_id;
@@ -88,6 +88,8 @@ class User extends My_Model {
         ),
 
     );
+    
+    
 
 
 }

@@ -1,227 +1,214 @@
-<?php
-include '../header.php';
-?>
+<div class="right_col" role="main">
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Manage Staff
-        <small> Records</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Staff</a></li>
-        <li class="active">Manage Staff </li>
-      </ol>
-    </section>
+    <div  class="alert alert-success alert-dismissable"> <?php echo $message ?></div>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="nav nav-tabs-custom">
-              <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#all">All</a></li>
-                  <li><a data-toggle="tab" href="#add">Add New Staff</a></li>
-              </ul>
-            </div>
 
-            <div class="box-body">
-            <div class="tab-content">
-            <div id="all" class="tab-pane fade in active">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Surname</th>
-                  <th>Other Names</th>
-                  <th>Gender</th>
-                  <th> Date of Birth</th>
-                  <th>Telephone</th>
-                  <th>Department</th>
-                  <th>Staff Level</th>
-                  <th>Qualification</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                     <?php
-                        $sql = $pdo->prepare("SELECT * FROM staff");
-                        $sql->execute();
-                        while($row = $sql->fetch(PDO::FETCH_ASSOC)){
-                        ?>
-                <tr>
-                  <td><?php echo $row['staff_surname'];?></td>
-                  <td><?php echo $row['staff_othername'];?></td>
-                  <td><?php echo $row['staff_gender'];?></td>
-                  <td><?php echo $row['staff_dob'];?></td>
-                  <td><?php echo $row['staff_phone_number'];?></td>
-                  <td><?php echo $row['staff_dept'];?></td>
-                  <td><?php echo $row['staff_level'];?></td>
-                  <td><?php echo $row['highest_qualification'];?></td>
-                  <td><?php echo $row['staff_status'];?></td>
-                  <td><a class="btn-form-modal btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#mymodal"></a>
-                    <a class="btn-form btn btn-danger glyphicon glyphicon-trash"></a></td>
-                </tr>
-                    <?php }?>
-                  </tbody>
-              </table>
-            </div>
-
-          <div id="add" class="tab-pane fade">
-            <form action="save_staff.php" method="POST" enctype="multipart/form-data">
-              <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"></h3>
-           </div>
-           <div class="box-body">
-             <div class="form-group ">
-                <label>Surname Name:</label>
-                  <input type="text" name="surname" class="form-control" placeholder="Adeoye">
-              </div>
-              <br/>
-
-              <div class="form-group">
-                  <label>Other Name:</label>
-                  <input type="text" name="othername" class="form-control" placeholder="Raphael Olamide">
-              </div>
-              <br/>
-
-              <div class="form-group">
-                <label>Gender</label>
-                <select class="form-control select2" name="gender" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              </div>
-              <br/>
-
-              <div class="form-group">
-                <label>Date Of Birth:</label>
-                <input type="date" name="dob" class="form-control">
-              </div>
-              <br/>
-
-              <div class="input-group">
-                <div class="input-group-addon">
-                <label>Phone</label><i class="glyphicon glyphicon-phone"></i>
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><?php echo $title ?></h3>
                 </div>
-                <input type="text" class="form-control" name="phone_number" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
-              </div>
-              <br/>
+            </div>
 
-              <div class="input-group">
-                <div class="input-group-addon">
-                <i class="">Email @</i>
+            <div class="clearfix"></div>
+
+            <div class="">
+    
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-list"></i> <span><?php echo $title2 ?></span></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"> <i class="fa fa-users"></i><span>Add New Staff</span></a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="all-tab" data-toggle="tab" aria-expanded="false"> <i class="fa fa-list"></i><span>All Staffs</span></a>
+                        </li>
+                      </ul>
+                      </div>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <br />
+                            <div class="row">
+                        <?php echo form_open('staff/add_staff') ?>
+                        <div class="form-horizontal form-label-left col-md-10">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Surname</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="staff_surname" placeholder="Seyi">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Other Names</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="staff_othername" placeholder="Sesan">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Gender</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="staff_gender">
+                                 <option>Male</option>
+                                 <option>Female</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Date Of Birth</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                           <input type="date" class="form-control" name="staff_dob">
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone Number</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" data-inputmask="'mask' : '99999999999'" name="staff_phone_number">
+                          <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Email</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="staff_email">
+                          <span class="fa fa-fa form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">State Of Origin</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="staff_state">
+                                 <option></option>
+                                 <option></option>
+                            </select>
+                        </div>
+                    </div>  
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Address</label> 
+                         <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea class="form-control" name="staff_address"></textarea>
+                         </div>                        
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Highest Qualification</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                        <input type="text" class="form-control" name="highest_qualification">
+                        <span class="glyphicon glyphicon-education form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>        
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Employment Type</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="staff_employment_type">
+                                <option>Select</option>
+                                <?php foreach ($employment_type->result() as $type): ?>
+                                 <option value="<?php echo $type->staff_type_id ?>"><?php echo $type->staff_type ?></option>
+                                 <?php endforeach ;?>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Staff Department</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="staff_dept">
+                                <option>Select</option>
+                                 <?php foreach ($staff_dept->result() as $dept): ?>
+                                 <option value="<?php echo $dept->staff_dept_id ?>"><?php echo $dept->staff_dept ?></option>
+                                 <?php endforeach ;?>   
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Staff Level</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="staff_level">
+                                 <option>Select</option>
+                                <?php foreach ($staff_level->result() as $level):?>
+                                <option value="<?php echo $level->staff_level_id ?>"> <?php echo $level->staff_level ?> </option>
+                                 <?php endforeach ;?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Staff Status</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" name="staff_status">
+                                 <option>Select</option>
+                                 <?php foreach ($staff_status->result() as $status):?>
+                                <option value="<?php echo $status->staff_status_id?>"> <?php echo $status->staff_status ?> </option>
+                                <?php endforeach ; ?>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Image</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                        <input type="file" class="form-control" name="staff_image">
+                        <span class="fa fa-photo form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div> 
+                            
+                    
+                            <br/>      
+                        <center>
+                            <input type="submit" class="btn btn-success" value="submit" name="submit"/>
+                        </center>
+                    </div>  
+                         <?php echo form_close() ?>
+                            </div>
+                          </div>
+                            
+                              <!-- View Customer -->
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="all-tab">
+                     
+					  <p class="text-muted font-13 m-b-30">
+                      
+                    </p>
+					
+                    <table id="datatable-responsive" class="datatable table table-striped table-hover table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Employment Type</th>
+                                <th>Department</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <?php foreach ($staffs->result() as $staff): ?>
+                            <tr>
+                                <td><?php echo ucwords($staff->staff_surname),  "  ", ucwords($staff->staff_othername) ?></td>
+                                <td><?php echo $staff->staff_gender ?></td>
+                                <td><?php echo $staff->staff_phone_number ?></td>
+                                <td><?php echo $staff->staff_address ?></td>
+                                <td><?php echo $staff->staff_employment_type ?></td>
+                                <td><?php echo $staff->staff_dept ?></td>
+                                <td><a href="<?php echo site_url("staff/view/{$staff->staff_id}")?>" class="btn btn-info btn-form-modal fa fa-link" data-toggle="modal" data-target=".bs-example-modal-lg">View</a>
+                                <a href="<?php echo site_url("staff/edit_staff/{$staff->staff_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
+                                <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                            </tr>
+                            <?php endforeach ;?>
+                        </tbody>
+                        </table>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
                 </div>
-                <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="someone@yahoo.com">
               </div>
-              <br/>
-
-              <div class="form-group">
-                <label>Nationality:</label>
-                <select class="form-control select2" name="nationality" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                    <?php foreach ($country as $key => $value):
-                    echo '<option value="'.$value.'">'.$value.'</option>'; //close your tags!!
-                    endforeach;
-                    ?>
-                </select>
-              </div>
-              <br/>
-
-              <div class="form-group">
-                <label>State of Origin</label>
-                <select class="form-control select2" name="state" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                  <?php
-                    foreach($state as $key => $value):
-                      echo '<option value="'.$value.'">'.$value.'</option>'; //close your tags!!
-                    endforeach;
-                    ?>
-                </select>
-              </div>
-              <br/>
-
-          <div class="form-group">
-             <label>Address</label>
-               <textarea class="form-control" name="address" rows="3" placeholder="Enter ..."></textarea>
-          </div>
-            <br/>
-
-            <div class="form-group">
-                <label>Highest Education Qualification:</label>
-                <input type="text" name="qualification" class="form-control" placeholder="Raphael Olamide">
-            </div>
-            <br/>
-
-              <div class="form-group">
-                <label>Staff Employment Type</label>
-                <select class="form-control select2" name="employment_type" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                </select>
-            </div>
-            <br/>
-
-              <div class="form-group">
-                <label>Staff Department</label>
-                <select class="form-control select2" name="dept" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                </select>
-            </div>
-            <br/>
-
-              <div class="form-group">
-                <label>Staff Level</label>
-                <select class="form-control select2" name="level" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                </select>
-            </div>
-            <br/>
-
-            <div class="form-group">
-              <div class="form-group">
-                <label>Staff Status</label>
-                <select class="form-control select2" name="status" style="width: 100%;">
-                  <option selected="selected">Select</option>
-                </select>
-            </div>
-            <br/>
-
-            <div class="form-group">
-                 <label for="exampleInputFile">Picture</label>
-                 <input type="file" name="image" id="exampleInputFile">
-            </div>
-            <br/>
-                    <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
-
-              </form>
-            </div>
-          </div>
-          <!--/ Tab content -->
-          </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      </div>
-      </div>
-    </section>
-    <!-- /.content -->
-
-  </div>
-  <!-- /.content-wrapper -->
-<?php
-include '../footer.php';
-?>
+    </div>
+                        

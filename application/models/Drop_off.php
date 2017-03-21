@@ -12,7 +12,7 @@
  * @author Ajilore Raphael
  */
 
-class Drop_off extends My_Model {
+class Drop_off extends MY_Model {
 
     public $drop_id;
     

@@ -11,7 +11,7 @@
  *
  * @author Ajilore Raphael
  */
-class Customer_status extends My_Model {
+class Customer_status extends MY_Model {
 
 
     public $customer_status_id;

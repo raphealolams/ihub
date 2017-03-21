@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Installer extends CI_Controller {
+class Installer extends CI_Controller{
 
 	/**
 	 * Index Page for this controller.
@@ -23,12 +23,14 @@ t	 * Maps to the following URL
 	public function index()
 	{
         $this->load->dbforge();
-        
+
+            
+            
         //Add customer Table
-        $this->load->model('customer');
-        $this->dbforge->add_field($this->customer->columns);
+        $this->load->model('customer_model');
+        $this->dbforge->add_field($this->customer_model->columns);
         $this->dbforge->add_key('customer_id', TRUE);
-        $this->dbforge->create_table('customer', TRUE);
+        $this->dbforge->create_table('Customer', TRUE);
         
         //Add Customer_Type Table
         $this->load->model('customer_type');
@@ -62,8 +64,8 @@ t	 * Maps to the following URL
         $this->dbforge->create_table('items', TRUE);
         
         //Add Staff Table
-        $this->load->model('staff');
-        $this->dbforge->add_field($this->staff->columns);
+        $this->load->model('staff_model');
+        $this->dbforge->add_field($this->staff_model->columns);
         $this->dbforge->add_key('staff_id');
         $this->dbforge->create_table('staff', TRUE);
         
@@ -73,22 +75,41 @@ t	 * Maps to the following URL
         $this->dbforge->add_key('staff_bank_id');
         $this->dbforge->create_table('staff_bank', TRUE);
         
-        //Add Staff Items
-        $this->load->model('staff_items');
-        $this->dbforge->add_field($this->staff_items->columns);
-        $this->dbforge->add_key('staff_items_id');
-        $this->dbforge->create_table('staff_items', TRUE);
+         //Add Staff Level
+        $this->load->model('staff_level');
+        $this->dbforge->add_field($this->staff_level->columns);
+        $this->dbforge->add_key('staff_level_id');
+        $this->dbforge->create_table('staff_level', TRUE);
+        
+         //Add Staff Dept
+        $this->load->model('staff_dept');
+        $this->dbforge->add_field($this->staff_dept->columns);
+        $this->dbforge->add_key('staff_dept_id');
+        $this->dbforge->create_table('staff_dept', TRUE);
+        
+         //Add Staff Type
+        $this->load->model('staff_type');
+        $this->dbforge->add_field($this->staff_type->columns);
+        $this->dbforge->add_key('staff_type_id');
+        $this->dbforge->create_table('staff_type', TRUE);
+        
+         //Add Staff Items
+        $this->load->model('staff_status');
+        $this->dbforge->add_field($this->staff_status->columns);
+        $this->dbforge->add_key('staff_status_id');
+        $this->dbforge->create_table('staff_status', TRUE);
         
         //Add User Table
         $this->load->model('user');
         $this->dbforge->add_field($this->user->columns);
         $this->dbforge->add_key('user_id');
         $this->dbforge->create_table('user', TRUE);
+    
 
         
         
         echo 'Insalled Successfully';
 	}
 
-	
+
 }

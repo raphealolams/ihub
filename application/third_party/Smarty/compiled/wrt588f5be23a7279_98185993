@@ -1,0 +1,49 @@
+<?php /* Smarty version 3.1.27, created on 2017-01-30 16:29:38
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\staff\add_staff.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:13591588f5be2351b97_59266275%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2a0fe8f984f88f7fcff604e57fd573c15dcfe9d2' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\staff\\add_staff.tpl',
+      1 => 1485789385,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '13591588f5be2351b97_59266275',
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_588f5be23a2ea7_97279945',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_588f5be23a2ea7_97279945')) {
+function content_588f5be23a2ea7_97279945 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '13591588f5be2351b97_59266275';
+?>
+<form>
+	<div class="container">
+		<label>First Name:</label>
+		<input type="text" name="staff_fname">
+
+		<label>Middle Name:</label>
+		<input type="text" name="staff_mname">
+
+		<label>Surname:</label>
+		<input type="text" name="staff_sname">
+
+		<label>Sex:</label>
+		<input type="radio" name="sex" value="male">Male
+		<input type="radio" name="sex" value="female">Female
+
+		<label>Department:</label>
+		<select>
+			
+		</select>
+	</div>
+</form><?php }
+}
+?>

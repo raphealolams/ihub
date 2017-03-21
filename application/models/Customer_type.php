@@ -11,7 +11,7 @@
  *
  * @author Ajilore Raphael
  */
-class Customer_type extends My_Model {
+class Customer_type extends MY_Model {
 
 
     public $customer_type_id;

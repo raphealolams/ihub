@@ -1,148 +1,92 @@
-<?php
-include '../header.php';
-?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Manage Customer
-        <small> Type</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Customer</a></li>
-        <li class="active">Manage Type </li>
-      </ol>
-    </section>
+<div class="right_col" role="main">
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"></h3>
+    <div  class="alert alert-success alert-dismissable"> <?php echo $message ?></div>
+
+
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><?php echo $title ?></h3>
+                </div>
             </div>
-            <!-- /.box-header -->
-            <div class="nav nav-tabs-custom">
-              <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#all">All</a></li>
-                  <li><a data-toggle="tab" href="#add">Add New</a></li>
-              </ul>
-            </div>
-            <div class="box-body">
-            <div class="tab-content">
-            <div id="all" class="tab-pane fade in active">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Customer Type Name</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <?php
-                    $sql = $pdo->prepare("SELECT * FROM customer_type");
-                    $sql->execute();
-                    while($row = $sql->fetch(PDO::FETCH_ASSOC)){
-                      ?>
-                  <td><?php echo $row['customer_type_name'];?></td>
-                  <td><button class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#mymodal<?php echo $row['customer_type_id'];?>"></button>
-                  <a class="delete btn btn-danger glyphicon glyphicon-trash" id="<?php echo $row['customer_type_id']; ?>" href="#" title="Delete"></a></td>
-                </tr>
 
-                <div id="mymodal<?php echo $row['customer_type_id'];?>" class="modal fade" role="dialog">
+            <div class="clearfix"></div>
 
-                          <div class="modal-dialog">
-                          <div class="modal-content">
-                          <div class="modal-header">
-                          <h4 class="modal-title">Edit Customer Type </h4>
-                        </div>
-                        <div class="modal-body">
-                          <form action="edit_manage_type.php" method="POST">
-                            <div class="box box-info">
-                              <div class="box-header with-border">
-                                <h3 class="box-title"></h3>
-                            </div>
-                         <div class="box-body">
-                          <input type="hidden" name="id" value="<?php echo $row['customer_type_id'];?>">
-                           <div class="form-group ">
-                              <label>Customer Type Name:</label>
-                                <input type="text" name="type" value="<?php echo $row['customer_type_name'];?>" class="form-control">
-                            </div>
-                                <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
-                                </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="">
+    
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-list"></i> <span><?php echo $title ?></span></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"> <i class="fa-user"></i>Add New</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="all-tab" data-toggle="tab" aria-expanded="false"> <i class="fa-list"></i>All Customer Type</a>
+                        </li>
+                      </ul>
+                      </div>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <br />
+                            <div class="row">
+                        <?php echo form_open('customer/add_type') ?>
+                        <div class="form-horizontal form-label-left col-md-10">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Type</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="customer_type_name" placeholder="VIP">
+                          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                         </div>
                       </div>
-                      <?php } ?>
-                            </form>
-                  </div>
-          </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-              </table>
-            </div>
-
-          <div id="add" class="tab-pane fade">
-            <form method="POST" action="add_customer_type">
-              <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"></h3>
+                            <br/>      
+                        <center>
+                            <input type="submit" class="btn btn-success" value="submit" name="submit"/>
+                        </center>
+                    </div>  
+                         <?php echo form_close() ?>
+                            </div>
+                          </div>
+                            
+                              <!-- View Customer -->
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="all-tab">
+                     
+					  <p class="text-muted font-13 m-b-30">
+                      
+                    </p>
+					
+                    <table id="datatable-responsive" class="datatable table table-striped table-hover table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Customer Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <?php foreach ($query->result() as $customer): ?>
+                            <tr>
+                                <td><?php echo $customer->customer_type_name ?></td>
+                                <td><a href="<?php echo site_url("customer/edit_type/{$customer->customer_type_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
+                                <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                            </tr>
+                            <?php endforeach ;?>
+                        </tbody>
+                        </table>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
                 </div>
-           <div class="box-body">
-             <div class="form-group ">
-                <label>Customer Type Name:</label>
-                  <input type="text" name="customer_type_name" class="form-control" placeholder="Regular">
               </div>
-
-
-                  <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
-               </div>
-                </div>
-              </form>
-                </div>
-
-          </div>
-              <!--/ Tab content -->
-</div>
-        <!-- /.col -->
-      </div>
     </div>
-      <!-- /.row -->
-    </div>
-    </section>
-    <!-- /.content -->
-  <script src="../../dist/js/jquery.js"></script>
-  <script type="text/javascript">
-  $(function() {
-  $(".delete").click(function(){
-  var element = $(this);
-  var del_id = element.attr("id");
-  var info = 'id=' + del_id;
-  if(confirm("Are you sure you want to delete this?"))
-  {
-   $.ajax({
-     type: "POST",
-     url: "delete_customer_type.php",
-     data: info,
-     success: function(){
-   }
-  });
-    $(this).parents(".show").animate({ backgroundColor: "#003" }, "slow")
-    .animate({ opacity: "hide" }, "slow");
-   }
-  return false;
-  });
-  });
-  </script>
-  </div>
-  <!-- /.content-wrapper -->
-<?php
-include '../footer.php';
-?>
+                        

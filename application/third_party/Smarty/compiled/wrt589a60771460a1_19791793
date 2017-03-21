@@ -1,0 +1,146 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-08 01:04:07
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\layouts\partials\menu.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:8898589a6077063775_36938409%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'fafe418436f003ef2ebc7dc92eeb5d8f91e03317' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\layouts\\partials\\menu.tpl',
+      1 => 1486512245,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '8898589a6077063775_36938409',
+  'variables' => 
+  array (
+    'CI' => 0,
+    'data' => 0,
+    'm' => 0,
+    'level' => 0,
+    'menu' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_589a607713e3a7_28341598',
+  'tpl_function' => 
+  array (
+    'menu' => 
+    array (
+      'called_functions' => 
+      array (
+      ),
+      'compiled_filepath' => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\third_party/Smarty/compiled\\fafe418436f003ef2ebc7dc92eeb5d8f91e03317_0.file.menu.tpl.php',
+      'uid' => 'fafe418436f003ef2ebc7dc92eeb5d8f91e03317',
+      'call_name' => 'smarty_template_function_menu_8898589a6077063775_36938409',
+    ),
+  ),
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_589a607713e3a7_28341598')) {
+function content_589a607713e3a7_28341598 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '8898589a6077063775_36938409';
+?>
+
+<?php $_smarty_tpl->tpl_vars['CI'] = new Smarty_Variable($_smarty_tpl->tpl_vars['CI']->value->config->load('menu'), null, 0);?>
+<?php $_smarty_tpl->tpl_vars['menu'] = new Smarty_Variable(config_item('menu_items'), null, 0);?>
+
+ <div id="left">
+    <div class="media user-media bg-dark dker">
+        <div class="user-media-toggleHover">
+            <span class="fa fa-user"></span>
+        </div>
+        <div class="user-wrapper bg-dark">
+                <a class="user-link" href="">
+                    <img class="media-object img-thumbnail user-img" alt="User Picture" src="<?php echo base_url("assets/dashboard/img/user.gif");?>
+")}">
+                    <span class="label label-danger user-label">16</span>
+                </a>
+
+                <!--
+                <div class="media-body">
+                    <h5 class="media-heading">Archie</h5>
+                    <ul class="list-unstyled user-info">
+                        <li><a href="">Administrator</a></li>
+                        <li>Last Access : <br>
+                            <small><i class="fa fa-calendar"></i>&nbsp;16 Mar 16:32</small>
+                        </li>
+                    </ul>
+                </div>
+                -->
+            </div>
+        </div>
+        
+        <!-- #menu -->
+        <ul id="menu" class="bg-blue dker">
+           <?php $_smarty_tpl->callTemplateFunction ('menu', $_smarty_tpl, array('data'=>$_smarty_tpl->tpl_vars['menu']->value), true);?>
+
+        </ul>
+        <!-- #menu -->
+
+</div>
+<?php }
+}
+?><?php
+/* smarty_template_function_menu_8898589a6077063775_36938409 */
+if (!function_exists('smarty_template_function_menu_8898589a6077063775_36938409')) {
+function smarty_template_function_menu_8898589a6077063775_36938409($_smarty_tpl,$params) {
+$saved_tpl_vars = $_smarty_tpl->tpl_vars;
+$params = array_merge(array('level'=>0,'max_level'=>2), $params);
+foreach ($params as $key => $value) {
+$_smarty_tpl->tpl_vars[$key] = new Smarty_Variable($value);
+}?>
+             <?php
+$_from = $_smarty_tpl->tpl_vars['data']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['m'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['m']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['m']->value) {
+$_smarty_tpl->tpl_vars['m']->_loop = true;
+$foreach_m_Sav = $_smarty_tpl->tpl_vars['m'];
+?>
+                    
+                    <?php if (isset($_smarty_tpl->tpl_vars['m']->value['children']) && is_array($_smarty_tpl->tpl_vars['m']->value['children'])) {?>
+                        <li class="">
+                            <a href="javascript:;">
+                                    <i class="<?php echo element('icon',$_smarty_tpl->tpl_vars['m']->value);?>
+"></i>
+                                    <span class="link-title"><?php echo $_smarty_tpl->tpl_vars['m']->value['title'];?>
+</span>
+                                    <span class="fa arrow"></span>
+                            </a>
+                            <ul class="collapse">
+                                <?php $_smarty_tpl->callTemplateFunction ('menu', $_smarty_tpl, array('data'=>$_smarty_tpl->tpl_vars['m']->value['children'],'level'=>$_smarty_tpl->tpl_vars['level']->value+1), false);?>
+
+                            </ul>
+                        </li>
+                    <?php } else { ?>
+                    
+                     <li class="">
+                        <a href="<?php echo site_url($_smarty_tpl->tpl_vars['m']->value['url']);?>
+">
+                            <i class="<?php echo element('icon',$_smarty_tpl->tpl_vars['m']->value);?>
+"></i>
+                            <span class="link-title">&nbsp;<?php echo $_smarty_tpl->tpl_vars['m']->value['title'];?>
+</span>
+                        </a>
+                    <?php }?>
+                </li>
+            <?php
+$_smarty_tpl->tpl_vars['m'] = $foreach_m_Sav;
+}
+?>
+        <?php foreach (Smarty::$global_tpl_vars as $key => $value){
+if ($_smarty_tpl->tpl_vars[$key] === $value) $saved_tpl_vars[$key] = $value;
+}
+$_smarty_tpl->tpl_vars = $saved_tpl_vars;
+}
+}
+/*/ smarty_template_function_menu_8898589a6077063775_36938409 */
+
+?>

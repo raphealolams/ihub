@@ -1,0 +1,205 @@
+<?php /* Smarty version 3.1.27, created on 2017-02-08 03:56:31
+         compiled from "C:\xampp\htdocs\crystal_school_app\application\views\account\edit_school_fees_payment.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:4691589a88df53c3e6_04179760%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6f2bb8a2c71b4204f26fde86a4e86e1539b799d2' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\crystal_school_app\\application\\views\\account\\edit_school_fees_payment.tpl',
+      1 => 1486521413,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '4691589a88df53c3e6_04179760',
+  'variables' => 
+  array (
+    'student' => 0,
+    'students' => 0,
+    'school_session' => 0,
+    'sessions' => 0,
+    'term' => 0,
+    'terms' => 0,
+    'schoolfeespayments' => 0,
+    'schoolfee' => 0,
+    'banks' => 0,
+    'bank' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_589a88df603797_07903768',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_589a88df603797_07903768')) {
+function content_589a88df603797_07903768 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '4691589a88df53c3e6_04179760';
+?>
+
+
+<form method="POST">
+
+            <div>
+            <label>Student's ID</label>
+                <select name="student_id">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['student']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['students'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['students']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['students']->value) {
+$_smarty_tpl->tpl_vars['students']->_loop = true;
+$foreach_students_Sav = $_smarty_tpl->tpl_vars['students'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['students']->value->student_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['students']->value->getName();?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['students'] = $foreach_students_Sav;
+}
+?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="schoolfeespayment_datetime">Date:</label>
+                <input type="date" name="schoolfeespayment_datetime" class="form-control" id="schoolfeespayment_datetime">
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" name="amount" class="form-control" id="schoolfeespayment_amount">
+            </div>
+
+            <div>
+            <label>Session ID</label>
+                <select name="session_id">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['school_session']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['sessions'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['sessions']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['sessions']->value) {
+$_smarty_tpl->tpl_vars['sessions']->_loop = true;
+$foreach_sessions_Sav = $_smarty_tpl->tpl_vars['sessions'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['sessions']->value->session_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['sessions']->value->session_id;?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['sessions'] = $foreach_sessions_Sav;
+}
+?>
+                </select>
+            </div>
+
+            <div>
+            <label>Term ID</label>
+                <select name="term_id">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['term']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['terms'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['terms']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['terms']->value) {
+$_smarty_tpl->tpl_vars['terms']->_loop = true;
+$foreach_terms_Sav = $_smarty_tpl->tpl_vars['terms'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['terms']->value->term_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['terms']->value->term_id;?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['terms'] = $foreach_terms_Sav;
+}
+?>
+                </select>
+            </div>
+
+            <div>
+            <label>Payment Mode ID</label>
+                <select name="paymentmode_id">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['schoolfeespayments']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['schoolfee'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['schoolfee']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['schoolfee']->value) {
+$_smarty_tpl->tpl_vars['schoolfee']->_loop = true;
+$foreach_schoolfee_Sav = $_smarty_tpl->tpl_vars['schoolfee'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['schoolfee']->value->paymentmode_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['schoolfee']->value->payment_modes;?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['schoolfee'] = $foreach_schoolfee_Sav;
+}
+?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tellerno">Teller Number:</label>
+                <input type="text" name="tellerno" class="form-control" id="schoolfeespayment_tellerno">
+            </div>
+
+            <div class="form-group">
+                <label for="tellername">Teller Name:</label>
+                <input type="text" name="tellername" class="form-control" id="schoolfeespayment_tellername">
+            </div>
+            
+
+            <div>
+            <label>Bank ID</label>
+                <select name="bank_id">
+                    <option>Select</option>
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['banks']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['bank'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['bank']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['bank']->value) {
+$_smarty_tpl->tpl_vars['bank']->_loop = true;
+$foreach_bank_Sav = $_smarty_tpl->tpl_vars['bank'];
+?>
+                        <option value="<?php echo $_smarty_tpl->tpl_vars['bank']->value->bank_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['bank']->value->bank_name;?>
+</option>
+                    <?php
+$_smarty_tpl->tpl_vars['bank'] = $foreach_bank_Sav;
+}
+?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="schoolfeespayment_collectedby">Collected BY:</label>
+                <input type="text" name="schoolfeespayment_collectedby" class="form-control" id="schoolfeespayment_collectedby">
+            </div>
+
+            <div class="form-group">
+                <label for="note">Note:</label>
+                <textarea cols="50" rows="5" name="note" class="form-control" id="schoolfeespayment_note"></textarea>
+            </div>
+
+
+            <input type="submit" name="submit" class="btn btn-success"  value="Submit"   />
+
+</form><?php }
+}
+?>
