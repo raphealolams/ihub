@@ -197,7 +197,7 @@ class Staff_model extends MY_Model {
         }
         else
         {
-            $url = base_url('assets/images/paypal.png') ;
+            $url = base_url('assets/images/default.jpg') ;
         }
         return $url;
     }

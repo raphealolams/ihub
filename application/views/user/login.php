@@ -1,75 +1,74 @@
-<?php $this->load->view('layout/header')?>
-<body class="login-layout">
-		<div class="main-container">
-			<div class="main-content">
-				<div class="row">
-					<div class="col-sm-10 col-sm-offset-1">
-						<div class="login-container">
-							<div class="center">
-								<h1>
-									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Ace</span>
-									<span class="white" id="id-text2">Application</span>
-								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Company Name</h4>
-							</div>
+ <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+<!--      <a class="hiddenanchor" id="reset_pass"></a>-->
 
-							<div class="space-6"></div>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>Login Area</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <input type="submit" class="btn btn-success" name="Login" value="Login" />
+                <a class="reset_pass" href="reset_pass">Lost your password?</a>
+              </div>
 
-							<div class="position-relative">
-								<div id="login-box" class="login-box visible widget-box no-border">
-									<div class="widget-body">
-										<div class="widget-main">
-											<h4 class="header blue lighter bigger">
-												<i class="ace-icon fa fa-coffee green"></i>
-												Please Enter Your Information
-											</h4>
+              <div class="clearfix"></div>
 
-											<div class="space-6"></div>
+              <div class="separator">
+                <p class="change_link">New to site?
+                  <a href="#signup" class="to_register"> Create Account </a>
+                </p>
 
-											<form>
-												<fieldset>
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-													</label>
+                <div class="clearfix"></div>
+                <br />
 
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-													</label>
+                <div>
+                  <h1><i class="fa fa-paw"></i>IHUB Nigeria</h1>
+                  <p>©2017 All Rights Reserved. IHUB Nigeria! Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
 
-													<div class="space"></div>
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>Create Account</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="index.html">Submit</a>
+              </div>
 
-													<div class="clearfix">
-														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
-															<i class="ace-icon fa fa-key"></i>
-															<span class="bigger-110">Login</span>
-														</button>
-													</div>
+              <div class="clearfix"></div>
 
-													<div class="space-4"></div>
-												</fieldset>
-											</form>
-
-
-										<div class="toolbar clearfix">
-												<a href="" data-target="#forgot-box" class="forgot-password-link">
-													<i class="ace-icon fa fa-arrow-left"></i>
-													I forgot my password
-												</a>
-										</div>
-									</div><!-- /.widget-body -->
-								</div><!-- /.login-box -->
-                                </div><!-- /.widget-body -->
-						</div>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.main-content -->
-		</div><!-- /.main-container -->
-
-			
+              <div class="separator">
+                <p class="change_link">Already a member ?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+                </div>
+                <div class="clearfix"></div>
+                  <br/>
+                   <div>
+                  <h1><i class="fa fa-paw"></i>IHUB Nigeria</h1>
+                  <p>©2017 All Rights Reserved. IHUB Nigeria! Privacy and Terms</p>
+                </div>
+              </form>
+            </section>
+          </div>

@@ -28,6 +28,9 @@
     <link href="<?php echo base_url('assets/vendors/jqvmap/dist/jqvmap.min.css')?>" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="<?php echo base_url('assets/vendors/bootstrap-daterangepicker/daterangepicker.css')?>" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link href="<?php echo base_url('assets/vendors/animate.css/animate.min.css')?>" rel="stylesheet">
       
     <!-- Datatables -->
     <link href="<?php echo base_url('assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')?>" rel="stylesheet">
@@ -39,4 +42,8 @@
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/build/css/custom.min.css')?>" rel="stylesheet">
   </head>
+  
+ 
    
+
+
