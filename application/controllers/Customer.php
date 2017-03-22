@@ -34,9 +34,9 @@ class Customer extends CI_Controller{
         
          $this->load->view('layout/header'); 
          $this->load->view('customer/all_customer', [
-         'query' => $this->db->get('customer'),
-         'types' => $this->db->get('customer_type'),
-         'status' => $this->db->get('customer_status'),
+         'query' => $data,
+         'types' => $types,
+         'status' => $status,
          'title' => $title,
          'message' => $this->session->flashdata('mssg')
          ]);
@@ -102,8 +102,8 @@ class Customer extends CI_Controller{
          $this->load->view('customer/edit_customer', [
              'customer' => $customer,
              'message' => $this->session->flashdata('mssg'),
-             'types' => $this->db->get('customer_type'),
-             'status' => $this->db->get('customer_status')
+             'types' => $types,
+             'status' => $status
          ]);
         
         
@@ -157,7 +157,7 @@ class Customer extends CI_Controller{
         
          $this->load->view('layout/header');
          $this->load->view('customer/manage_type', [
-         'query' => $this->db->get('customer_type'),
+         'query' => $data,
          'title' => $title,
          'message' => $this->session->flashdata('mssg')
          ]);
@@ -216,7 +216,7 @@ class Customer extends CI_Controller{
         
          $this->load->view('layout/header');
          $this->load->view('customer/customer_status', [
-         'query' => $this->db->get('customer_status'),
+         'query' => $data,
          'title' => $title,
          'title2' => $title2,
          'message' => $this->session->flashdata('mssg')

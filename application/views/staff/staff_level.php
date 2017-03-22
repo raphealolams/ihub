@@ -73,7 +73,7 @@
                         </thead>
                         
                         <tbody>
-                            <?php foreach ($levels->result() as $level): ?>
+                            <?php foreach ($levels as $level): ?>
                             <tr>
                                 <td><?php echo $level->staff_level ?></td>
                                 <td><a href="<?php echo site_url("staff/edit_level/{$level->staff_level_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>

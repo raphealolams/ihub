@@ -111,7 +111,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="staff_employment_type">
                                 <option>Select</option>
-                                <?php foreach ($employment_type->result() as $type): ?>
+                                <?php foreach ($employment_type as $type): ?>
                                  <option value="<?php echo $type->staff_type_id ?>"><?php echo $type->staff_type ?></option>
                                  <?php endforeach ;?>
                             </select>
@@ -122,7 +122,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="staff_dept">
                                 <option>Select</option>
-                                 <?php foreach ($staff_dept->result() as $dept): ?>
+                                 <?php foreach ($staff_dept as $dept): ?>
                                  <option value="<?php echo $dept->staff_dept_id ?>"><?php echo $dept->staff_dept ?></option>
                                  <?php endforeach ;?>   
                             </select>
@@ -133,7 +133,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="staff_level">
                                  <option>Select</option>
-                                <?php foreach ($staff_level->result() as $level):?>
+                                <?php foreach ($staff_level as $level):?>
                                 <option value="<?php echo $level->staff_level_id ?>"> <?php echo $level->staff_level ?> </option>
                                  <?php endforeach ;?>
                             </select>
@@ -144,7 +144,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="staff_status">
                                  <option>Select</option>
-                                 <?php foreach ($staff_status->result() as $status):?>
+                                 <?php foreach ($staff_status as $status):?>
                                 <option value="<?php echo $status->staff_status_id?>"> <?php echo $status->staff_status ?> </option>
                                 <?php endforeach ; ?>
                             </select>
@@ -189,14 +189,14 @@
                         </thead>
                         
                         <tbody>
-                            <?php foreach ($staffs->result() as $staff): ?>
+                            <?php foreach ($staffs as $staff): ?>
                             <tr>
-                                <td><?php echo ucwords($staff->staff_surname),  "  ", ucwords($staff->staff_othername) ?></td>
-                                <td><?php echo $staff->staff_gender ?></td>
+                                <td><strong><?php echo $staff->getName() ?></strong></td>
+                                <td><?php echo $staff->staff_gender ?> </td>
                                 <td><?php echo $staff->staff_phone_number ?></td>
                                 <td><?php echo $staff->staff_address ?></td>
                                 <td><?php echo $staff->staff_employment_type ?></td>
-                                <td><?php echo $staff->staff_dept ?></td>
+                                <td><?php echo $staff->getDeptName() ?></td>
                                 <td><a href="<?php echo site_url("staff/view/{$staff->staff_id}")?>" class="btn btn-info btn-form-modal fa fa-link" data-toggle="modal" data-target=".bs-example-modal-lg">View</a>
                                 <a href="<?php echo site_url("staff/edit_staff/{$staff->staff_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
                                 <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>

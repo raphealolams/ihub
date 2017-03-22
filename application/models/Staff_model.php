@@ -177,9 +177,10 @@ class Staff_model extends MY_Model {
     
    public function getDeptName()
     {
-        $dept = $this->staff_dept->getOne(array('staff_dept_id' => $this->staff_dept));
+        $this->load->model('staff_dept' , 'staff_dept_model');
+        $dept = $this->staff_dept_model->getOne($this->staff_dept);
         
-        return $dept->staff_dept;
+        if($dept) return $dept->staff_dept;
     }
     
      public function getEmployType()
@@ -197,7 +198,7 @@ class Staff_model extends MY_Model {
         }
         else
         {
-            $url = base_url('assets/images/default.jpg') ;
+            $url = base_url('uploads/default.jpg') ;
         }
         return $url;
     }

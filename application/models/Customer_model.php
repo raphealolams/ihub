@@ -138,10 +138,16 @@ class Customer_model extends MY_Model {
 
     );
 
-//     public function getData(){
-//        $query = $this->db->get(customer);
-//        return $query->result();
+     public function getData(){
+        $query = $this->db->get(customer);
+        return $query->result();
+     }
     
+    public function getCustomerType()
+    {
+        $this->load->model('customer_type');
+        
+    }
 
        public function getPhotoUrl()
     {
@@ -151,7 +157,7 @@ class Customer_model extends MY_Model {
         }
         else
         {
-            $url = base_url('assets/images/default.jpg') ;
+            $url = base_url('uploads/default.jpg') ;
         }
         return $url;
     }

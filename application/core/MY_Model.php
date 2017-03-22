@@ -17,7 +17,7 @@ class MY_Model extends CI_Model{
     protected $table = '';
     protected $primary = 'id';
 
-    public function __construct() {
+    public function __construct($data = null) {
         parent::__construct();
 
         $this->load->database();
@@ -27,6 +27,11 @@ class MY_Model extends CI_Model{
         if (!$this->table) {
             $this->table = strtolower(plural(get_class($this)));
         }
+        if(is_array($data)){
+            foreach($data as $key => $value){
+                if(property_exists($this,$key)) $this->$key = $value;
+            }
+        }
     }
 
     
@@ -35,7 +40,11 @@ class MY_Model extends CI_Model{
     *@param int $id Id of record to fetch
     */
     public function getOne($id) {
-        return $this->db->get_where($this->table, array($this->primary => $id))->row();
+        $row = $this->db->get_where($this->table, array($this->primary => $id))->row_array();
+         $class_name =  get_class($this);
+                
+         return new $class_name($row);
+    
     }
     
     
@@ -73,7 +82,9 @@ class MY_Model extends CI_Model{
 
         if ($Q->num_rows() > 0) {
             foreach ($Q->result_array() as $row) {
-                $data[] = $row;
+                $class_name =  get_class($this);
+                
+                $data[] = new $class_name($row);
             }
         }
         $Q->free_result();

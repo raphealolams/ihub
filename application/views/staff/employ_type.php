@@ -73,7 +73,7 @@
                         </thead>
                         
                         <tbody>
-                            <?php foreach ($types->result() as $type): ?>
+                            <?php foreach ($types as $type): ?>
                             <tr>
                                 <td><?php echo $type->staff_type ?></td>
                                 <td><a href="<?php echo site_url("staff/edit_type/{$type->staff_type_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>

@@ -90,7 +90,7 @@
                             <select class="form-control" name="customer_type">
                             <option value="<?php echo $customer->customer_type ?>"></option>
                             <option> </option>
-                                 <?php foreach ($types->result() as $type): ?>
+                                 <?php foreach ($types as $type): ?>
                             <option> <?php echo $type->customer_type_name ?></option>
                                 <?php endforeach ;?>
                             </select>
@@ -103,7 +103,7 @@
                             <select class="form-control" name="status">
                             <option value="<?php echo $customer->status ?>"></option>
                                 <option></option>
-                                  <?php foreach ($status->result() as $stat): ?>
+                                  <?php foreach ($status as $stat): ?>
                             <option> <?php echo $stat->customer_status_name ?></option>
                                 <?php endforeach ;?>
                             </select>

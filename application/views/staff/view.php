@@ -10,7 +10,7 @@
         <div class="col-md-10">
     <div class="table">
         <center> 
-        <img src="$staff->getPhotoUrl()" class="img-rounded img-responsive" alt="staff Photo" width="304" height="236"> 
+        <img src="<?php echo $staff->getPhotoUrl()?>" class="img-rounded img-responsive" alt="staff Photo" width="304" height="236"> 
         </center> 
         <table class="table table-responsive table-hover">
             <tbody>
@@ -41,7 +41,7 @@
                 
                  <tr>
                     <th>Email</th>
-                    <td><?php echo $staff->staff_email ?></td>
+                    <td><?php echo $staff->staff_gender ?></td>
                 </tr>
                 
                 <tr>

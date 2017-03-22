@@ -45,11 +45,11 @@ class Staff extends CI_Controller{
         
          $this->load->view('layout/header'); 
          $this->load->view('staff/all_staff', [
-         'staffs' => $this->db->get('staff'),
-         'staff_dept' => $this->db->get('staff_dept'),
-         'staff_level' => $this->db->get('staff_level'),
-         'staff_status' => $this->db->get('staff_status'),
-         'employment_type' => $this->db->get('staff_type'),
+         'staffs' => $staffs,
+         'staff_dept' => $staff_dept,
+         'staff_level' => $staff_level,
+         'staff_status' => $staff_status,
+         'employment_type' => $employment_type,
          'title' => $title,
          'title2' => $title2,
          'message' => $this->session->flashdata('mssg')
@@ -125,10 +125,10 @@ class Staff extends CI_Controller{
          $this->load->view('staff/edit_staff', [
              'staff' => $staff,
              'message' => $this->session->flashdata('mssg', 'Staff Successfully Updated'),
-             'staff_dept' => $this->db->get('staff_dept'),
-             'staff_status' => $this->db->get('staff_status'),
-             'employment_type' => $this->db->get('staff_type'),
-             'staff_level' => $this->db->get('staff_level')
+             'staff_dept' => $staff_dept,
+             'staff_status' => $staff_status,
+             'employment_type' => $employment_type,
+             'staff_level' => $staff_level
          ]);
         
         
@@ -191,7 +191,7 @@ class Staff extends CI_Controller{
         
          $this->load->view('layout/header');
          $this->load->view('staff/staff_dept', [
-         'query' => $this->db->get('staff_dept'),
+         'query' => $data,
          'title' => $title,
          'title2' => $title2,
          'message' => $this->session->flashdata('mssg')
@@ -262,7 +262,7 @@ class Staff extends CI_Controller{
         
          $this->load->view('layout/header');
          $this->load->view('staff/staff_status', [
-         'query' => $this->db->get('staff_status'),
+         'query' => $data,
          'title' => $title,
          'title2' => $title2,
          'message' => $this->session->flashdata('mssg')
@@ -326,7 +326,7 @@ class Staff extends CI_Controller{
         $type = $this->staff_type->getAll();
         $this->load->view('layout/header');
         $this->load->view('staff/employ_type' , [
-        'types' => $this->db->get('staff_type'), 
+        'types' => $type, 
         'title' => $title,
         'title2' => $title2,
         'message' => $this->session->flashdata('mssg')
@@ -388,10 +388,10 @@ class Staff extends CI_Controller{
         $title = "Staff Configuration";
         $title2 = "Manage Staff Level";
         
-        $type = $this->staff_level->getAll();
+        $levels = $this->staff_level->getAll();
         $this->load->view('layout/header');
         $this->load->view('staff/staff_level' , [
-        'levels' => $this->db->get('staff_level'), 
+        'levels' => $levels, 
         'title' => $title,
         'title2' => $title2,
         'message' => $this->session->flashdata('mssg')

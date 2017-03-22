@@ -83,7 +83,7 @@
                             <select class="form-control" name="staff_employment_type">
                                  <option><?php echo $staff->staff_employment_type ?></option>
                                  <option></option>
-                                <?php foreach ($employment_type->result() as $type): ?>
+                                <?php foreach ($employment_type as $type): ?>
                                 <option value="<?php echo $type->staff_type_id ?>"> <?php echo $type->staff_type ?></option>
                                 <?php endforeach ;?>
                             </select>
@@ -95,8 +95,8 @@
                             <select class="form-control" name="staff_dept">
                                  <option><?php echo $staff->staff_dept ?></option>
                                  <option></option>
-                                <?php foreach ($staff_dept->result() as $dept):?>
-                                <option value="<?php echo $dept->staff_dept_id?>"><?php echo $dept->staff_dept ?></option>
+                                <?php foreach ($staff_dept as $dept):?>
+                                <option value="<?php echo $dept->staff_dept_id?>"><?php echo $dept->getDeptName() ?></option>
                                 <?php endforeach ; ?>
                             </select>
                         </div>
@@ -107,7 +107,7 @@
                             <select class="form-control" name="staff_level">
                                  <option><?php echo $staff->staff_level ?></option>
                                  <option></option>
-                                <?php foreach ($staff_level->result() as $level) :?>
+                                <?php foreach ($staff_level as $level) :?>
                                 <option value="<?php echo $level->staff_level_id ?>"> <?php echo $level->staff_level ?></option>
                                  <?php endforeach ; ?>
                             </select>
@@ -118,7 +118,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="staff_status">
                                  <option> <?php echo $staff->staff_status ?></option>
-                                <?php foreach ($staff_status->result() as $status):?>
+                                <?php foreach ($staff_status as $status):?>
                                 <option value="<?php echo $status->staff_status_id?>"> <?php echo $status->staff_status ?> </option>
                                 <?php endforeach ; ?>
                             </select>

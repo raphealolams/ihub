@@ -73,7 +73,7 @@
                         </thead>
                         
                         <tbody>
-                            <?php foreach ($query->result() as $dept): ?>
+                            <?php foreach ($query as $dept): ?>
                             <tr>
                                 <td><?php echo $dept->staff_dept ?></td>
                                 <td><a href="<?php echo site_url("staff/edit_dept/{$dept->staff_dept_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>

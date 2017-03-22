@@ -121,7 +121,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="customer_type">
                                  <option> </option>
-                                <?php foreach ($types->result() as $type): ?>
+                                <?php foreach ($types as $type): ?>
                             <option> <?php echo $type->customer_type_name ?></option>
                                 <?php endforeach ;?>
                             </select>
@@ -133,7 +133,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="status">
                             <option> </option>
-                                <?php foreach ($status->result() as $stat): ?>
+                                <?php foreach ($status as $stat): ?>
                             <option> <?php echo $stat->customer_status_name ?></option>
                                 <?php endforeach ;?>
                             </select>
@@ -174,7 +174,7 @@
                       </thead>
 
                       <tbody>
-                          <?php foreach ($query->result() as $customer): ?>
+                          <?php foreach ($query as $customer): ?>
                           <tr>
                           <td><?php echo $customer->surname ?> </td>
                           <td><?php echo $customer->other_name ?></td>

@@ -19,12 +19,12 @@ class User extends MY_Model {
     public $username;
 
     public $password;
-
-    public $password2;
     
     public $image;
     
     public $role;
+    
+    public $status;
 
     public $create_time;
 
@@ -60,12 +60,6 @@ class User extends MY_Model {
             'null' => true
         ),
         
-        'password2' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => true
-        ),
-        
         'image' => array(
             'type' => 'varchar',
             'constraint' => '250',
@@ -75,6 +69,12 @@ class User extends MY_Model {
         'role' => array(
             'type' => 'varchar',
             'constraint' => '50',
+            'null' => true
+        ),
+        
+        'status' => array(
+            'type' => 'varchar',
+            'constraint' => '100',
             'null' => true
         ),
         

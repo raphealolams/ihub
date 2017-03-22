@@ -24,6 +24,7 @@ class Login extends CI_Controller{
     {
         $this->load->view('layout/headerfor');
         $this->load->view('user/login');
+        $this-load->view('layout/footer');
         
     }
     

@@ -73,7 +73,7 @@
                         </thead>
                         
                         <tbody>
-                            <?php foreach ($query->result() as $status): ?>
+                            <?php foreach ($query as $status): ?>
                             <tr>
                                 <td><?php echo $status->staff_status ?></td>
                                 <td><a href="<?php echo site_url("staff/edit_status/{$status->staff_status_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
