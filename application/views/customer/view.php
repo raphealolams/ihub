@@ -10,7 +10,7 @@
         <div class="col-md-10">
     <div class="table">
         <center> 
-        <img src="<?php echo $customer->getPhotoUrl() ?>" class="img-rounded img-responsive" alt="Customer Photo" width="304" height="236"> 
+        <img src="" class="img-rounded img-responsive" alt="Customer Photo" width="304" height="236"> 
         </center> 
         <table class="table table-responsive table-hover">
             <tbody>
@@ -56,12 +56,12 @@
                 
                 <tr>
                     <th>Customer Type</th>
-                    <td><?php echo $customer->customer_type ?> </td>
+                    <td><?php echo $customer->getType() ?> </td>
                 </tr>
                 
                 <tr>
                     <th>Status</th>
-                    <td><?php echo $customer->status ?></td>
+                    <td><?php echo $customer->getStatus() ?></td>
                 </tr>
             
             </tbody>

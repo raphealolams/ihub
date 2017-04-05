@@ -30,16 +30,16 @@ class Customer extends CI_Controller{
          $title = "Customer Home";
          $types = $this->customer_type->getAll();
          $status = $this->customer_status->getAll();
-         $data = $this->customer_model->getAll();
+         $customers = $this->customer_model->getAll();
         
          $this->load->view('layout/header'); 
+         $this->load->view('layout/nav'); 
          $this->load->view('customer/all_customer', [
-         'query' => $data,
+         'customers' => $customers,
          'types' => $types,
          'status' => $status,
          'title' => $title,
-         'message' => $this->session->flashdata('mssg')
-         ]);
+         'message' => $this->session->flashdata('mssg')]);
          
         $this->load->view('layout/footer');   
     }
@@ -156,6 +156,7 @@ class Customer extends CI_Controller{
          $data = $this->customer_type->getAll();
         
          $this->load->view('layout/header');
+         $this->load->view('layout/nav'); 
          $this->load->view('customer/manage_type', [
          'query' => $data,
          'title' => $title,
@@ -215,6 +216,7 @@ class Customer extends CI_Controller{
          $data = $this->customer_status->getAll();
         
          $this->load->view('layout/header');
+        $this->load->view('layout/nav');
          $this->load->view('customer/customer_status', [
          'query' => $data,
          'title' => $title,

@@ -26,7 +26,7 @@ class Staff_model extends MY_Model {
 
     public $staff_phone_number;
 
-    public $email;
+    public $staff_email;
 
     public $nationality;
     
@@ -169,12 +169,17 @@ class Staff_model extends MY_Model {
 
     );
 
-     
+     /*
+    *@params
+    */
     public function getName()
     {
             return $this->staff_surname . ' ' . $this->staff_othername;
     }
     
+    /*
+    *@params
+    */
    public function getDeptName()
     {
         $this->load->model('staff_dept' , 'staff_dept_model');
@@ -183,13 +188,44 @@ class Staff_model extends MY_Model {
         if($dept) return $dept->staff_dept;
     }
     
-     public function getEmployType()
+    /*
+    *@params
+    */
+     public function getLevel()
     {
-        $type = $this->staff_type->getOne(array('staff_type_id' => $this->staff_type));
+        $this->load->model('staff_level' , 'staff_level_model');
+        $level = $this->staff_level_model->getOne($this->staff_level);
         
-        return $type->staff_type;
+        if($level) return $level->staff_level;
     }
     
+    
+     /*
+    *@params
+    */
+     public function getEmploy()
+    {
+        $this->load->model('staff_type' , 'staff_type_model');
+        $dept = $this->staff_type_model->getOne($this->staff_employment_type);
+        
+        if($dept) return $dept->staff_type;
+    }
+    
+    
+    /*
+    *@params
+    */
+    public function getStatus()
+    {
+        $this->load->model('staff_status' , 'staff_status_model');
+        $status = $this->staff_status_model->getOne($this->staff_status);
+        
+        if($status) return $status->staff_status;
+    }
+    
+    /*
+    *@params
+    */
     public function getPhotoUrl()
     {
         if($this->staff_image)

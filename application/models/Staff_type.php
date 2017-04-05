@@ -58,6 +58,10 @@ class Staff_type extends MY_Model {
         ),
 
     );
-
+    
+        public function getType()
+    {
+        return;
+    }
 
 }

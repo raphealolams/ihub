@@ -88,10 +88,10 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Type</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="customer_type">
-                            <option value="<?php echo $customer->customer_type ?>"></option>
+                            <option value="<?php echo $customer->customer_type?>" ><?php echo $customer->getType() ?></option>
                             <option> </option>
                                  <?php foreach ($types as $type): ?>
-                            <option> <?php echo $type->customer_type_name ?></option>
+                            <option value="<?php echo $type->customer_type_id ?>"> <?php echo $type->customer_type_name ?></option>
                                 <?php endforeach ;?>
                             </select>
                         </div>
@@ -101,10 +101,10 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Status</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="status">
-                            <option value="<?php echo $customer->status ?>"></option>
+                            <option value="<?php echo $customer->status?>"><?php echo $customer->getStatus() ?></option>
                                 <option></option>
                                   <?php foreach ($status as $stat): ?>
-                            <option> <?php echo $stat->customer_status_name ?></option>
+                            <option value="<?php echo $stat->customer_status_id ?>"> <?php echo $stat->customer_status_name ?></option>
                                 <?php endforeach ;?>
                             </select>
                         </div>

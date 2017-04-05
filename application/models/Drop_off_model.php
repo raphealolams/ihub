@@ -12,41 +12,21 @@
  * @author Ajilore Raphael
  */
 
-class Drop_off extends MY_Model {
+class Drop_off_model extends MY_Model {
 
     public $drop_id;
     
-    public $customer_container_id;
-    
     public $customer_id;
+    
+    public $category_name;
 
     public $item_id;
-
-    public $item_name;
-
-    public $customer_type;
 
     public $quantity;
 
     public $price;
     
-    public $discount;
-    
     public $total_price;
-    
-    public $deposit;
-    
-    public $balance;
-    
-    public $comment;
-    
-    public $status;
-    
-    public $drop_date;
-    
-    public $pickup_date;
-    
-    public $invoice_number;
 
     public $create_time;
 
@@ -70,13 +50,13 @@ class Drop_off extends MY_Model {
             'auto_increment' => TRUE
         ),
         
-        'customer_container_id' => array(
+        'customer_id' => array(
             'type' => 'int',
-            'constraint' => '250',
+            'constraint' => '11',
             'null' => true
         ),
         
-        'customer_id' => array(
+        'category_name' => array(
             'type' => 'int',
             'constraint' => '11',
             'null' => true
@@ -85,18 +65,6 @@ class Drop_off extends MY_Model {
         'item_id' => array(
             'type' => 'int',
             'constraint' => '11',
-            'null' => true
-        ),
-        
-        'item_name' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
-            'null' => true
-        ),
-        
-        'customer_type' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
             'null' => true
         ),
         
@@ -112,56 +80,11 @@ class Drop_off extends MY_Model {
             'null' => true
         
         ),
-
-        'discount' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
-            'null' => true
-        ),
         
         'total_price' => array(
             'type' => 'varchar',
             'constraint' => '50',
             'null' => true
-        ),
-        
-        'deposit' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
-            'null' => true
-        ),
-        
-        'balance' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
-            'null' => true
-        ),
-        
-        'comment' => array(
-            'type' => 'text',
-            'null' => true
-        ),
-        
-        'status' => array(
-            'type' => 'int',
-            'constraint' => '2',
-            'null' => true
-        ),
-        
-        'drop_date' => array(
-            'type' => 'datetime',
-            'null' => false
-        ),
-        
-        'picked_date' => array(
-            'type' => 'datetime',
-            'null' => false
-        ),
-        
-        'invoice_number' => array(
-            'type' => 'varchar',
-            'constraint' => '200',
-            'null' => false
         ),
         
         'create_time' => array(
@@ -176,5 +99,27 @@ class Drop_off extends MY_Model {
 
     );
 
-
+       /*
+    *@params
+    */
+    public function getCatName()
+    {
+        $this->load->model('category' , 'category_name_model');
+        $status = $this->category_name_model->getOne($this->category_name);
+        
+        if($status) return $status->category_name;
+    }
+    
+    /*
+    *@params
+    */
+    public function getItemName()
+    {
+        $this->load->model('items' , 'items_name_model');
+        $item = $this->items_name_model->getOne($this->item_id);
+        
+        if($item) return $item->item_name;
+    }
+    
+    
 }

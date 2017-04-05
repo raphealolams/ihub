@@ -112,7 +112,7 @@
                             <select class="form-control" name="staff_employment_type">
                                 <option>Select</option>
                                 <?php foreach ($employment_type as $type): ?>
-                                 <option value="<?php echo $type->staff_type_id ?>"><?php echo $type->staff_type ?></option>
+                                 <option value="<?php echo $type->staff_type_id ?> set_value('staff_employment_type')"><?php echo $type->staff_type ?></option>
                                  <?php endforeach ;?>
                             </select>
                         </div>
@@ -195,7 +195,7 @@
                                 <td><?php echo $staff->staff_gender ?> </td>
                                 <td><?php echo $staff->staff_phone_number ?></td>
                                 <td><?php echo $staff->staff_address ?></td>
-                                <td><?php echo $staff->staff_employment_type ?></td>
+                                <td><?php echo $staff->getEmploy() ?></td>
                                 <td><?php echo $staff->getDeptName() ?></td>
                                 <td><a href="<?php echo site_url("staff/view/{$staff->staff_id}")?>" class="btn btn-info btn-form-modal fa fa-link" data-toggle="modal" data-target=".bs-example-modal-lg">View</a>
                                 <a href="<?php echo site_url("staff/edit_staff/{$staff->staff_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>

@@ -24,7 +24,7 @@ class Staff extends CI_Controller{
           'staff_bank',
           'staff_type'
         ));
-        $this->output->enable_profiler(true);
+        $this->output->enable_profiler(false);
        
     }
        
@@ -34,7 +34,7 @@ class Staff extends CI_Controller{
     */
     public function index()
     {
-         
+        
          $title = "Staff Home";
          $title2 = "Manage Staff Details";
          $staffs = $this->staff_model->getAll();
@@ -44,6 +44,7 @@ class Staff extends CI_Controller{
          $employment_type = $this->staff_type->getAll();
         
          $this->load->view('layout/header'); 
+        $this->load->view('layout/nav');
          $this->load->view('staff/all_staff', [
          'staffs' => $staffs,
          'staff_dept' => $staff_dept,
@@ -190,6 +191,7 @@ class Staff extends CI_Controller{
          $data = $this->staff_dept->getAll();
         
          $this->load->view('layout/header');
+         $this->load->view('layout/view');
          $this->load->view('staff/staff_dept', [
          'query' => $data,
          'title' => $title,
@@ -261,6 +263,7 @@ class Staff extends CI_Controller{
          $data = $this->staff_status->getAll();
         
          $this->load->view('layout/header');
+         $this->load>view('layout/nav');
          $this->load->view('staff/staff_status', [
          'query' => $data,
          'title' => $title,
@@ -325,6 +328,7 @@ class Staff extends CI_Controller{
         
         $type = $this->staff_type->getAll();
         $this->load->view('layout/header');
+        $this->load->view('layout/nav');
         $this->load->view('staff/employ_type' , [
         'types' => $type, 
         'title' => $title,
@@ -390,6 +394,7 @@ class Staff extends CI_Controller{
         
         $levels = $this->staff_level->getAll();
         $this->load->view('layout/header');
+        $this->load->view('layout/nav');
         $this->load->view('staff/staff_level' , [
         'levels' => $levels, 
         'title' => $title,

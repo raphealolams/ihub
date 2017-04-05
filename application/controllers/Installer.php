@@ -35,74 +35,81 @@ t	 * Maps to the following URL
         //Add Customer_Type Table
         $this->load->model('customer_type');
         $this->dbforge->add_field($this->customer_type->columns);
-        $this->dbforge->add_key('customer_type_id');
+        $this->dbforge->add_key('customer_type_id', TRUE);
         $this->dbforge->create_table('customer_type', TRUE);
         
         //Add Customer Status Table
         $this->load->model('customer_status');
         $this->dbforge->add_field($this->customer_status->columns);
-        $this->dbforge->add_key('customer_status_id');
+        $this->dbforge->add_key('customer_status_id', TRUE);
         $this->dbforge->create_table('customer_status', TRUE);
         
         //Add Customer Container Table
         $this->load->model('customer_container');
         $this->dbforge->add_field($this->customer_container->columns);
-        $this->dbforge->add_key('customer_container_id');
+        $this->dbforge->add_key('customer_container_id', TRUE);
         $this->dbforge->create_table('customer_container', TRUE);
         
         //Add Drop Off Table
-        $this->load->model('drop_off');
-        $this->dbforge->add_field($this->drop_off->columns);
-        $this->dbforge->add_key('drop_id');
+        $this->load->model('drop_off_model');
+        $this->dbforge->add_field($this->drop_off_model->columns);
+        $this->dbforge->add_key('drop_id', TRUE);
         $this->dbforge->create_table('drop_off', TRUE);
         
         
         //Add Items Table
         $this->load->model('items');
         $this->dbforge->add_field($this->items->columns);
-        $this->dbforge->add_key('items_id');
+        $this->dbforge->add_key('item_id', TRUE);
         $this->dbforge->create_table('items', TRUE);
         
         //Add Staff Table
         $this->load->model('staff_model');
         $this->dbforge->add_field($this->staff_model->columns);
-        $this->dbforge->add_key('staff_id');
+        $this->dbforge->add_key('staff_id' , TRUE);
         $this->dbforge->create_table('staff', TRUE);
         
         //Add Staff Bank Table
         $this->load->model('staff_bank');
         $this->dbforge->add_field($this->staff_bank->columns);
-        $this->dbforge->add_key('staff_bank_id');
+        $this->dbforge->add_key('staff_bank_id', TRUE);
         $this->dbforge->create_table('staff_bank', TRUE);
         
          //Add Staff Level
         $this->load->model('staff_level');
         $this->dbforge->add_field($this->staff_level->columns);
-        $this->dbforge->add_key('staff_level_id');
+        $this->dbforge->add_key('staff_level_id', TRUE);
         $this->dbforge->create_table('staff_level', TRUE);
         
          //Add Staff Dept
         $this->load->model('staff_dept');
         $this->dbforge->add_field($this->staff_dept->columns);
-        $this->dbforge->add_key('staff_dept_id');
+        $this->dbforge->add_key('staff_dept_id', TRUE);
         $this->dbforge->create_table('staff_dept', TRUE);
         
          //Add Staff Type
         $this->load->model('staff_type');
         $this->dbforge->add_field($this->staff_type->columns);
-        $this->dbforge->add_key('staff_type_id');
+        $this->dbforge->add_key('staff_type_id', TRUE);
         $this->dbforge->create_table('staff_type', TRUE);
         
          //Add Staff Items
         $this->load->model('staff_status');
         $this->dbforge->add_field($this->staff_status->columns);
-        $this->dbforge->add_key('staff_status_id');
+        $this->dbforge->add_key('staff_status_id', TRUE);
         $this->dbforge->create_table('staff_status', TRUE);
+        
+        //Add Category Table
+        $this->load->model('category');
+        $this->dbforge->add_field($this->category->columns);
+        $this->dbforge->add_key('category_id', TRUE);
+        $this->dbforge->create_table('category', TRUE);
+    
         
         //Add User Table
         $this->load->model('user');
         $this->dbforge->add_field($this->user->columns);
-        $this->dbforge->add_key('user_id');
+        $this->dbforge->add_key('user_id', TRUE);
         $this->dbforge->create_table('user', TRUE);
     
 

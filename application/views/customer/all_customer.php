@@ -120,9 +120,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Type</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="customer_type">
-                                 <option> </option>
+                                <option>Select</option>
                                 <?php foreach ($types as $type): ?>
-                            <option> <?php echo $type->customer_type_name ?></option>
+                            <option value="<?php echo $type->customer_type_id ?>"> <?php echo $type->customer_type_name ?></option>
                                 <?php endforeach ;?>
                             </select>
                         </div>
@@ -132,9 +132,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Customer Status</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="status">
-                            <option> </option>
+                                <option>Select</option>
                                 <?php foreach ($status as $stat): ?>
-                            <option> <?php echo $stat->customer_status_name ?></option>
+                            <option value="<?php echo $stat->customer_status_id ?>"> <?php echo $stat->customer_status_name ?></option>
                                 <?php endforeach ;?>
                             </select>
                         </div>
@@ -164,24 +164,24 @@
                       <thead>
                         <tr>
                           <th>Surname</th>
-                          <th>Other Names</th>
                           <th>Gender</th>
                           <th>Phone Number</th>
                           <th>Address</th>
                           <th>Status</th>
+                          <th>Type</th>
                           <th>Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                          <?php foreach ($query as $customer): ?>
+                          <?php foreach ($customers as $customer): ?>
                           <tr>
-                          <td><?php echo $customer->surname ?> </td>
-                          <td><?php echo $customer->other_name ?></td>
+                          <td><strong><?php echo $customer->getName() ?></strong></td>
                           <td><?php echo $customer->gender ?></td>
                           <td><?php echo $customer->phone_number ?></td>
                           <td><?php echo $customer->address ?> </td>   
-                          <td><?php echo $customer->status ?></td> 
+                          <td><?php echo $customer->getStatus() ?></td> 
+                         <td><?php echo $customer->getType() ?></td>
                           <td><a href="<?php echo site_url("customer/view/{$customer->customer_id}")?>" class="btn btn-form-modal btn-primary fa fa-link" data-toggle="modal" data-target=".bs-example-modal-lg">View</a>
                               <a href="<?php echo site_url("customer/edit_customer/{$customer->customer_id}")?>" class="btn btn-form-modal btn-warning fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
                               <a href="site_url('')" class="btn btn-danger fa fa-trash">Delete</a></td>

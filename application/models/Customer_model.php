@@ -116,14 +116,14 @@ class Customer_model extends MY_Model {
         ),
         
         'customer_type' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
+            'type' => 'INT',
+            'constraint' => '11',
             'null' => true
         ),
         
         'status' => array(
-            'type' => 'varchar',
-            'constraint' => '50',
+            'type' => 'INT',
+            'constraint' => '11',
             'null' => true
         ),
         
@@ -137,18 +137,36 @@ class Customer_model extends MY_Model {
         ),
 
     );
-
-     public function getData(){
-        $query = $this->db->get(customer);
-        return $query->result();
-     }
     
-    public function getCustomerType()
+    /*
+    *@params
+    */
+    public function getName()
     {
-        $this->load->model('customer_type');
-        
+        return $this->surname . '  ' . $this->other_name;
     }
-
+    
+    /*
+    *@params
+    */
+    public function getStatus()
+    {
+        $this->load->model('customer_status' , 'customer_status_model');
+        $stat = $this->customer_status_model->getOne($this->status);
+        if($stat) return $stat->customer_status_name;
+    }
+    
+    /*
+    *@params
+    */
+    public function getType()
+    {
+        $this->load->model('customer_type' , 'customer_type_model');
+        $type = $this->customer_type_model->getOne($this->customer_type);
+        
+        if($type) return $type->customer_type_name;
+    }
+    
        public function getPhotoUrl()
     {
         if($this->image)

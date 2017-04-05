@@ -10,7 +10,7 @@
         <div class="col-md-10">
     <div class="table">
         <center> 
-        <img src="<?php echo $staff->getPhotoUrl()?>" class="img-rounded img-responsive" alt="staff Photo" width="304" height="236"> 
+        <img src="$staff->getPhotoUrl()" class="img-rounded img-responsive" alt="staff Photo" width="304" height="236"> 
         </center> 
         <table class="table table-responsive table-hover">
             <tbody>
@@ -61,7 +61,7 @@
                 
                 <tr>
                     <th>Employment Type</th>
-                    <td><?php echo $staff->staff_employment_type ?> </td>
+                    <td><?php echo $staff->getEmploy() ?> </td>
                 </tr>
                 
                 <tr>
@@ -71,12 +71,12 @@
                 
                 <tr>
                     <th>Level</th>
-                    <td><?php echo $staff->staff_level ?></td>
+                    <td><?php echo $staff->getLevel() ?></td>
                 </tr>
                 
                 <tr>
                     <th>Status</th>
-                    <td><?php echo $staff->staff_status ?></td>
+                    <td><?php echo $staff->getStatus() ?></td>
                 </tr>
             
             </tbody>

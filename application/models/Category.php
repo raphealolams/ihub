@@ -11,16 +11,12 @@
  *
  * @author Ajilore Raphael
  */
-class Items extends MY_Model {
+class Category extends MY_Model {
 
 
-    public $item_id;
+    public $category_id;
 
     public $category_name;
-    
-    public $item_name;
-    
-    public $price;
     
     public $comment;
 
@@ -29,9 +25,9 @@ class Items extends MY_Model {
     public $edit_time;
     
     
-    protected $table = 'items';
+    protected $table = 'category';
 
-    protected $primary = 'item_id';
+    protected $primary = 'category_id';
 
     /**
      * Column definition
@@ -39,7 +35,7 @@ class Items extends MY_Model {
      * @var array
      */
     public $columns = array(
-        'item_id' => array(
+        'category_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
@@ -47,20 +43,9 @@ class Items extends MY_Model {
         ),
         
         'category_name' => array(
-            'type' => 'INT',
-            'constraint' => 11,
-            'null' => true
-        ),
-        
-        'item_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
             'null' => true
-        ),
-        
-        'price' => array(
-            'type' => 'varchar',
-            'constraint' => '100'
         ),
         
         'comment' => array(
@@ -73,6 +58,7 @@ class Items extends MY_Model {
             'type' => 'datetime',
             'null' => true
         ),
+        
         'edit_time' => array(
             'type' => 'datetime',
             'null' => true
@@ -80,17 +66,10 @@ class Items extends MY_Model {
 
     );
     
-      /*
-    *@params
-    */
-    public function getCatName()
+     public function getCat()
     {
-        $this->load->model('category' , 'category_name_model');
-        $status = $this->category_name_model->getOne($this->category_name);
-        
-        if($status) return $status->category_name;
+        return;
     }
-  
 
 
 }

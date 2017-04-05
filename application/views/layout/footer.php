@@ -46,45 +46,7 @@ Bootstrap
 <script src="{base_url("assets/dashboard/lib/bootstrap/js/bootstrap.js")}"></script>
 -->
 
-<script>
-    
-
-    $(function(){
-        var $hook = function(){
-            $('.btn-form-modal').click(function(e){
-                e.preventDefault();
-                // get the url to open
-                var url = $(this).attr('href');
-                if(url){
-                    console.log("Launching modal and changing the iframe url to "+url);
-                    $('#modal-frame').attr('src' , url);
-                    $("#formModal").modal();
-                }
-            });
-            $('.btn-print').click(function(e){
-                e.preventDefault();
-                var $prev = document.body.innerHTML;
-                $('body').html($('#print-content').html());
-                window.print();
-                $('body').html($prev);
-            });
-        }
-        var $d = $('.data-table').dataTable({ 
-            drawCallback : function(){
-                 $hook();
-            }
-        });
-        $hook();
-
-    });
-
-    $(function () {
-    //Initialize Select2 Elements
-    $(".select2").select2();  
-  });
-
-</script>
-
+-
 
     <!-- jQuery -->
     <script src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js')?>"></script>
