@@ -49,7 +49,7 @@
                                 </div> 
                                 </td>
                                 <td>
-                                    <input type="submit" class="btn btn-success" value="select" name="Select"/>
+                                    <input type="submit" class="btn btn-success" value="select" name="select"/>
                                 </td>
                             </tr>
                         
@@ -158,22 +158,58 @@
                                 <th>Quantity</th>
                                 <th>Total Price</th>
                                 <th>Action</th>
+                               
                             </tr>
                         </thead>
                         <?php echo form_open()?>
+                       <?php $total = 0 ?>
                         <tbody>
                             <?php foreach ($droped as $drop) :?>
+                            
+                            
                             <tr>
                                 <td><?php echo $drop->getCatName() ?></td>
                                 <td><?php echo $drop->getItemName() ?></td>
                                 <td><?php echo $drop->price?></td>
                                 <td><?php echo $drop->quantity?></td>
-                                <td><?php echo $drop->total_price. ' '.  $randomString?></td>
-                                <td><a href="" class="btn btn-warning fa fa-pencil">Remove</a></td>
+                                <td><?php echo $drop->total_price?></td>
+                                <td><a href="<?php echo site_url("drop_off/delete_items/{$drop->drop_id}/{$customer_id}")?>" class="btn btn-warning fa fa-pencil">Remove</a></td>
                             </tr>
+                            <?php $total += $drop->total_price ?>
                             <?php endforeach ; ?>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td><strong><label>Pickup Date</label><input type="date" class="form-control"  name="pick_date" >  </strong> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                
+                                <td><strong><label>Total Price</label><input type="number" class="form-control" value="<?php echo $total ?>" name="total_price"  disabled>  </strong> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>
+                            <strong> <label>Deposit</label> <input type="number" class="form-control" name="deposit" > </strong> 
+                                </td>
+                            </tr>
+                             <tr>
+                                <td colspan="4"></td>
+                                <td>
+                                    <strong> <label>Balance</label> <input type="number" class="form-control" name="bal"  disabled> </strong>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td colspan="5"></td>
+                                <td>
+                                        <input type="submit" class="btn btn-success pull-center" value="Save" name="bal" >
+                                </td>
+                            </tr>
                         </tbody>
-                        </table>
+                      </table>
                       <?php echo form_close()?>
                       
                     </div>
+                </div>
+              </div>
+    </div>
+</div>

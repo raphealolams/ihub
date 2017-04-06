@@ -208,13 +208,13 @@ class Drop_off extends CI_Controller{
         $items = array();
         $customers = $this->customer_model->getAll();
         
-        $this->load->helper('String_helper');
-        $randomString=generateRandomString(5);
+//        $this->load->helper('String_helper');
+//        $randomString=generateRandomString(5);
         
         
         if($this->input->post('select'))
         {
-            $customer_id = $this->input->post();
+            $customer_id = $this->input->post('customer_id');
             redirect(site_url('drop_off/drop_items/'.$customer_id));
         }
         
@@ -228,14 +228,13 @@ class Drop_off extends CI_Controller{
             $categorys = $this->category->getAll();
         }
         
-        
+         $day = date('Y-m-d');
         if($this->input->post('Add'))
         {  
             $item_id = $this->input->post('item_id');
             $item_data = $this->items->getOne($item_id);
             $items_quantity = $this->input->post('quantity');
-             $customer_id = $this->input->post('customer_id');
-
+               
             if($item_data)
             {
                 
@@ -245,16 +244,17 @@ class Drop_off extends CI_Controller{
                 'item_id' => $item_id ,
                 'quantity' => $items_quantity,
                 'price' => $item_data->price,
-                'total_price' => $item_data->price * $items_quantity
+                'total_price' => $item_data->price * $items_quantity,
+                'drop_date' => $day
             );
                 
             $this->drop_off_model->insert($data);
             $this->session->set_flashdata('mssg', 'Item Successfully Added');
-            redirect('drop_off/drop_items'); 
+            redirect('drop_off/drop_items/'.$customer_id); 
             }
         }
         
-         $droped = $this->drop_off_model->getAll('', array('customer_id'=>'1'));
+         $droped = $this->drop_off_model->getAll('', array('customer_id'=>$customer_id, 'drop_date'=>$day));
         
         $this->load->view('layout/header');
         $this->load->view('layout/nav');
@@ -266,18 +266,32 @@ class Drop_off extends CI_Controller{
             'items' => $items,
             'customers' => $customers,
             'droped' => $droped,
-            'randomString' => $randomString,
             'message' => $this->session->flashdata('mssg'),
+            'customer_id' => $customer_id
         ]);
         $this->load->view('layout/footer');
+        
+        if($this->input->post('Save'))
+        {
+            
+        }
     }
     
     /*
     *@params
     */
-    public function delete_items($id='')
+    public function delete_items($drop_id='' , $customer_id = '')
     {
-        
+        $items = $this->drop_off_model->getOne($drop_id);
+
+        if(!$items->drop_id)
+        {
+            show_error("Item does not exist!");
+        }
+
+        $items->delete($drop_id);
+
+        redirect(site_url('drop_off/drop_items/'.$customer_id));
     }
     
 }

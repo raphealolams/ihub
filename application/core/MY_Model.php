@@ -119,14 +119,15 @@ class MY_Model extends CI_Model{
     }
 
     
-    /**
+    /*
     *
     *
     */
-    public function delete($id) {
-        $this->db->where($this->primary_key, $id);
-
+    public function delete($id) 
+    {
+        $this->db->where($this->primary, $id);
         return $this->db->delete($this->table);
+       
     }
     
      /*

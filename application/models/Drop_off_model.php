@@ -87,6 +87,11 @@ class Drop_off_model extends MY_Model {
             'null' => true
         ),
         
+        'drop_date' => array(
+            'type' => 'date',
+            'null' => true
+        ),
+        
         'create_time' => array(
             'type' => 'datetime',
             'null' => true
