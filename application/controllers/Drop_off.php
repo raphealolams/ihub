@@ -207,9 +207,11 @@ class Drop_off extends CI_Controller{
         $categorys = array();
         $items = array();
         $customers = $this->customer_model->getAll();
-        
-//        $this->load->helper('String_helper');
-//        $randomString=generateRandomString(5);
+        $day = date('Y-m-d');
+        $yes = 1;
+        $no = 0;
+        $status_yes = 1;
+        $status_no = 0;
         
         
         if($this->input->post('select'))
@@ -228,13 +230,13 @@ class Drop_off extends CI_Controller{
             $categorys = $this->category->getAll();
         }
         
-         $day = date('Y-m-d');
         if($this->input->post('Add'))
         {  
             $item_id = $this->input->post('item_id');
             $item_data = $this->items->getOne($item_id);
             $items_quantity = $this->input->post('quantity');
                
+           
             if($item_data)
             {
                 
@@ -245,7 +247,7 @@ class Drop_off extends CI_Controller{
                 'quantity' => $items_quantity,
                 'price' => $item_data->price,
                 'total_price' => $item_data->price * $items_quantity,
-                'drop_date' => $day
+                'in_basket' => $yes
             );
                 
             $this->drop_off_model->insert($data);
@@ -254,7 +256,47 @@ class Drop_off extends CI_Controller{
             }
         }
         
-         $droped = $this->drop_off_model->getAll('', array('customer_id'=>$customer_id, 'drop_date'=>$day));
+         $droped = $this->drop_off_model->getAll('', array('customer_id'=>$customer_id, 'in_basket'=>$yes));
+        
+        //Save Data to the customer_container
+         if($this->input->post('save'))
+        {
+            $this->load->helper('String_helper');
+            $randomString=generateRandomString(5);
+            $date = $this->input->post('pick_date');
+            if($date=== $day)
+            {
+                redirect('drop_off/drop_items/'.$customer_id , [$this->session->set_flashdata('mssg' , 'Cant Pick Up Items Today')]);
+            }
+            
+            $data = array(
+                'customer_id' => $customer_id,
+                'status' => $status_yes,
+                'invoice_number' => $randomString,
+                'total' => $this->input->post('total'),
+                'deposit' => $this->input->post('deposit'),
+                'balance' => $this->input->post('balance'),
+                'picked_date' => $date,
+                'drop_date' => $day
+            );
+            
+           foreach ($droped as $drop_item)
+          {
+               $drop_item->in_basket = $no;
+               $drop_item->invoice_number = $randomString;
+               $update_data = [
+                   'invoice_number' => $randomString,
+                   'in_basket' => $no,
+                   'customer_id' => $customer_id
+               ];
+               $drop_item->update($update_data, $drop_item->drop_id);
+           }
+            
+            $this->customer_container->insert($data);
+            redirect('drop_off/print_recipt/'.$customer_id); 
+            
+        }
+        
         
         $this->load->view('layout/header');
         $this->load->view('layout/nav');
@@ -271,10 +313,6 @@ class Drop_off extends CI_Controller{
         ]);
         $this->load->view('layout/footer');
         
-        if($this->input->post('Save'))
-        {
-            
-        }
     }
     
     /*
@@ -291,7 +329,23 @@ class Drop_off extends CI_Controller{
 
         $items->delete($drop_id);
 
-        redirect(site_url('drop_off/drop_items/'.$customer_id));
+        redirect(site_url('drop_off/drop_items/'.$customer_id , [$this->session->set_flashdata('mssg' , 'One Item Removed')]));
+    }
+    
+    public function print_recipt()
+    {
+        $this->load->view('layout/header');
+        $this->load->view('layout/nav');
+        $this->load->view('drop_off/print_recipt');
+        $this->load->view('layout/footer');
+    }
+    
+    public function search_drop()
+    {
+        $this->load->view('layout/header');
+        $this->load->view('layout/nav');
+        $this->load->view('drop_off/search_drop');
+        $this->load->view('layout/footer');
     }
     
 }

@@ -164,9 +164,9 @@
                         <?php echo form_open()?>
                        <?php $total = 0 ?>
                         <tbody>
-                            <?php foreach ($droped as $drop) :?>
                             
-                            
+                            <?php 
+                                foreach ($droped as $drop) :?>
                             <tr>
                                 <td><?php echo $drop->getCatName() ?></td>
                                 <td><?php echo $drop->getItemName() ?></td>
@@ -177,31 +177,31 @@
                             </tr>
                             <?php $total += $drop->total_price ?>
                             <?php endforeach ; ?>
-                            <tr>
+                             <tr>
                                 <td colspan="4"></td>
-                                <td><strong><label>Pickup Date</label><input type="date" class="form-control"  name="pick_date" >  </strong> </td>
+                                
+                                <td><strong><label>Total Price</label><input type="number" id="txt1" class="form-control" onkeyup="sum();"  value="<?php echo $total ?>" name="total"  disabled>  </strong> </td>
                             </tr>
                             <tr>
                                 <td colspan="4"></td>
-                                
-                                <td><strong><label>Total Price</label><input type="number" class="form-control" value="<?php echo $total ?>" name="total_price"  disabled>  </strong> </td>
+                                <td><strong><label>Pickup Date</label><input type="date" class="form-control" name="pick_date" value="<?php echo set_value('pick_date')?>" >  </strong> </td>
                             </tr>
                             <tr>
                                 <td colspan="4"></td>
                                 <td>
-                            <strong> <label>Deposit</label> <input type="number" class="form-control" name="deposit" > </strong> 
+                            <strong> <label>Deposit</label> <input type="number" id="txt2" class="form-control"  onkeyup="sum();" name="deposit" > </strong> 
                                 </td>
                             </tr>
                              <tr>
                                 <td colspan="4"></td>
                                 <td>
-                                    <strong> <label>Balance</label> <input type="number" class="form-control" name="bal"  disabled> </strong>
+                                    <strong> <label>Balance</label> <input type="number" id="txt3" class="form-control" name="balance" disabled> </strong>
                                 </td>
                             </tr>
                              <tr>
                                 <td colspan="5"></td>
                                 <td>
-                                        <input type="submit" class="btn btn-success pull-center" value="Save" name="bal" >
+                                        <input type="submit" class="btn btn-success pull-center" value="save" name="save" >
                                 </td>
                             </tr>
                         </tbody>
@@ -213,3 +213,25 @@
               </div>
     </div>
 </div>
+<script>
+
+    function sum() {
+      var txtFirstNumberValue = document.getElementById('txt1').value;
+      var txtSecondNumberValue = document.getElementById('txt2').value;
+    
+      if(!txtSecondNumberValue || txtSecondNumberValue < 0){
+          txtSecondNumberValue = 0;
+          document.getElementById('txt3').value = 0;
+      }
+        // if amount entered is higher than the charged, then correct it
+        if(txtSecondNumberValue > txtFirstNumberValue){
+            txtSecondNumberValue = txtFirstNumberValue;
+        }
+      var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+      if (isNaN(result)) {
+          result = txtFirstNumberValue;
+      }
+        document.getElementById('txt3').value = result;
+}
+
+</script>

@@ -15,15 +15,21 @@ class Customer_container extends MY_Model {
     
     public $customer_container_id;
 
-    public $item_id;
-
     public $customer_id;
 
-    public $picked;
+    public $status;
     
     public $invoice_number;
     
+    public $total;
+    
+    public $deposit;
+    
+    public $balance;
+    
     public $picked_date;
+    
+    public $drop_date;
 
     public $create_time;
 
@@ -47,19 +53,13 @@ class Customer_container extends MY_Model {
             'auto_increment' => TRUE
         ),
         
-        'item_id' => array(
-            'type' => 'int',
-            'constraint' => '11',
-            'null' => true
-        ),
-        
         'customer_id' => array(
             'type' => 'int',
             'constraint' => '11',
             'null' => true
         ),
         
-        'picked' => array(
+        'status' => array(
             'type' => 'varchar',
             'constraint' => '10',
             'null' => true
@@ -71,8 +71,32 @@ class Customer_container extends MY_Model {
             'null' => true
         ),
         
+        
+        'total' => array(
+            'type' => 'varchar',
+            'constraint' => '20',
+            'null' => true
+        ),
+        
+        'deposit' => array(
+            'type' => 'varchar',
+            'constraint' => '20',
+            'null' => true
+        ),
+        
+        'balance' => array(
+            'type' => 'varchar',
+            'constraint' => '20',
+            'null' => true
+        ),
+       
         'picked_date' => array(
-            'type' => 'datetime',
+            'type' => 'date',
+            'null' => true
+        ),
+        
+        'drop_date' => array(
+            'type' => 'date',
             'null' => true
         ),
         
@@ -80,6 +104,7 @@ class Customer_container extends MY_Model {
             'type' => 'datetime',
             'null' => true
         ),
+        
         'edit_time' => array(
             'type' => 'datetime',
             'null' => true

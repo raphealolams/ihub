@@ -27,6 +27,10 @@ class Drop_off_model extends MY_Model {
     public $price;
     
     public $total_price;
+    
+    public $in_basket;
+    
+    public $invoice_number;
 
     public $create_time;
 
@@ -87,9 +91,17 @@ class Drop_off_model extends MY_Model {
             'null' => true
         ),
         
-        'drop_date' => array(
-            'type' => 'date',
+        'in_basket' => array(
+            'type' => 'int',
+            'constraint' => '11',
             'null' => true
+            
+        ),
+        
+        'invoice_number' => array(
+            'type' => 'varchar',
+            'constraint' => '250',
+            'null' => 'null'
         ),
         
         'create_time' => array(
