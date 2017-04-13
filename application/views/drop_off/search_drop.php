@@ -30,7 +30,10 @@
                        <table id="responsive" class="datatable table table-striped dt-responsive nowrap" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Customer Name</th>
+                            
+
+                                <th>Invoice Number</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -40,16 +43,13 @@
                                 <td>
                                       <div class="form-group">
                                       <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <select class="form-control" name="customer_id">
-                                     
-                                        <option></option>
-                                       
-                                    </select>
+                                        <input type="text" class="form-control" name="invoice_number">
                                    </div>
-                                </div> 
+                                </div>
                                 </td>
+                                <td></td>
                                 <td>
-                                    <input type="submit" class="btn btn-success" value="select" name="select"/>
+                                    <input type="submit" class="btn btn-success" value="search" name="search"/>
                                 </td>
                             </tr>
                         
@@ -60,10 +60,81 @@
                     </div>
                 </div> 
                 
+                 <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-list"></i> <span>Search Result</span></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                       <table id="responsive" class="datatable table table-bordered table-hover table-striped dt-responsive nowrap" cellspacing="0">
+                                    <center></center>
+                        <thead>
+                            <tr>
+                                <th>Category Name</th>
+                                <th>Item Name</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                               
+                            </tr>
+                        </thead>
+                        <?php echo form_open()?>
+                       <?php $total = 0 ?>
+                        <tbody>
+                            
+                            <?php 
+                                foreach ($droped as $drop) :?>
+                            <tr>
+                                <td><?php echo $drop->getCatName() ?></td>
+                                <td><?php echo $drop->getItemName() ?></td>
+                                <td><?php echo $drop->price?></td>
+                                <td><?php echo $drop->quantity?></td>
+                                <td><?php echo $drop->total_price?></td>
+                            </tr>
+                            <?php $total += $drop->total_price ?>
+                            <?php endforeach ; ?>
+                             <tr>
+                                <td colspan="4"></td>
+                                
+                                <td><strong><label>Total Price</label><input type="number" id="txt1" class="form-control" onkeyup="sum();"  value="<?php echo $total ?>" name="total"  readonly>  </strong> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>
+                    
+                            <strong> <label>Amount Paid</label> <input type="number" id="txt2" class="form-control"  onkeyup="sum()" name="deposit"> </strong>
+                                    
+                                </td>
+                            </tr>
+                             <tr>
+                                <td colspan="4"></td>
+                                <td>
+                                    <strong> <label>Balance</label> <input type="number" id="txt3" class="form-control" name="balance" readonly> </strong>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td colspan="4"></td>
+                                <td>
+                                        <center><input type="submit" class="btn btn-success pull-center" value="save" name="save" ></center>
+                                </td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      <?php echo form_close()?>
+                      
+                    </div>
+                </div> 
                 
     
                
     </div>
+</div>
 </div>
 <script>
 

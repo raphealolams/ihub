@@ -180,7 +180,7 @@
                              <tr>
                                 <td colspan="4"></td>
                                 
-                                <td><strong><label>Total Price</label><input type="number" id="txt1" class="form-control" onkeyup="sum();"  value="<?php echo $total ?>" name="total"  disabled>  </strong> </td>
+                                <td><strong><label>Total Price</label><input type="number" id="txt1" class="form-control" onkeyup="sum();"  value="<?php echo $total ?>" name="total"  readonly>  </strong> </td>
                             </tr>
                             <tr>
                                 <td colspan="4"></td>
@@ -195,7 +195,7 @@
                              <tr>
                                 <td colspan="4"></td>
                                 <td>
-                                    <strong> <label>Balance</label> <input type="number" id="txt3" class="form-control" name="balance" disabled> </strong>
+                                    <strong> <label>Balance</label> <input type="number" id="txt3" class="form-control" name="balance" readonly> </strong>
                                 </td>
                             </tr>
                              <tr>

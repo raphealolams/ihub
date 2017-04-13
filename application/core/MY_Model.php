@@ -35,17 +35,31 @@ class MY_Model extends CI_Model{
     }
 
     
-    /**
-    *
-    *@param int $id Id of record to fetch
-    */
-    public function getOne($id) {
-        $row = $this->db->get_where($this->table, array($this->primary => $id))->row_array();
-         $class_name =  get_class($this);
-                
-         return new $class_name($row);
+//    /**
+//    *
+//    *@param int $id Id of record to fetch
+//    */
+//    public function getOne($id) {
+//        $row = $this->db->get_where($this->table, array($this->primary => $id))->row_array();
+//         $class_name =  get_class($this);
+//                
+//         return new $class_name($row);
+//    
+//    }
     
-    }
+      /**
+      *
+      *@param int $id Id of record to fetch
+      */
+      public function getOne($id = '', $where = array()) {
+
+        if($id) $where[$this->primary] = $id;
+
+         $row = $this->db->get_where($this->table, $where)->row_array();
+         $class_name =  get_class($this);
+
+        return new $class_name($row);
+      }
     
     
     /**
@@ -107,7 +121,7 @@ class MY_Model extends CI_Model{
     }
     
     
-    /**
+    /*
     *
     *
     */
@@ -148,6 +162,21 @@ class MY_Model extends CI_Model{
         {
             return  $this->{$this->primary};
         }
+    }
+    
+    
+    /**
+     *
+     * @param array $where
+     * @return type
+     */
+    public function count($where = '')
+    {
+        if($where) $this->db->where( $where );
+
+        $total = $this->db->count_all_results( $this->getTable() ) ;
+
+        return $total;
     }
     
 }
