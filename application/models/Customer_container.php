@@ -112,5 +112,16 @@ class Customer_container extends MY_Model {
 
     );
 
-
+    /*
+    *@params
+    */
+    public function getdetails()
+    {
+        $this->load->model('customer_model' , 'customer_model_');
+        $status = $this->customer_model_->getOne($this->customer_id);
+        
+        if($status) return $status;
+    }
+    
+    
 }

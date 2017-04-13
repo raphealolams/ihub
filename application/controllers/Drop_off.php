@@ -336,20 +336,9 @@ class Drop_off extends CI_Controller{
         redirect(site_url('drop_off/drop_items/'.$customer_id , [$this->session->set_flashdata('mssg' , 'One Item Removed')]));
     }
     
-    public function print_recipt($invoice_number = ' ')
-    {
-        
-
-        
-        
-        
-        
-        $this->load->view('layout/header');
-        $this->load->view('layout/nav');
-        $this->load->view('drop_off/print_recipt');
-        $this->load->view('layout/footer');
-    }
-    
+    /*
+    *@params
+    */
     public function search_drop($invoice_number = '')
     {
         
@@ -386,6 +375,26 @@ class Drop_off extends CI_Controller{
         $this->load->view('layout/nav');
         $this->load->view('drop_off/search_drop' , [
             'droped' => $droped,
+        ]);
+        $this->load->view('layout/footer');
+    }
+    
+    /*
+    *@params
+    */
+       public function print_recipt($invoice_number = ' ')
+    {
+        
+        $invoice_numb = $this->customer_container->getAll('', array('invoice_number'=>$invoice_number, 'status'=>$this->status_no));
+        $droped = $this->drop_off_model->getAll('',  array('invoice_number'=>$invoice_number, 'in_basket'=>$this->no));
+        
+        $this->load->view('layout/header');
+        $this->load->view('layout/nav');
+        $this->load->view('drop_off/print_recipt', [
+            
+            'invoice_number' => $invoice_numb,
+            'droped' => $droped,
+            
         ]);
         $this->load->view('layout/footer');
     }

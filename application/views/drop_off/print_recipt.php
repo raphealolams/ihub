@@ -29,7 +29,7 @@
                         <div class="invoice-box print-content ">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
-                <td colspan="4">
+                <td colspan="12">
                     <table>
                         <tr>
                             <td class="title">
@@ -42,19 +42,41 @@
                             <td>
                             
                             </td>
-                            
                             <td>
-                                Invoice #: <br>
-                                Created:<br>
-                                Pickup Date:
+                            
                             </td>
+                            <td>
+                            
+                            </td>
+                            <td>
+                            
+                            </td>
+                             <td>
+                            
+                            </td>
+                            <td>
+                            
+                            </td>
+                            <td>
+                            
+                            </td>
+                            <td>
+                            
+                            </td>
+                            <?php foreach ($invoice_number as $number):?>
+                            <td>
+                                Invoice #: <?php echo $number->invoice_number?> <br>
+                                Expected Pickup Date:: <?php echo $number->picked_date?>: <br/>
+                                Created:: <?php echo date('Dd-M-Y')?><br>
+                            </td>
+                            <?php endforeach?>
                         </tr>
                     </table>
                 </td>
             </tr>
             
             <tr class="information">
-                <td colspan="4">
+                <td colspan="12">
                     <table>
                         <tr>
                             <td>
@@ -64,18 +86,25 @@
                             </td>
                             
                             <td>
-                            
                             </td>
                             
                             <td>
-                            
                             </td>
                             
                             <td>
-                                Acme Corp.<br>
-                                John Doe<br>
-                                john@example.com
                             </td>
+                            
+                            <td>
+                            </td>
+                            
+                            <?php foreach ($invoice_number as $number):?>
+                               <?php $data = $number->getdetails(); ?>
+                            <td>
+                                <?php echo $data->surname .' '. $data->other_name?><br>
+                                <?php echo $data->email?><br>
+                                <?php echo $data->phone_number?>
+                            </td>
+                            <?php endforeach?>
                         </tr>
                     </table>
                 </td>
@@ -86,11 +115,7 @@
                     Payment Method
                 </td>
                 
-                <td>
-                    
-                </td>
-                
-                <td></td>
+                <td colspan="11"> </td>
                 
                 <td>
                     #
@@ -99,114 +124,103 @@
             
             <tr class="details">
                 <td>
-                    Check
+                    Cash
                 </td>
                 
-                <td>
+              <td colspan="11"> </td>
                     
-                </td>
-                
+                <?php foreach ($invoice_number as $number):?>
                 <td>
+                    <?php echo $number->deposit?>
                 </td>
-                
-                <td>
-                    1000
-                </td>
+                <?php endforeach?>
             </tr>
             
             <tr class="heading">
                 <td>
+                    Category
+                </td>
+                
+                <td colspan="2"> </td>
+                
+                <td>
                     Item
                 </td>
                 
+                <td colspan="2"> </td>
+                
                 <td>Quantity</td>
                 
-                <td>
+               <td colspan="2"> </td>
                 
+                <td>
+                    Unit Price
                 </td>
+                
+               <td colspan="2"> </td>
                 
                 <td>
                     Price
                 </td>
             </tr>
-            
+            <?php foreach ($droped as $drop_item):?>
             <tr class="item">
-                <td>
-                    Website design
-                </td>
                 
                 <td>
-                
+                     <?php echo $drop_item->getCatName()?>
                 </td>
+                
+              <td colspan="2"> </td>
+                
+                <td>
+                    <?php echo $drop_item->getItemName()?>
+                </td>
+                
+               <td colspan="2"> </td>
                 
                   <td>
-                
+                     <?php echo $drop_item->quantity?>
                 </td>
+                
+                 <td colspan="2"> </td>
                 
                 <td>
-                    $300.00
+                   <?php echo $drop_item->price?>     
                 </td>
+                    
+               <td colspan="2"> </td>
+                
+                <td>
+                    <?php echo $drop_item->total_price?>
+                </td>
+               
             </tr>
+             <?php endforeach?>
             
-            <tr class="item">
-                <td>
-                    Hosting (3 months)
-                </td>
-                
-                <td>
-                
-                </td>
-                
-                  <td>
-                
-                </td>
-                
-                <td>
-                    $75.00
-                </td>
-            </tr>
             
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-                
-                <td>
-                
-                </td>
-                
-                  <td>
-                
-                </td>
-                
-                <td>
-                    $10.00
-                </td>
-            </tr>
-            
+             <?php foreach ($invoice_number as $number):?>
             <tr class="total">
-                <td> </td>
-                <td></td>
-                <td></td>
+                <td colspan="12"> </td>
+                
                 <td>
-                   Total: $385.00
+                      <strong>Total:: <?php echo $number->total?></strong>
                 </td>
             </tr>
             
-            <tr class="balance">
-                <td> </td>
-                <td></td>
-                
+            <tr class="balance" >
+                <td colspan="12"> </td>
                 <td>
-                   Balance: $385.00
+                   <strong>Balance:: <?php echo $number->balance?></strong>   
                 </td>
+                
             </tr>
+             <?php endforeach?>
         </table>
     </div>
               
                 <div class=" ">
                     <center>     
-                        <button type="button" class="btn btn-lg btn-success glyphicon glyphicon-print" onclick="windoes.print()"></button>
+                        <button type="button" class="btn btn-lg btn-success glyphicon glyphicon-print" onclick="window.print()"></button>
                     </center>        
                 </div>
                 </section>
@@ -242,7 +256,7 @@
         vertical-align:top;
     }
     
-    .invoice-box table tr td:nth-child(2){
+    .invoice-box table tr td:nth-child(){
         text-align:left;
     }
     
@@ -274,16 +288,13 @@
         border-bottom:1px solid #eee;
     }
     
-    .invoice-box table tr.item.last td{
-        border-bottom:none;
-    }
     
-    .invoice-box table tr.total td:nth-child(4){
+    .invoice-box table tr.total td:nth-child(){
         border-top:2px solid #eee;
         font-weight:bold;
     }
      
-     .invoice-box table tr.balance td:nth-child(3){
+     .invoice-box table tr.balance td:nth-child(){
         border-top:2px solid #eee;
         font-weight:bold;
     }
