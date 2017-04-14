@@ -10,7 +10,7 @@
  *
  * @author Ajilore Raphael
  */
-class Drop_off extends CI_Controller{
+class Drop_off extends MY_Controller{
     
   
     

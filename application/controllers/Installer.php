@@ -56,6 +56,18 @@ t	 * Maps to the following URL
         $this->dbforge->add_key('drop_id', TRUE);
         $this->dbforge->create_table('drop_off', TRUE);
         
+        //Add Expenses Type Table
+        $this->load->model('expenses_type');
+        $this->dbforge->add_field($this->expenses_type->columns);
+        $this->dbforge->add_key('expenses_type_id', TRUE);
+        $this->dbforge->create_table('expenses_type', TRUE);
+        
+        //Add Expenses Table
+        $this->load->model('expenses_model');
+        $this->dbforge->add_field($this->expenses_model->columns);
+        $this->dbforge->add_key('expenses_id', TRUE);
+        $this->dbforge->create_table('expenses_model', TRUE);
+        
         
         //Add Items Table
         $this->load->model('items');

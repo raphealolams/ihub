@@ -10,7 +10,7 @@
  *
  * @author Ajilore Raphael
  */
-class Customer extends CI_Controller{
+class Customer extends MY_Controller{
     
   
     
