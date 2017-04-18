@@ -26,6 +26,8 @@ class Expenses_model extends My_Model {
     public $expenses_date;
 
     public $expenses_type_id;
+    
+    public $collected_by;
 
     public $expenses_status;
 
@@ -72,10 +74,16 @@ class Expenses_model extends My_Model {
             'constraint' => 11,
         ),
         
-        'expenses_status' => array(
+        'collected_by' => array(
             'type' => 'INT',
-            'constraint' => 2,
-            'default'=>0
+            'constraint' => 11,
+            'null' => true
+        ),
+        
+        'expenses_status' => array(
+            'type' => 'varchar',
+            'constraint' => 50,
+            'default'=> 'null'
         ),
         
         'create_time' => array(
@@ -86,10 +94,32 @@ class Expenses_model extends My_Model {
         'edit_time' => array(
             'type' => 'datetime',
             'null' => true
-        ),
-        
-    
-
+        )
 );
  
+    /*
+    *@params
+    */
+    public function getExpenseType()
+    {
+    
+        $this->load->model('expenses_type' , 'expenses_type');
+        $status = $this->expenses_type->getOne($this->expenses_type_id);
+        
+        if($status) return $status->expenses_type_name;
+    }
+    
+    /*
+    *@params
+    */
+    public function getStaffName()
+    {
+    
+        $this->load->model('staff_model' , 'staff_model');
+        $status = $this->staff_model->getOne($this->collected_by);
+        
+        if($status) return $status->staff_surname .' '. $status->staff_othername;
+    }
+    
+  
 }

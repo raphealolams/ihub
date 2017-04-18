@@ -4,7 +4,6 @@
                 <h4 class="modal-title" id="myModalLabel1"></h4>
             </div>
 <br/>
-
 <div class="right_col" role="main">
     <div class="">
     

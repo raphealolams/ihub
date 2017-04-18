@@ -43,13 +43,29 @@
                               <div class="form-horizontal form-label-left col-md-10">
                         <?php echo form_open() ?>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Expense Type</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Payroll Type Name</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
-                          <input type="text" class="form-control" name="expenses_type_name" placeholder="Fuel" required="required" value="">
-                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          <input type="text" class="form-control" name="payroll_type_name" placeholder="Lateness" required="required" value="<?php echo set_value('payroll_type_name')?>">
+                        </div>
+                      </div>
+                    
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Payroll Type</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                         <select name="payroll_type_status" class="form-control">
+                                <option value="select">Select</option>
+                                <option value="2">Addition</option>
+                                <option value="1">Deduction</option>
+                            </select>
                         </div>
                       </div>
                         
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Payroll Type Name</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea class="form-control" name="payroll_type_descr" placeholder="write a short description" required="required"><?php echo set_value('payroll_type_descr')?></textarea>
+                        </div>
+                      </div>
                       
                         <br/>
                         <center>
@@ -75,21 +91,32 @@
                      
                       <thead>
                         <tr>
-                          <th>Expenses Type</th>
+                          <th>Payroll Type Name</th>
+                          <th>Payroll Type</th>
+                          <th>Description</th>
                           <th>Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                          <?php foreach ($expenses_type as $expenses): ?>
+                            <?php foreach ($payroll_types as $types):?>
                           <tr>
-                          <td><strong><?php echo $expenses->expenses_type_name ?></strong></td>
+                          <td><?php echo $types->payroll_type_name?></td>
+                          <td><?php if($types->isAddition())
+                                {
+                                   echo 'Addition';
+                                }
+                                else{
+                                    echo 'Deduction';
+                                }
+                              ?></td>
+                          <td><?php echo $types->payroll_type_descr?></td>
 
                           <td>
-                              <a href="<?php echo site_url("expenses_manager/edit_expense/{$expenses->expenses_type_id}")?>" class="btn btn-form-modal btn-warning fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
-                              <a href="<?php echo site_url("expenses_manager/delete_expense_type/{$expenses->expenses_type_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                              <a href="<?php echo site_url("payroll/edit_payroll_type/{$types->payroll_type_id}")?>" class="btn btn-form-modal btn-warning fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
+                              <a href="<?php echo site_url("payroll/delete_payroll_type/{$types->payroll_type_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
                           </tr>
-                          <?php endforeach; ?>
+                        <?php endforeach?>
                      </tbody>
                     </table>
                         </div>

@@ -10,21 +10,35 @@
  *
  * @author Ajilore Raphael
  */
-class Login extends CI_Controller{
+class User extends MY_Controller{
     
   
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('user');
+        $this->load->model('user_model');
+        
     }
     
     //
     public function index()
     {
-        $this->load->view('layout/headerfor');
-        $this->load->view('user/login');
-        $this-load->view('layout/footer');
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        $this->load->view('layout/header');
+        $this->load->view('user/login' , [
+            'message' => $this->session->set_flashdata('mssg')
+        ]);
+        //$this->load->view('layout/footer');
         
     }
     

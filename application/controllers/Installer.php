@@ -26,6 +26,12 @@ t	 * Maps to the following URL
 
             
             
+        //Add Category Table
+        $this->load->model('category');
+        $this->dbforge->add_field($this->category->columns);
+        $this->dbforge->add_key('category_id', TRUE);
+        $this->dbforge->create_table('category', TRUE);
+        
         //Add customer Table
         $this->load->model('customer_model');
         $this->dbforge->add_field($this->customer_model->columns);
@@ -66,7 +72,7 @@ t	 * Maps to the following URL
         $this->load->model('expenses_model');
         $this->dbforge->add_field($this->expenses_model->columns);
         $this->dbforge->add_key('expenses_id', TRUE);
-        $this->dbforge->create_table('expenses_model', TRUE);
+        $this->dbforge->create_table('expenses', TRUE);
         
         
         //Add Items Table
@@ -74,6 +80,24 @@ t	 * Maps to the following URL
         $this->dbforge->add_field($this->items->columns);
         $this->dbforge->add_key('item_id', TRUE);
         $this->dbforge->create_table('items', TRUE);
+        
+        //Add Payroll Approved Table
+        $this->load->model('payroll_approved');
+        $this->dbforge->add_field($this->payroll_approved->columns);
+        $this->dbforge->add_key('payroll_approved_id', TRUE);
+        $this->dbforge->create_table('payroll_approved', TRUE);
+        
+        //Add Payroll Others Table
+        $this->load->model('payroll_others');
+        $this->dbforge->add_field($this->payroll_others->columns);
+        $this->dbforge->add_key('payroll_others_id', TRUE);
+        $this->dbforge->create_table('payroll_others', TRUE);
+        
+        //Add Payroll Type Table
+        $this->load->model('payroll_type');
+        $this->dbforge->add_field($this->payroll_type->columns);
+        $this->dbforge->add_key('payroll_type_id', TRUE);
+        $this->dbforge->create_table('payroll_type', TRUE);
         
         //Add Staff Table
         $this->load->model('staff_model');
@@ -110,14 +134,7 @@ t	 * Maps to the following URL
         $this->dbforge->add_field($this->staff_status->columns);
         $this->dbforge->add_key('staff_status_id', TRUE);
         $this->dbforge->create_table('staff_status', TRUE);
-        
-        //Add Category Table
-        $this->load->model('category');
-        $this->dbforge->add_field($this->category->columns);
-        $this->dbforge->add_key('category_id', TRUE);
-        $this->dbforge->create_table('category', TRUE);
     
-        
         //Add User Table
         $this->load->model('user');
         $this->dbforge->add_field($this->user->columns);

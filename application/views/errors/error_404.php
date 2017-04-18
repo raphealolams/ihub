@@ -1,3 +1,4 @@
+<?php $this->load->view('layout/header')?>
 
   <body class="nav-md">
     <div class="container body">
@@ -30,3 +31,4 @@
       </div>
     </div>
 
+<?php $this->load->view('layout/footer')?>
