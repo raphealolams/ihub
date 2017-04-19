@@ -35,8 +35,7 @@
     <!-- Google Icons -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             
-      
-
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/build/css/custom.min.css')?>" rel="stylesheet">
+    
   </head>

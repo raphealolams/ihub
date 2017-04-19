@@ -239,4 +239,54 @@ class Staff_model extends MY_Model {
         return $url;
     }
     
+    
+    /*
+    *@
+    */
+    public function getParollDeductionAmount( $month , $year)
+    {
+        
+         $fields = array(
+                'SUM(Payrollothers_amount) as total_addition'
+        );
+
+        $this->db->select($fields);
+        $this->db->join('payrolltype' , 'payrolltype.payrolltype_id = payrollothers.payrolltype_id' );
+         $this->db->where(array(
+            'payrollothers.Payrollothers_month' => $month,
+            'payrollothers.Payrollothers_year' => $year,
+            'payrollothers.staff_id' => $this->staff_id,
+            'payrolltype.payrolltype_status' => 1
+        ));
+        $total_addition = $this->db->get('payrollothers')->result();
+        $total_addition = $total_addition[0]->total_addition;
+        return $total_addition;
+    }
+    
+    
+    /*
+    *@
+    */
+    public function getParollAdditionAmount($month , $year)
+    {
+         
+        $this->db->join('payrolltype' , 'payrolltype.payrolltype_id = payrollothers.payrolltype_id' );
+         $this->db->where(array(
+            'payrollothers.Payrollothers_month' => $month,
+            'payrollothers.staff_id' => $this->staff_id,
+            'payrollothers.Payrollothers_year' => $year,
+            'payrolltype.payrolltype_status' => 2,
+        ));
+         
+        $fields = array(
+                'SUM(Payrollothers_amount) as total_deduction'
+        );
+
+        $this->db->select($fields);
+        $total_deduction = $this->db->get('payrollothers')->result();
+        $total_deduction = $total_deduction[0]->total_deduction;
+        return  $total_deduction;
+    }
+
+    
 }

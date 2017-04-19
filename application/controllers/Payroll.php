@@ -163,13 +163,13 @@ class Payroll extends MY_Controller {
                 $year =  $this->input->post('payrollothers_year');
                 $month =  $this->input->post('payrollothers_month');
 
-                foreach($items as $payrolltype_id)
+                foreach($items as $payroll_type_id)
                 {
-                    $payroll = $this->payrollothers->getOne(array(
+                    $payroll = $this->payroll_others->getOne(array(
                         'staff_id' =>  $staff_id ,
                         'payroll_others_month' => $this->input->post('payroll_others_month'),
                         'payroll_others_year' => $this->input->post('payroll_others_year'),
-                        'payroll_type_id' => $payrolltype_id
+                        'payroll_type_id' => $payroll_type_id
                     ));
                     
                     $amount = element($payroll_type_id , $amounts );
@@ -194,7 +194,7 @@ class Payroll extends MY_Controller {
           if($staff_id && $month && $year)
           {
                
-                $payroll_types =  $this->payrolltype->getAll();
+                $payroll_types =  $this->payroll_type->getAll();
           }
          
           $this->load->view('layout/header');
@@ -210,7 +210,7 @@ class Payroll extends MY_Controller {
              'years' => range(date('Y') - 3 , date('Y') + 2 ),
              'months' => $this->months,
              'title' => $title,
-             'message' => $this->session->flashdata('mssg')
+             'message' => $this->session->flashdata('mssg'),
          ));
          $this->load->view('layout/footer');
      }
@@ -238,50 +238,56 @@ class Payroll extends MY_Controller {
 
      public function view_staff_payroll($staff_id = '' , $month = '' , $year = '')
      {  
-         $staff = $this->staff->getOne(array(
+         $staff = $this->staff_model->getOne('' , array(
             'staff_id' => $staff_id
         ));
           
-          $items = $this->payroll_others->getAll(array(
+          $items = $this->payroll_others->getAll('' , array(
                 'staff_id' => $staff_id,
-                'Payrollothers_month' => $month,
-                'Payrollothers_year' => $year 
+                'Payroll_others_month' => $month,
+                'Payroll_others_year' => $year 
           ));
-          $this->_view('payroll/view_staff_payroll', array(
+          $this->load->view('layout/header');
+          $this->load->view('layout/nav');
+          $this->load->view('payroll/view_staff_payroll', array(
                'staff' => $staff,
                'items' => $items,
                'month' => $month,
                'months' => $this->months,
                'year' => $year
         )) ;
+         
+        $this->load->view('layout/footer');
      }
 
 
      public function bill()
      {
 
-        $this->page_title = 'View Payroll';
-        $this->page_desc = "View all payroll";
+        $title = 'View Payroll';
         $staffs = array();
-        $month = date('m');
+        $month = date('M');
         $year = date('Y');
         if($this->input->post('search'))
         {
             $month = $this->input->post('month');
             $year = $this->input->post('year');
             $staffs = $this->staff->getAll();
-
         }
        
        
-           // print_r($staffs);
-
-         $this->_view('payroll/payroll_bill', array(
+           //print_r($staffs);
+         $this->load->view('layout/header');
+         $this->load->view('layout/nav');
+         $this->load->view('payroll/payroll_bill', array(
                'staffs' => $staffs,
                'months' => $this->months,
-               'month' => (int)$month ,
-               'year'  => $year
+               'month' => $month ,
+               'year'  => $year,
+               'message' => $this->session->flashdata('mssg'),
+               'title' => $title
         )) ;
+         $this->load->view('layout/footer');
      }
 
 

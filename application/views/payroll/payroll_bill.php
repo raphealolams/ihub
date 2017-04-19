@@ -33,8 +33,6 @@
                      
                       <thead>
                         <tr>
-                          <th>Staff Name</th>
-                          <th></th>
                           <th>Month</th>
                           <th></th>
                           <th>Year</th>
@@ -45,28 +43,12 @@
                       <tbody>
                             <?php echo form_open()?>
                             <tr>
-                            <td>
-                    
-                        <div class="form-group">
-                              <select class="form-control" name="staff_id">
-                               <option value="">Select</option>
-                              <?php foreach ($staffs as $staff):?>
-                                <option value="<?php echo $staff->staff_id?>">
-                                    <?php echo $staff->getName()?>
-                                </option>
-                              <?php endforeach?>
-                          </select>
-                        </div>
-                           
-                            </td>
-                                
-                                <td></td>
                         <td>
                         <div class="form-group">
-                              <select class="form-control" name="payroll_others_year">
+                              <select class="form-control" name="month">
                                <option value="">Select</option>
                               <?php foreach ($months as $index=>$value):?>
-                                <option value="<?php echo $index ?> <?php echo set_value('payroll_others_month')?>">
+                                <option value="<?php echo $index ?>">
                                 <?php echo $value?>      
                             </option>
                               <?php endforeach?>
@@ -78,21 +60,13 @@
                                 
                         <td>
                             <div class="form-group">
-                                 <select class="form-control" name="payroll_others_month">
-                               <option value="">Select</option>
-                              <?php foreach ($years as $y):?>
-                                <option value="<?php echo $y?>"> 
-                                <?php echo $y?>     
-                                </option>
-                              <?php endforeach?>
-                          </select>
+                               <input type="text" class="form-control" value="<?php echo $year?>" name="year">
                             </div>
                         </td>
                                 
                         <td>
                         <div class="form-group">
-                          <input type="submit" class="btn btn-success" name="search" value="search">
-                          <input type="submit" class="btn btn-success" name="view" value="Print">
+                          <input type="submit" class="btn btn-success" name="Search" value="Search">
                         </div>     
                         </td>
                           
@@ -122,62 +96,61 @@
                            <table id="tahle-responsive" class="datatable table table-striped table-hover  dt-responsive nowrap" cellspacing="0" width="100%">
                      
                       <thead>
+                    <div class="panel panel-info">
+                    <div class="panel-body text-center"><strong>Staff Payroll Bill for the Month of <?php echo $month?> </strong></div>
+                </div>
                         <tr>
-                             <th>Payroll Name</th>
-                             <th>Payroll Type</th>
-                             <th>Status</th>
-                             <th>Amount</th>
+                                <th>Name</th>
+                                <th>Addition</th>
+                                <th>Deduction</th>
+                                <th>Total Payables</th>
+                                <th>Action</th>
                              
                         </tr>
                       </thead>
 
                       <tbody>
-                          <?php foreach ($payroll_types as $payroll_type):?>
-                
-                        <?php 
-                          ($payroll_other = $CI->payroll_others->getOne([
-                            'staff_id' =>  $staff_id ,
-                            'Payroll_others_month' => $month,
-                            'Payroll_others_year' => $year,
-                            'Payroll_type_id' =>  $payroll_type->payroll_type_id
-                ])) ?>
-                      
-                     <input type="hidden" name="items[]" value="<?php echo $payroll_type->payroll_type_id?>">
-                         
-                    <tr>
-                        <td><?php echo ucwords($payroll_type->payroll_type_name)?></td>  
-                        <td><?php if ($payroll_type->isAddition())
-                                {
-                                echo "Addition"; 
-                                }
-                                    else{
-                                        echo "Deduction";
-                                } 
-                            ?>
-                            </td>
-                        <td>
-                          <div class="checkbox">
-                            <input type="checkbox" name="items[]" value="<?php echo $payroll_type->payroll_type_id?>">
-                           <?php if ($payroll_other->Payroll_others_id)
-                            {
-                                    checked=="";
-                            }
-                           ?>
-                        </div>
-                        
-                        </td>
-                        <td><input type="text" class="form-control"  value="<?php echo $payroll_other->Payroll_others_amount?>"
-                        name="amounts <?php echo $payroll_type->payrolltype_id ?>"
-                        id="amount"></td>
+                <?php 
+                $total_addition = 0;
+                $total_deduction= 0;
+                $total_payable = 0;
+                ?>
+                <?php foreach ($staffs as $staff) :?>
+                <?php $additions = $staff->getParollAdditionAmount($month, $year)?>
+                <?php $deductions = $staff->getParollDeductionAmount($month, $year)?>
+                <?php $payable = $additions - $deductions?>
+
+                 <?php $total_addition = $total_addition + $additions ?>
+                 <?php $total_deduction = $total_deduction + $deductions ?>
+                 <?php $total_payable = $payable + $total_payable ?>
                           
-                    </tr>
-                          <?php endforeach ?>
+                          
+                    <tr>
+                    <td><?php echo ucwords($staff->getName())?></td>
+                    <td><?php echo number_format($additions , 2 , '.' , ',')?></td>
+                    <td><?php echo number_format($deductions , 2 , '.' , ',')?></td>
+                    <td><?php number_format($payable , 2 , '.' , ',') ?></td>
+                    <td><a class="btn btn-primary fa fa-money"
+                     href="<?php echo site_url("payroll/view_staff_payroll/{$staff->getId()}/{$month}/{$year}")?>"
+                    >View</a></td>
+           <?php endforeach?>
+                </tr>
+                          
+                      <br/>
+                    <br/>
+                <tr>
+                     
+                    <th><strong>Total</strong></th>
+                    <td><?php echo number_format($total_addition , 2 , '.' , ',')?></td>
+                    <td><?php echo number_format($total_deduction , 2 , '.' , ',')?></td>
+                    <td><?php echo number_format($total_payable , 2 , '.' , ',')?></td>
+
+                </tr>
+                          
                      </tbody>
                         
                     </table>
-                      <?php if (count($payroll_types)) :?>
-                        <input type="submit" name="generate" class="btn btn-success " value="Generate" />  
-                        <?php endif ?>
+                      
                 </div>
                 </div>
                  </div>

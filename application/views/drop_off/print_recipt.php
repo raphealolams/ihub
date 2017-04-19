@@ -26,7 +26,7 @@
 
                     <section class="content invoice">
                      
-                        <div class="invoice-box print-content ">
+                        <div class="invoice-box" id="print-content">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
                 <td colspan="12">
@@ -218,11 +218,10 @@
         </table>
     </div>
               
-                <div class=" ">
                     <center>     
-                        <button type="button" class="btn btn-lg btn-success glyphicon glyphicon-print" onclick="window.print()"></button>
+                        <input type="button" class="btn btn-success btn-print" name="Print" value="Print">
                     </center>        
-                </div>
+                
                 </section>
                   </div>
                 </div>

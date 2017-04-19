@@ -147,7 +147,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                      
+                      <?php if (count($droped)):?>
                        <table id="responsive" class="datatable table table-bordered table-hover table-striped dt-responsive nowrap" cellspacing="0">
                                     <center></center>
                         <thead>
@@ -206,6 +206,7 @@
                             </tr>
                         </tbody>
                       </table>
+                      <?php endif?>
                       <?php echo form_close()?>
                       
                     </div>

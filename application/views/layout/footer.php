@@ -41,6 +41,21 @@
     }
     
 </style>
+
+<script>
+  $(function () {
+     //Initialize Select2 Elements
+    $(".select2").select2();
+
+    $('.btn-print').click(function(e){
+                 e.preventDefault();
+                 var $prev = document.body.innerHTML;
+                 $('body').html($('#print-content').html());
+                 window.print();
+                 $('body').html($prev);
+             });
+  });
+</script>
 <!--
 Bootstrap 
 <script src="{base_url("assets/dashboard/lib/bootstrap/js/bootstrap.js")}"></script>
