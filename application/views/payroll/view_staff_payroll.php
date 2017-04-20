@@ -42,34 +42,65 @@
         </tr>
       </thead>
         <tbody>
+            <?php
+            $additions = 0;
+            $deductions = 0;
+            ?>
             <tr>
           <td><strong>Additions </strong> </td>
           <td colspan="3"> </td>
         </tr>
+            <?php foreach($items as $item):?>
+            <?php if($item->getAmount() > 0  && $item->isAddition()){
+                  $additions = $additions + $item->getAmount();
+                }
+               ?>
+  
         <tr>
-          <td >2345</td>
-          <td class="td-num">12 JUN 15</td>
-          <td class="td-num">SGD 30.00</td>
-          <td class="td-num">2</td>
-        </tr> 
+          <td><?php echo $item->getItemName()?></td>
+          <td class="td-num"><?php echo $item->getItemDescription()?></td>
+          <td class="td-num"><?php echo number_format($item->getAmount() , 2 , '.' , ',')?></td>
+          <td></td>
+        </tr>
+            <?php endforeach ?>
+        
+          <tr>
+          <td colspan="3"></td>
+          <td class="raphael"><?php echo number_format($additions , 2 , '.' , ',')?></td>
+        </tr>
+            
             
          <tr>
           <td><strong>Deduction </strong> </td>
           <td colspan="3"> </td>
         </tr>
+            <?php foreach ($items as $item):?>
+            <?php if ($item->getAmount() > 0  && $item->isDeduction()){
+                $deductions = $deductions + $item->getAmount();
+            }
+            ?>
+                <tr>
+                  <td><?php echo $item->getItemName()?></td>
+                  <td class="td-num"><?php echo $item->getItemDescription()?></td>
+                  <td class="td-num"><?php echo number_format($item->getAmount() , 2 , '.' , ',')?></td>
+                  <td></td>
+                </tr>
+            <?php endforeach?>
+         <tr>
+          <td></td>
+          <td></td>
+          <td ></td>
+          <td class="raphael"><?php echo number_format($deductions , 2 , '.' , ',')?></td>
+        </tr>
+      </tbody> 
         <tr>
-          <td >2345</td>
-          <td class="td-num">12 JUN 15</td>
-          <td class="td-num">SGD 30.00</td>
-          <td class="td-num">2</td>
-        </tr> 
-        
-       
-      </tbody>      
-         <tr><td>Grand total</td>
+        <td colspan="4"></td>
+        </tr>
+        <tr>
+         <strong><td>Grand total</td></strong>
           <td></td>
           <td></td>
-        <td class="td-num">SGD 108.00</td>
+        <td class="ed"><?php echo number_format($additions - $deductions , 2 , '.' , ',')?></td>
         </tr>
       </table>
 
@@ -150,10 +181,6 @@
 	.margin
 	{
 		margin-bottom: 40px;
-	}
-	.pb
-	{
-		height: 40px;
 	}
 
 </style>

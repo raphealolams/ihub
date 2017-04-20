@@ -530,5 +530,3 @@ $config['proxy_ips'] = '';
 |
 |
 */
-$config['roles'] = array('subscriber', 'admin');
-$config['status'] = array('pending', 'approved');

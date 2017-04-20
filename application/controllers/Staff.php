@@ -10,7 +10,7 @@
  *
  * @author Ajilore Raphael
  */
-class Staff extends CI_Controller{
+class Staff extends MY_Controller{
     
   
     
@@ -24,7 +24,10 @@ class Staff extends CI_Controller{
           'staff_bank',
           'staff_type'
         ));
-        $this->output->enable_profiler(false);
+        
+        
+        //$this->_secure();
+        $this->output->enable_profiler(true);
        
     }
        
@@ -34,7 +37,12 @@ class Staff extends CI_Controller{
     */
     public function index()
     {
-        
+
+//    if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+//        {
+//            show_error('You do not have permission to visit this page!');
+//        }
+//        
          $title = "Staff Home";
          $title2 = "Manage Staff Details";
          $staffs = $this->staff_model->getAll();

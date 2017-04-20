@@ -99,6 +99,12 @@ t	 * Maps to the following URL
         $this->dbforge->add_key('payroll_type_id', TRUE);
         $this->dbforge->create_table('payroll_type', TRUE);
         
+        //Add Priveledge Type Table
+        $this->load->model('priveledge');
+        $this->dbforge->add_field($this->priveledge->columns);
+        $this->dbforge->add_key('priveledge_id', TRUE);
+        $this->dbforge->create_table('priveledge', TRUE);
+        
         //Add Staff Table
         $this->load->model('staff_model');
         $this->dbforge->add_field($this->staff_model->columns);
@@ -136,16 +142,75 @@ t	 * Maps to the following URL
         $this->dbforge->create_table('staff_status', TRUE);
     
         //Add User Table
-        $this->load->model('user');
-        $this->dbforge->add_field($this->user->columns);
+        $this->load->model('user_model');
+        $this->dbforge->add_field($this->user_model->columns);
         $this->dbforge->add_key('user_id', TRUE);
         $this->dbforge->create_table('user', TRUE);
+        
     
+        
+     // create default user
+       $user_data =array(
+           'user_name' => 'Admin',
+           'user_password' => 'admin',
+           'user_name' => 'Admin',
+           'user_fullname' => 'Super Admin',
+           'user_priveledge' => 1,
+           'create_time' => date('Y m d h:m:s'),
+           'user_lastloggedin' => '',
+           'edit_time' => '',
+           //'user_fullname' => 'Admin',
+           'super_admin' => true,
+           'user_priveledge' => 'Admin'
+       );
+       $admin = $this->user_model->getOne(' ' , array('user_name' => 'Admin'));
 
-        
-        
+       if(!$admin->user_id)
+       {
+           $admin->insert($user_data);
+           $admin->hashPassword();
+
+       }
+       $admin->insert($user_data);
+
+
+       $this->_createPriveledges();
+    
         echo 'Insalled Successfully';
 	}
+    
+    protected function _createPriveledges()
+    {
+        $priveledges = array(
+                array('priveledge_name' => 'Admin' , 'mutable' => false  ,'priveledge_info' => 'Full Access and Control, Can Edit and Delete account'),
+                array('priveledge_name' => 'Semi-admin' , 'mutable' => false  ,'priveledge_info' => 'Full Access but Can\'t Edit Other Users Information'),
+                array('priveledge_name' => 'Operator' , 'mutable' => false  ,'priveledge_info' => 'Restricted from Users Info  and Administrative Setup Editing'),
+                array('priveledge_name' => 'Sub-operator' ,'mutable' => false  , 'priveledge_info' => 'Can not Edit Or Delete Any Information but Can Add Expenses'),
+                array('priveledge_name' => 'Account' , 'mutable' => false  ,'priveledge_info' => 'The Finance Department'),
+                array('priveledge_name' => 'Others' , 'mutable' => false  , 'priveledge_info' => 'Have Minimum Access as a Staff Member(non-academic staff')
+        );
 
+        foreach($priveledges as $p)
+        {
+            $privelege = $this->priveledge->getOne('' , array( 'priveledge_name' => $p['priveledge_name']));
+            $privelege->insert($p);
+
+        }
+
+    }
+
+
+
+    public function _createNewColumns()
+    {
+        // user column
+        $this->db->query("ALTER TABLE `user` CHANGE `user_password` `user_password` VARCHAR(300)");
+        $this->db->query("ALTER TABLE user ADD user_fullname varchar(100)");
+        $this->db->query("ALTER TABLE user ADD photo varchar(1000)");
+        $this->db->query("ALTER TABLE user ADD password_hashed tinyint(1)");
+        $this->db->query("ALTER TABLE user ADD super_admin tinyint(1)");
+
+    }
 
 }
+

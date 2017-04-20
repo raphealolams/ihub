@@ -160,12 +160,12 @@ class Payroll extends MY_Controller {
          {
                 $items = $this->input->post('items');
                 $amounts =$this->input->post('amounts');
-                $year =  $this->input->post('payrollothers_year');
-                $month =  $this->input->post('payrollothers_month');
+                $year =  $this->input->post('payroll_others_year');
+                $month =  $this->input->post('payroll_others_month');
 
                 foreach($items as $payroll_type_id)
                 {
-                    $payroll = $this->payroll_others->getOne(array(
+                    $payroll = $this->payroll_others->getOne(' ' , array(
                         'staff_id' =>  $staff_id ,
                         'payroll_others_month' => $this->input->post('payroll_others_month'),
                         'payroll_others_year' => $this->input->post('payroll_others_year'),
@@ -179,9 +179,10 @@ class Payroll extends MY_Controller {
                     {
                         continue;
                     }
+                    
                     $payroll->payroll_others_amount = $amount;
                     $payroll->staff_id = $staff_id;
-                    $payroll->Payroll_type_id = $payrolltype_id ;
+                    $payroll->Payroll_type_id = $payroll_type_id ;
                     $payroll->Payroll_others_month = $month;
                     $payroll->Payroll_others_year = $year;
                     $payroll->insert();

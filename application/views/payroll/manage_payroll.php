@@ -1,4 +1,4 @@
-
+<?php $CI = get_instance() ?>
 <div class="right_col" role="main">
 
     <div  class="alert alert-success alert-dismissable"> <?php echo $message ?></div>
@@ -118,8 +118,8 @@
                   </div>
                   <div class="x_content">
                       <br/>
-                                
-                           <table id="tahle-responsive" class="datatable table table-striped table-hover  dt-responsive nowrap" cellspacing="0" width="100%">
+                    <?php echo form_open()?>               
+                 <table id="tahle-responsive" class="datatable table table-striped table-hover  dt-responsive nowrap" cellspacing="0" width="100%">
                      
                       <thead>
                         <tr>
@@ -130,12 +130,12 @@
                              
                         </tr>
                       </thead>
-
+                     
                       <tbody>
                           <?php foreach ($payroll_types as $payroll_type):?>
                 
                         <?php 
-                          ($payroll_other = $CI->payroll_others->getOne([
+                          ($payroll_other = $CI->payroll_others->getOne(' ' , [
                             'staff_id' =>  $staff_id ,
                             'Payroll_others_month' => $month,
                             'Payroll_others_year' => $year,
@@ -158,16 +158,11 @@
                         <td>
                           <div class="checkbox">
                             <input type="checkbox" name="items[]" value="<?php echo $payroll_type->payroll_type_id?>">
-                           <?php if ($payroll_other->Payroll_others_id)
-                            {
-                                    checked=="";
-                            }
-                           ?>
                         </div>
                         
                         </td>
-                        <td><input type="text" class="form-control"  value="<?php echo $payroll_other->Payroll_others_amount?>"
-                        name="amounts <?php echo $payroll_type->payrolltype_id ?>"
+                        <td><input type="text" class="form-control"  value="<?php echo $payroll_other->payroll_others_amount?>"
+                        name="amounts <?php echo $payroll_type->payroll_type_id ?>"
                         id="amount"></td>
                           
                     </tr>
@@ -175,8 +170,9 @@
                      </tbody>
                         
                     </table>
+                      <?php echo form_close()?>
                       <?php if (count($payroll_types)) :?>
-                        <input type="submit" name="generate" class="btn btn-success " value="Generate" />  
+                        <input type="submit" name="generate" class="btn btn-success " value="generate" />  
                         <?php endif ?>
                 </div>
                 </div>

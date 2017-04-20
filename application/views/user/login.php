@@ -7,13 +7,15 @@
            <?php echo form_open()?>
              <h1>Login Area</h1>
              <div>
-               <input type="email" class="form-control" name="email" placeholder=" Someone@something.com" />
+               <input type="text" class="form-control" name="username" placeholder=" Someone@something.com" />
+                 <?php echo form_error('username')?>
              </div>
              <div>
                <input type="password" class="form-control" name="password" placeholder="password " />
+             <?php echo form_error('password')?>
              </div>
              <div>
-               <input type="submit" class="btn btn-success" name="Login" value="Login" />
+               <input type="submit" class="btn btn-success" name="login" value="login" />
            </div >
              <div class="clearfix"></div>
 

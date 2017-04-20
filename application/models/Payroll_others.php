@@ -117,7 +117,7 @@ class Payroll_others extends My_Model{
             return $this->item;
         }
         $CI = get_instance();
-        $this->item = $this->payroll_types->getOne(array(
+        $this->item = $this->payroll_types->getOne('' , array(
             'payroll_type_id' => $this->payroll_type_id
         )) ;
 
@@ -150,7 +150,7 @@ class Payroll_others extends My_Model{
     public function isAddition()
     {
         $CI = get_instance();
-        $type = $this->payroll_type->getOne(array(
+        $type = $this->payroll_type->getOne(' ' , array(
             'payroll_type_id' => $this->payroll_type_id
         )) ;
         return $type->isAddition();
@@ -162,7 +162,7 @@ class Payroll_others extends My_Model{
     public function isDeduction()
     {
         $CI = get_instance();
-        $type = $this->payroll_type->getOne(array(
+        $type = $this->payroll_type->getOne(' ' , array(
             'payroll_type_id' => $this->payroll_type_id
         )) ;
         return $type->isDeduction();
