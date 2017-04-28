@@ -159,6 +159,12 @@ t	 * Maps to the following URL
         $this->dbforge->add_key('staff_status_id', TRUE);
         $this->dbforge->create_table('staff_status', TRUE);
     
+        //Add Tax Table
+        $this->load->model('tax');
+        $this->dbforge->add_field($this->tax->columns);
+        $this->dbforge->add_key('tax_id', TRUE);
+        $this->dbforge->create_table('tax', TRUE);
+        
         //Add User Table
         $this->load->model('user_model');
         $this->dbforge->add_field($this->user_model->columns);

@@ -211,6 +211,26 @@ class Payroll_others extends My_Model{
         $total_deduction = $this->db->get('payroll_others')->result()[0]->total_deduction;
         return  $total_deduction;
     }
+    
+    
+    /*
+    *@params returns Int
+    *@params gets the Total Payment for the month
+    */
+    public function getTotalPayables($month , $year)
+    {
+         $fields = array(
+                'SUM(payroll_others_amount) as total_payables'
+        );
+
+        $this->db->select($fields);
+         $this->db->where(array(
+            'YEAR(payroll_others_year)' => date($year),
+            'MONTH(payroll_others_month)' => date($month),
+        ));
+        $total_payables = $this->db->get('payroll_others')->result()[0]->total_payables;
+        return $total_payables;
+    }
 
 
 }

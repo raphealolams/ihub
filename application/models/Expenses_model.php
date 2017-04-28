@@ -121,5 +121,27 @@ class Expenses_model extends My_Model {
         if($status) return $status->staff_surname .' '. $status->staff_othername;
     }
     
+    
+    
+    /*
+    *@params returns int
+    *@params gets the total Expenses for the month
+    */
+      public function getExpense($month , $year)
+    {
+
+         $fields = array(
+                'SUM(expenses_amount) as total_expenses'
+        );
+
+        $this->db->select($fields);
+         $this->db->where(array(
+            'YEAR(expenses_date)' => date($year),
+            'MONTH(expenses_date)' => date($month),
+        ));
+        $total_expenses = $this->db->get('expenses')->result()[0]->total_expenses;
+        return $total_expenses;
+    }
+    
   
 }

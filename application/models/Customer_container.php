@@ -124,4 +124,24 @@ class Customer_container extends MY_Model {
     }
     
     
+    /*
+    *@params return int
+    *@params gets the total income for the month
+    */
+    public function getTotalIncome($month , $year)
+    {
+         $fields = array(
+                'SUM(deposit) as total_income'
+        );
+
+        $this->db->select($fields);
+         $this->db->where(array(
+            'YEAR(picked_date)' => date($year),
+            'MONTH(picked_date)' => date($month),
+        ));
+        $total_income = $this->db->get('customer_container')->result()[0]->total_income;
+        return $total_income;
+    }
+    
+    
 }

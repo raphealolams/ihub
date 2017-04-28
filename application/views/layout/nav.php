@@ -51,7 +51,7 @@
                     
                  <li><a><i class="fa fa-book"></i>Reporting<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                          <li><a href="<?php echo site_url("report")?>">Daily Profit and Loss</a></li>
+                          <li><a href="<?php echo site_url("report")?>">Profit and Loss</a></li>
                           </ul>        
                 </li>
                 <li><a href="<?php echo site_url('user/all')?>"><i class="fa fa-users"></i>Users <span class="fa fa-chevron"></span></a>

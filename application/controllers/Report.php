@@ -37,6 +37,7 @@ class Report extends MY_Controller {
             'payroll_type',
             'payroll_others',
             'payroll_approved',
+            'expenses_model',
             'staff_model',
             'customer_container',
             'expenses_model',
@@ -52,9 +53,12 @@ class Report extends MY_Controller {
     {
         
         
-        
-        
-        
+        if($this->input->post('search'))
+        {
+            $month = $this->input->post('month');
+            $year = $this->input->post('year');
+            redirect('report/print_report/'.$month.'/'.$year);
+        }
         
         
         $this->load->view('layout/header');
@@ -63,7 +67,59 @@ class Report extends MY_Controller {
             'set_up' => $this->setup_model->getOne()
             
         ]);
-        $this->load->view('report/profit_loss');
+        $this->load->view('report/profit_loss' , [
+            'message' => $this->session->flashdata('mssg'),
+            'title' => 'Generate Report',
+            'title2' => 'Profit And Loss Report',
+            'months' => $this->months,
+            'years' =>  range(date('Y') - 3 , date('Y') + 2 )
+        ]);
+        $this->load->view('layout/footer');
+    }
+    
+    public function print_report($month = '' , $year = '')
+    {
+        
+        
+        $expenses = $this->expenses_model->getExpense($month, $year);
+        $income = $this->customer_container->getTotalIncome($month, $year);
+        $payables = $this->payroll_others->getTotalPayables($month, $year);
+        
+        $this->load->view('layout/header');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()   
+        ]);
+        $this->load->view('report/print_report' , [
+            'message' => $this->session->flashdata('mssg'),
+            'title' => 'Generated Report',
+            'title2' => 'Print Profit and Loss Report',
+            'months' => $this->months,
+            'years' =>  range(date('Y') - 3 , date('Y') + 2 ),
+            'expenses' => $expenses,
+            'income' => $income,
+            'payables' => $payables
+        ]);
+        $this->load->view('layout/footer');
+    }
+    
+    public function tax()
+    {
+        
+        
+        
+        $this->load->view('layout/header');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()   
+        ]);
+        $this->load->view('report/tax' , [
+            'message' => $this->session->flashdata('mssg'),
+            'title' => 'Taxation',
+            'title2' => 'Manage Company Taxation',
+            'months' => $this->months,
+            'years' =>  range(date('Y') - 3 , date('Y') + 2 )
+        ]);
         $this->load->view('layout/footer');
     }
 
