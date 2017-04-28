@@ -22,13 +22,11 @@ class Staff extends MY_Controller{
           'staff_level',
           'staff_status',
           'staff_bank',
-          'staff_type'
+          'staff_type',
+          'user_model',
+          'setup_model'
         ));
-        
-        
-        //$this->_secure();
-        $this->output->enable_profiler(true);
-       
+        $this->_secure();
     }
        
     /*
@@ -38,11 +36,12 @@ class Staff extends MY_Controller{
     public function index()
     {
 
-//    if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
-//        {
-//            show_error('You do not have permission to visit this page!');
-//        }
-//        
+    if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
          $title = "Staff Home";
          $title2 = "Manage Staff Details";
          $staffs = $this->staff_model->getAll();
@@ -52,7 +51,11 @@ class Staff extends MY_Controller{
          $employment_type = $this->staff_type->getAll();
         
          $this->load->view('layout/header'); 
-        $this->load->view('layout/nav');
+         $this->load->view('layout/nav' , [
+             'users' => $this->user_model->getOne(),
+             'set_up' => $this->setup_model->getOne()
+
+         ]);
          $this->load->view('staff/all_staff', [
          'staffs' => $staffs,
          'staff_dept' => $staff_dept,
@@ -72,6 +75,12 @@ class Staff extends MY_Controller{
     */
     public function add_staff()
     {    
+        
+     if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         if ($this->input->post('submit')) 
         {
             
@@ -123,9 +132,15 @@ class Staff extends MY_Controller{
     /*
     *@params this Loads the edit staff Modal and performs the logic
     */
-    public function edit_staff($id = " ")
+    public function edit_staff($id = "")
     {   
 
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
          $staff = $this->staff_model->getOne($id);
          $staff_dept = $this->staff_dept->getAll();
          $staff_level = $this->staff_level->getAll();
@@ -177,7 +192,13 @@ class Staff extends MY_Controller{
     */
     public function view($id = "")
     {
-        $staff = $this->staff_model->getOne( $id);
+        
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+         $staff = $this->staff_model->getOne( $id);
         
             if(!$staff->staff_id)
             {
@@ -189,17 +210,51 @@ class Staff extends MY_Controller{
         ));
     }
     
+    
+    public function delete_staff($id = '')
+    {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $staff = $this->staff_model->getOne($staff_id);
+        
+        if(!$staff->staff_id)
+        {
+            show_error("Staff Record Not Found");
+        }
+        
+        $staff->delete($id);
+            
+        $this->session->set_flashdata('mssg' , "Staff Deleted");
+        
+        redirect('staff/index');
+    }
+    
     /*
     *@params this loads the staff dept under the config
     */
     public function manage_dept()
     {
+        
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
          $title = "Staff Configuration";
          $title2 = "Manage Staff Department";
          $data = $this->staff_dept->getAll();
         
          $this->load->view('layout/header');
-         $this->load->view('layout/view');
+         $this->load->view('layout/nav' , [
+             'users' => $this->user_model->getOne(),
+             'set_up' => $this->setup_model->getOne()
+
+         ]);
          $this->load->view('staff/staff_dept', [
          'query' => $data,
          'title' => $title,
@@ -214,6 +269,12 @@ class Staff extends MY_Controller{
     */
     public function add_dept()
     {
+        
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         if ($this->input->post('submit')) {
             
             $data = array(
@@ -236,6 +297,14 @@ class Staff extends MY_Controller{
     
     public function edit_dept($id = "")
     {
+       
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
         $data = $this->staff_dept->getOne($id);
         $this->load->view('staff/edit_staff_dept', [
             'dept' => $data
@@ -261,17 +330,55 @@ class Staff extends MY_Controller{
         }   
     }
     
+    
+    /*
+    *@params Deletes Staff Department
+    */
+    public function delete_dept($id = '')
+    {
+       
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
+        $staff_dept = $this->staff_dept->getOne($staff_dept_id);
+        
+        
+        if(!$staff_dept->staff_dept_id)
+        {
+            show_error("Department Not Found");
+        }
+        
+        $staff_dept->delete($id);
+        $this->session->set_flashdata('mssg' , 'Department Deleted');
+        redirect('staff/manage_dept');
+    }
+    
     /*
     *@params Staff Status
     */
     public function manage_status()
     {
+      
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
          $title = "Staff Configuration";
          $title2 = "Manage Staff Status";
          $data = $this->staff_status->getAll();
         
          $this->load->view('layout/header');
-         $this->load>view('layout/nav');
+         $this->load->view('layout/nav' , [
+             'users' => $this->user_model->getOne(),
+             'set_up' => $this->setup_model->getOne()
+
+         ]);
          $this->load->view('staff/staff_status', [
          'query' => $data,
          'title' => $title,
@@ -286,6 +393,14 @@ class Staff extends MY_Controller{
     */
     public function add_status()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
         if($this->input->post('submit'))
         {
             $data = array(
@@ -303,6 +418,14 @@ class Staff extends MY_Controller{
     */
     public function edit_status($id = "")
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
         $data = $this->staff_status->getOne($id);
         $this->load->view('staff/edit_status', [
             'status' => $data
@@ -326,17 +449,57 @@ class Staff extends MY_Controller{
         }
     }
     
+    
+    
+    /*
+    @params Deletes The Staff Status
+    */
+    public function delete_status($id = '')
+    {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
+        $staff_status = $this->staff_status->getOne($staff_status_id);
+        
+        if(!$staff_status->staff_status_id)
+        {
+            show_error('Staff Status Not Found');
+        }
+        
+        $staff_status->delete($id);
+        $this->session->set_flashdata('mssg' , 'Staff Status Deleted');
+        redirect('staff/manage_status');
+    }
+    
+    
+    
     /*
     *@params Manage Employment Type
     */
     public function manage_employment()
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
         $title = "Staff Configuration";
         $title2 = "Manage Staff Employment Type";
         
         $type = $this->staff_type->getAll();
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('staff/employ_type' , [
         'types' => $type, 
         'title' => $title,
@@ -352,6 +515,14 @@ class Staff extends MY_Controller{
 
     public function add_type()
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
         if($this->input->post('submit'))
         {
             $data = array(
@@ -369,6 +540,13 @@ class Staff extends MY_Controller{
     */
     public function edit_type($id = " ")
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
         $data = $this->staff_type->getOne($id);
         $this->load->view('staff/edit_employ_type', [
             'type' => $data
@@ -392,17 +570,52 @@ class Staff extends MY_Controller{
         }
     }
     
+    /*
+    *@params Deletes the Staff Employment Type
+    */
+    public function delete_type($id = '')
+    {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        $staff_type = $this->staff_type->getOne($staff_type_id);
+        
+        if(!$staff_type->staff_type_id)
+        {
+            show_error('Staff Employment Type Not Found');
+        }
+        
+        $staff_type->delete($id);
+        $this->session->set_flashdata('mssg' , 'Employment Type Deleted');
+        redirect('staff/manage_employment');
+    }
+    
+    
        /*
     *@params Manage Staff Level
     */
     public function manage_level()
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
         $title = "Staff Configuration";
         $title2 = "Manage Staff Level";
         
         $levels = $this->staff_level->getAll();
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('staff/staff_level' , [
         'levels' => $levels, 
         'title' => $title,
@@ -418,6 +631,14 @@ class Staff extends MY_Controller{
 
     public function add_level()
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
+        
         if($this->input->post('submit'))
         {
             $data = array(
@@ -435,10 +656,15 @@ class Staff extends MY_Controller{
     */
     public function edit_level($id = " ")
     {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
+        
         $data = $this->staff_level->getOne($id);
-        $this->load->view('staff/edit_level', [
-            'level' => $data
-        ]);
+       
         
         if(!$data || !$data->staff_level_id)
         { 
@@ -456,5 +682,34 @@ class Staff extends MY_Controller{
            $this->session->set_flashdata('mssg', 'Staff Level Successfully Updated');
             redirect('staff/manage_level');
         }
+         $this->load->view('staff/edit_level', [
+            'level' => $data
+        ]);
+    }
+    
+    
+      
+    /*
+    *@params Deletes the Staff Level
+    */
+    public function delete_level($id = '')
+    {
+    
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator', 'Sub-operator' , 'Account')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $staff_level = $this->staff_level->getOne($staff_level_id);
+        
+        if(!$staff_level->staff_level_id)
+        {
+            show_error('Staff Level Not Found');
+        }
+        
+        $staff_level->delete($id);
+        $this->session->set_flashdata('mssg' , 'Staff Level Deleted');
+        redirect('staff/manage_level');
     }
 }

@@ -37,11 +37,34 @@ class Report extends MY_Controller {
             'payroll_type',
             'payroll_others',
             'payroll_approved',
-            'staff_model'
+            'staff_model',
+            'customer_container',
+            'expenses_model',
+            'user_model',
+            'setup_model'
            
         ));
-        $this->output->enable_profiler(true);
+        $this->_secure();
        
+    }
+    
+    public function index()
+    {
+        
+        
+        
+        
+        
+        
+        
+        $this->load->view('layout/header');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+            
+        ]);
+        $this->load->view('report/profit_loss');
+        $this->load->view('layout/footer');
     }
 
 }

@@ -93,7 +93,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Staff Department</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
                             <select class="form-control" name="staff_dept">
-                                 <option value="<?php echo $staff_dept?>"><?php echo $staff->getDeptName() ?></option>
+                                 <option value="<?php echo $staff->staff_dept?>"><?php echo $staff->getDeptName() ?></option>
                                  <option></option>
                                 <?php foreach ($staff_dept as $dept):?>
                                 <option value="<?php echo $dept->staff_dept_id?>"><?php echo $dept->staff_dept ?></option>
@@ -127,9 +127,12 @@
                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Image</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
-                        <input type="file" class="form-control" name="staff_image" value="<?php echo $staff->staff_image ?>">
+                        <input type="file" class="form-control" name="staff_image" value="">
                         <span class="fa fa-photo form-control-feedback right" aria-hidden="true"></span>
                         </div>
+                    </div> 
+                     <div>
+                      <img src="<?php echo $staff->getPhotoUrl()?>" alt="image" style="height:80; width:70;">
                     </div> 
                             
                     

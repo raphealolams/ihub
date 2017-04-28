@@ -77,7 +77,7 @@
                             <tr>
                                 <td><?php echo $type->staff_type ?></td>
                                 <td><a href="<?php echo site_url("staff/edit_type/{$type->staff_type_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
-                                <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                                <a href="<?php echo site_url("staff/delete_type/{$type->staff_type_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
                             </tr>
                             <?php endforeach ;?>
                         </tbody>

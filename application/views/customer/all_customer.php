@@ -184,7 +184,7 @@
                          <td><?php echo $customer->getType() ?></td>
                           <td><a href="<?php echo site_url("customer/view/{$customer->customer_id}")?>" class="btn btn-form-modal btn-primary fa fa-link" data-toggle="modal" data-target=".bs-example-modal-lg">View</a>
                               <a href="<?php echo site_url("customer/edit_customer/{$customer->customer_id}")?>" class="btn btn-form-modal btn-warning fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
-                              <a href="site_url('')" class="btn btn-danger fa fa-trash">Delete</a></td>
+                              <a href="<?php echo site_url("customer/delete_customer/{$customer->customer_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
                           </tr>
                           <?php endforeach; ?>
                      </tbody>

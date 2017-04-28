@@ -32,36 +32,45 @@
                         <?php echo form_open_multipart()?>
                         <div class="form-horizontal form-label-left col-md-10">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">User Name</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Company Name</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
-                          <input type="text" class="form-control" name="user_name" value="<?php echo $user->user_name?>">
+                          <input type="text" class="form-control" name="setup_name">
                           <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                            <?php echo form_error('user_priveledge')?>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Passowrd</label>
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone Number</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
-                          <input type="password" class="form-control" name="password">
-                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"> </span>                                          <?php echo form_error('user_priveledge')?>
-                        </div>
-                      </div>
-                    
-                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Confirm Passowrd</label>
-                        <div class="col-md-9 col-sm-9 col-xs-9">
-                          <input type="password" class="form-control" name="user_password_confirm">
+                          <input type="text" class="form-control"  data-inputmask="'mask' : '99999999999'" name="setup_phonenumber">
                           <span class="fa fa-fa form-control-feedback right" aria-hidden="true"></span>
-                        <?php echo form_error('user_priveledge')?>
                         </div>
                     </div>
-                  
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Company Address</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea type="text" class="form-control" name="setup_address"></textarea>
+                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"> </span>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Sms Username</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="text" class="form-control" name="sms_username" value="raphealolams@yahoo.com">
+                          <span class="fa fa-fa form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Sms Password</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                          <input type="password" class="form-control" name="sms_password" value="ajilore">
+                          <span class="fa fa-fa form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-3">Image</label>
                         <div class="col-md-9 col-sm-9 col-xs-9">
-                          <input type="file" class="form-control" name="image">
+                          <input type="file" class="form-control" name="setup_image">
                           <span class="fa fa-fa form-control-feedback right" aria-hidden="true"></span>
-                        <?php echo form_error('user_priveledge')?>
                         </div>
                     </div>
                             <br/>      
@@ -69,7 +78,6 @@
                             <input type="submit" class="btn btn-success" value="submit" name="submit"/>
                         </center>
                     </div>  
-                         <?php echo form_close() ?>
                             </div>
                           </div>
           

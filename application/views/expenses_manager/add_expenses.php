@@ -167,10 +167,6 @@
                     
                      </tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
                   <td><strong>Total</strong></td>
                   <td class="bg-danger"><strong><?php echo $total?></strong></td>
                 </tr>

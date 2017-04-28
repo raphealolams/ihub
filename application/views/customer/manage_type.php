@@ -77,7 +77,7 @@
                             <tr>
                                 <td><?php echo $customer->customer_type_name ?></td>
                                 <td><a href="<?php echo site_url("customer/edit_type/{$customer->customer_type_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
-                                <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                                <a href="<?php echo site_url("customer/delete_type/{$customer->customer_type_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
                             </tr>
                             <?php endforeach ;?>
                         </tbody>

@@ -1,4 +1,4 @@
-<?php $this->load->view('layout/header')?>
+
 <div id="forgot-box" class="forgot-box widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">

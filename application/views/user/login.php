@@ -11,7 +11,7 @@
                  <?php echo form_error('username')?>
              </div>
              <div>
-               <input type="password" class="form-control" name="password" placeholder="password " />
+               <input type="password" class="form-control" name="password"/>
              <?php echo form_error('password')?>
              </div>
              <div>

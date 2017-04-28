@@ -110,7 +110,7 @@
                                 <td><?php echo $itemss->comment ?></td>
                                 <td>
                                 <a href="<?php echo site_url("drop_off/edit_items/{$itemss->item_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
-                                <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                                <a href="<?php echo site_url("drop_off/delete_item/{$itemss->item_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
                             </tr>
                             <?php endforeach ;?>
                         </tbody>

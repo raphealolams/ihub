@@ -17,7 +17,7 @@
                              
                     <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-bars"></i>Search Area</h2>
+                    <h2><i class="fa fa-search"></i>Search Area</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -107,7 +107,7 @@
                             
                     <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-bars"></i>Search Result Area</h2>
+                    <h2><i class="fa fa-search"></i>Search Result Area</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -170,10 +170,11 @@
                      </tbody>
                         
                     </table>
-                      <?php echo form_close()?>
+                  
                       <?php if (count($payroll_types)) :?>
                         <input type="submit" name="generate" class="btn btn-success " value="generate" />  
                         <?php endif ?>
+                          <?php echo form_close()?>
                 </div>
                 </div>
                  </div>

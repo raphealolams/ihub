@@ -15,6 +15,9 @@ class MY_Controller extends CI_Controller{
     
     public function __construct() {
         parent::__construct();
+        
+        
+        $this->output->enable_profiler(true);
     }
     
     
@@ -56,7 +59,7 @@ class MY_Controller extends CI_Controller{
         if($user_id)
         {
             $this->load->model('user_model');
-            $this->current_user = $this->user_model->getOne(' ' , ['user.user_id' => $user_id]);
+            $this->current_user = $this->user_model->getOne('' , ['user.user_id' => $user_id]);
         }
         
         return $this->current_user;

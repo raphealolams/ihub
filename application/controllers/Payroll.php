@@ -37,16 +37,23 @@ class Payroll extends MY_Controller {
             'payroll_type',
             'payroll_others',
             'payroll_approved',
-            'staff_model'
+            'staff_model',
+            'setup_model'
            
         ));
-        $this->output->enable_profiler(true);
+       $this->_secure();
        
     }
     public function index()
     {
 
-         $title = "Payroll Types";
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $title = "Payroll Types";
 
         if($this->input->post('submit'))
         {
@@ -61,7 +68,10 @@ class Payroll extends MY_Controller {
         }
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+        ]);
         $this->load->view('payroll/payroll_types' , [
             'title' => $title,
             'message' => $this->session->flashdata('mssg'),
@@ -75,6 +85,13 @@ class Payroll extends MY_Controller {
      public function edit_payroll_type($payroll_type_id = '')
      {
          
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        } 
+         
+        
         $payroll_type = $this->payroll_type->getOne($payroll_type_id);
 
         /*
@@ -112,6 +129,13 @@ class Payroll extends MY_Controller {
 
      public function delete_payroll_type($payroll_type_id = '')
      {
+       
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        } 
+         
+         
         $payroll_type = $this->payroll_type->getOne($payroll_type_id);
 
 
@@ -128,12 +152,17 @@ class Payroll extends MY_Controller {
      }
        
      /**
-     *
-     *
-     *
+     *@params
      */
      public function manage($staff_id = '', $month = '' , $year = '')
      {
+        
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+         
+         
          $title = 'Manage Payroll';
 
          $payroll = '';
@@ -156,7 +185,7 @@ class Payroll extends MY_Controller {
                 redirect('payroll/view_staff_payroll/'.$staff_id.'/'.$month.'/'.$year);
         }
 
-        if( $this->input->post('generate') )
+        if( $this->input->post('generate'))
          {
                 $items = $this->input->post('items');
                 $amounts =$this->input->post('amounts');
@@ -172,7 +201,7 @@ class Payroll extends MY_Controller {
                         'payroll_type_id' => $payroll_type_id
                     ));
                     
-                    $amount = element($payroll_type_id , $amounts );
+                    $amount = element($payroll_type_id , $amounts);
                     
                     // if amount isnt set and the item hasnt been added before
                     if(!$amount && !$payroll->payroll_type_id)
@@ -180,15 +209,20 @@ class Payroll extends MY_Controller {
                         continue;
                     }
                     
-                    $payroll->payroll_others_amount = $amount;
-                    $payroll->staff_id = $staff_id;
-                    $payroll->Payroll_type_id = $payroll_type_id ;
-                    $payroll->Payroll_others_month = $month;
-                    $payroll->Payroll_others_year = $year;
-                    $payroll->insert();
-                   
+                    $data = array(
+                    
+                    $payroll->payroll_others_amount = $amount,
+                    $payroll->staff_id = $staff_id,
+                    $payroll->Payroll_type_id = $payroll_type_id,
+                    $payroll->Payroll_others_month = $month,
+                    $payroll->Payroll_others_year = $year,
+                    
+                    );
+                    
+                    $this->payroll_others->insert($data);
+                    $this->session->set_flashdata('mssg' , 'Payroll generated successfully');
                 }
-                $this->session->set_flashdata('mssg' , 'Payroll generated successfully');
+                
          }
           
           
@@ -199,7 +233,11 @@ class Payroll extends MY_Controller {
           }
          
           $this->load->view('layout/header');
-          $this->load->view('layout/nav');
+          $this->load->view('layout/nav' , [
+              'users' => $this->user_model->getOne(),
+              'set_up' => $this->setup_model->getOne()
+
+          ]);
           $this->load->view('payroll/manage_payroll' , array(
               'staff_id' => $staff_id,
               'month' => $month ,
@@ -217,8 +255,18 @@ class Payroll extends MY_Controller {
      }
 
 
+    /*
+    *@params
+    */
      public function edit_payrollothers($id)
      {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        } 
+         
+         
         $this->page_title = 'Edit Payrollothers';
         $item = $this->payrollothers->getOne(array(
             'payrollothers_id' => $id
@@ -239,6 +287,13 @@ class Payroll extends MY_Controller {
 
      public function view_staff_payroll($staff_id = '' , $month = '' , $year = '')
      {  
+        
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+         
+         
          $staff = $this->staff_model->getOne('' , array(
             'staff_id' => $staff_id
         ));
@@ -249,7 +304,11 @@ class Payroll extends MY_Controller {
                 'Payroll_others_year' => $year 
           ));
           $this->load->view('layout/header');
-          $this->load->view('layout/nav');
+          $this->load->view('layout/nav' , [
+              'users' => $this->user_model->getOne(),
+              'set_up' => $this->setup_model->getOne()
+
+          ]);
           $this->load->view('payroll/view_staff_payroll', array(
                'staff' => $staff,
                'items' => $items,
@@ -265,6 +324,11 @@ class Payroll extends MY_Controller {
      public function bill()
      {
 
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         $title = 'View Payroll';
         $staffs = array();
         $month = date('M');
@@ -279,7 +343,11 @@ class Payroll extends MY_Controller {
        
            //print_r($staffs);
          $this->load->view('layout/header');
-         $this->load->view('layout/nav');
+         $this->load->view('layout/nav' , [
+             'users' => $this->user_model->getOne(),
+             'set_up' => $this->setup_model->getOne()
+
+         ]);
          $this->load->view('payroll/payroll_bill', array(
                'staffs' => $staffs,
                'months' => $this->months,
@@ -290,7 +358,4 @@ class Payroll extends MY_Controller {
         )) ;
          $this->load->view('layout/footer');
      }
-
-
-
 }

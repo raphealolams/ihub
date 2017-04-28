@@ -174,7 +174,7 @@ class MY_Model extends CI_Model{
     {
         if($where) $this->db->where( $where );
 
-        $total = $this->db->count_all_results( $this->getTable() ) ;
+        $total = $this->db->count_all_results( $this->table) ;
 
         return $total;
     }

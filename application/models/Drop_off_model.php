@@ -139,4 +139,16 @@ class Drop_off_model extends MY_Model {
     }
     
     
+     /*
+    *@params returns Array of data for a particular customer
+    */
+    public function getdetails()
+    {
+        $this->load->model('customer_model' , 'customer_model_');
+        $status = $this->customer_model_->getOne($this->customer_id);
+        
+        if($status) return $status;
+    }
+    
+    
 }

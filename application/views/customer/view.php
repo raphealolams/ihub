@@ -10,7 +10,7 @@
         <div class="col-md-10">
     <div class="table">
         <center> 
-        <img src="" class="img-rounded img-responsive" alt="Customer Photo" width="304" height="236"> 
+        <img src="<?php echo $customer->getPhotoUrl()?>" class="img-rounded img-responsive" alt="Customer Photo" width="304" height="236"> 
         </center> 
         <table class="table table-responsive table-hover">
             <tbody>

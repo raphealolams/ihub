@@ -23,9 +23,12 @@ class Drop_off extends MY_Controller{
             'category',
             'items',
             'customer_container',
-            'drop_off_model'
+            'drop_off_model', 
+            'user_model',
+            'setup_model'
         ));
-        $this->output->enable_profiler(true);
+        $this->_secure();
+        
        
     }
     
@@ -35,37 +38,28 @@ class Drop_off extends MY_Controller{
         public $status_no = 0;
        
     
-    public function index()
-    {
-         
-         $title = "Customer Home";
-         $types = $this->customer_type->getAll();
-         $status = $this->customer_status->getAll();
-         $customers = $this->customer_model->getAll();
-        
-         $this->load->view('layout/header'); 
-         $this->load->view('layout/nav'); 
-         $this->load->view('customer/all_customer', [
-         'customers' => $customers,
-         'types' => $types,
-         'status' => $status,
-         'title' => $title,
-         'message' => $this->session->flashdata('mssg')]);
-         
-        $this->load->view('layout/footer');   
-    }
-    
     /*
     *@params
     */
     public function manage_category()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         $title = "Category Home Page";
         $title2 = "Manage Items Category";
         $category = $this->category->getAll();
         
             $this->load->view('layout/header');
-            $this->load->view('layout/nav');
+            $this->load->view('layout/nav' , [
+                'users' => $this->user_model->getOne(),
+                'set_up' => $this->setup_model->getOne()
+
+            ]);
             $this->load->view('drop_off/category', [
             'title' => $title,
             'title2' => $title2,
@@ -80,7 +74,13 @@ class Drop_off extends MY_Controller{
     */
     public function add_category()
     {
-          if($this->input->post('submit'))
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        if($this->input->post('submit'))
         {
             $data = array(
                 'category_name' => $this->input->post('category_name'),
@@ -99,10 +99,15 @@ class Drop_off extends MY_Controller{
     */
     public function edit_category($id = '')
     {
-          $data = $this->category->getOne($id);
-        $this->load->view('drop_off/edit_category', [
-            'category' => $data
-        ]);
+          
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $data = $this->category->getOne($id);
+       
         
         if(!$data || !$data->category_id)
         { 
@@ -121,6 +126,29 @@ class Drop_off extends MY_Controller{
            $this->session->set_flashdata('mssg', 'Category Successfully Updated');
             redirect('drop_off/manage_category');
         }  
+         $this->load->view('drop_off/edit_category', [
+            'category' => $data
+        ]);
+    }
+    
+    
+    public function delete_category($id = '')
+    {
+       if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        $item_cat = $this->category->getOne($category_id);
+        
+        if(!$item_cat->category_id)
+        {
+            show_error('Category Not found');
+        }
+        
+        $item_cat->delete($id);
+        $this->session->set_flashdata('mssg' , 'Category Deleted');
+        redirect('drop_off/manage_category');
     }
     
     /*
@@ -128,13 +156,24 @@ class Drop_off extends MY_Controller{
     */
     public function manage_items()
     {
-        $title = "Items Home Page";
-        $title2 = "Manage Items Category";
-        $items = $this->items->getAll();
-        $category = $this->category->getAll();
+     
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+            $title = "Items Home Page";
+            $title2 = "Manage Items Category";
+            $items = $this->items->getAll();
+            $category = $this->category->getAll();
         
             $this->load->view('layout/header');
-            $this->load->view('layout/nav');
+            $this->load->view('layout/nav' , [
+                'users' => $this->user_model->getOne(),
+                'set_up' => $this->setup_model->getOne()
+
+            ]);
             $this->load->view('drop_off/items', [
             'title' => $title,
             'title2' => $title2,
@@ -150,7 +189,14 @@ class Drop_off extends MY_Controller{
     */
     public function add_items()
     {
-          if($this->input->post('submit'))
+          
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        if($this->input->post('submit'))
         {
             $data = array(
                 'category_name' => $this->input->post('category_name'),
@@ -172,14 +218,15 @@ class Drop_off extends MY_Controller{
     */
     public function edit_items($id = '')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         $item = $this->items->getOne($id);
         $category = $this->category->getAll();
-        $this->load->view('drop_off/edit_item', [
-            'item' => $item,
-            'message' => $this->session->flashdata('mssg'),
-            'category' => $category
-        ]);
-        
+       
         if(!$item || !$item->item_id)
         { 
             show_error("Item does not exist");
@@ -199,13 +246,51 @@ class Drop_off extends MY_Controller{
            $this->session->set_flashdata('mssg', 'Item Successfully Updated');
             redirect('drop_off/manage_items');
         }  
+         $this->load->view('drop_off/edit_item', [
+            'item' => $item,
+            'message' => $this->session->flashdata('mssg'),
+            'category' => $category
+        ]);
     }
+    
+    
+    /*
+    @params deletes Items from the Item Table
+    */
+    public function delete_item($id = '')
+    {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $items = $this->items->getOne($item_id);
+        
+        if(!$items->item_id)
+        {
+            show_error('Item Not found');
+        }
+        
+        $items->delete($id);
+        $this->session->set_flashdata('mssg' , 'Item Deleted');
+        redirect('drop_off/manage_items');
+    }
+    
     
     /*
     *@params
     */
     public function drop_items($customer_id='' )
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         $title = "Add Droped Item";
         $title2 = "Select Items ";
         $title3 = "View All Items";
@@ -303,7 +388,11 @@ class Drop_off extends MY_Controller{
         
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('drop_off/drop_item', [
             'title' => $title,
             'title2' => $title2,
@@ -320,10 +409,16 @@ class Drop_off extends MY_Controller{
     }
     
     /*
-    *@params
+    *@params deletes items on the cart
     */
     public function delete_items($drop_id='' , $customer_id = '')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         $items = $this->drop_off_model->getOne($drop_id);
 
         if(!$items->drop_id)
@@ -341,6 +436,12 @@ class Drop_off extends MY_Controller{
     */
     public function search_drop($invoice_number = '')
     {
+       
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+    
         
         if($this->input->post('search'))
         {
@@ -349,6 +450,7 @@ class Drop_off extends MY_Controller{
         }
         
         $droped = $this->drop_off_model->getAll('' , array(  'invoice_number'=>$invoice_number, 'in_basket'=>$this->no));
+        
         
         if($this->input->post('save'))
         {
@@ -372,24 +474,38 @@ class Drop_off extends MY_Controller{
         }
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('drop_off/search_drop' , [
             'droped' => $droped,
+            'search' => $this->customer_container->getOne('' , array('invoice_number'=>$invoice_number)),
         ]);
         $this->load->view('layout/footer');
     }
     
     /*
-    *@params
+    *@params Prints Recipt 
     */
        public function print_recipt($invoice_number = ' ')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }  
         
         $invoice_numb = $this->customer_container->getAll('', array('invoice_number'=>$invoice_number, 'status'=>$this->status_no));
         $droped = $this->drop_off_model->getAll('',  array('invoice_number'=>$invoice_number, 'in_basket'=>$this->no));
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('drop_off/print_recipt', [
             
             'invoice_number' => $invoice_numb,

@@ -530,3 +530,12 @@ $config['proxy_ips'] = '';
 |
 |
 */
+//Third Party Library Configuration
+$config['twilio_sid']           =   'AC1313aca17f42ddcba7e6336041bf431d';
+$config['twilio_token']         =   'bd40e261cbfb28c2eaedb3188f17004c';
+$config['twilio_phone']         =   '+12533368296';
+$config['twilio_phone_display'] =   'easywash';
+$config['twilio_sms_callback']  =   $config['base_url'] . '/sms'; //it should be our application's dedicated sms url
+$config['twilio_voice_callback']=   $config['base_url'] . '/voice'; //it should be our application's dedicated voice url
+$config['twilio_voice_fallback']=   $config['base_url'] . '/voice/fallback';
+$config['twilio_voice_status']  =   $config['base_url'] . '/voice/status';

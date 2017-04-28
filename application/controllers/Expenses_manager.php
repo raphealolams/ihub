@@ -17,13 +17,17 @@ class Expenses_manager extends MY_Controller {
     
         public function __construct() {
         parent::__construct();
-       $this->load->model(array(
+       
+            $this->load->model(array(
             'expenses_type',
             'expenses_model',
-            'staff_model'
-           
+            'staff_model',
+            'user_model',
+            'setup_model'
         ));
-        $this->output->enable_profiler(true);
+            
+        $this->_secure();
+        
        
     }
     
@@ -33,6 +37,13 @@ class Expenses_manager extends MY_Controller {
     */
     public function index()
     {   
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         $title = "Expense Manager";
         $expenses_type = $this->expenses_type->getAll();
         
@@ -48,7 +59,11 @@ class Expenses_manager extends MY_Controller {
         }
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('expenses_manager/add_expenses_type', [
             'message' => $this->session->flashdata('mssg'),
             'title' => $title,
@@ -63,6 +78,13 @@ class Expenses_manager extends MY_Controller {
     */
     public function edit_expense($id = '')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         $expenses_type = $this->expenses_type->getOne($id);
         
         if($this->input->post('submit'))
@@ -87,6 +109,12 @@ class Expenses_manager extends MY_Controller {
     */
     public function delete_expense_type($expenses_type_id = '')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         $expenses = $this->expenses_type->getOne($expenses_type_id);
 
         if(!$expenses->expenses_type_id)
@@ -105,6 +133,12 @@ class Expenses_manager extends MY_Controller {
     */
     public function expenses()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         
         $title = "Expenses manager";
         $expenses_type = $this->expenses_type->getAll();
@@ -159,7 +193,11 @@ class Expenses_manager extends MY_Controller {
         }
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
         $this->load->view('expenses_manager/add_expenses' , [
             'message' => $this->session->flashdata('mssg'),
             'title' => $title,
@@ -177,6 +215,12 @@ class Expenses_manager extends MY_Controller {
     */
     public function edit_expenses($id = '')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         
         $expenses = $this->expenses_model->getOne($id);
         
@@ -214,6 +258,12 @@ class Expenses_manager extends MY_Controller {
     */
     public function delete_expenses($expenses_id = '')
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
         $expenses = $this->expenses_model->getOne($expenses_id);
         
         if(!$expenses->expenses_id)

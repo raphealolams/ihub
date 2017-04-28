@@ -77,7 +77,7 @@
                             <tr>
                                 <td><?php echo $level->staff_level ?></td>
                                 <td><a href="<?php echo site_url("staff/edit_level/{$level->staff_level_id}")?>" class="btn btn-warning btn-form-modal fa fa-pencil" data-toggle="modal" data-target=".bs-example-modal-lg">Edit</a>
-                                <a href="<?php echo site_url()?>" class="btn btn-danger fa fa-trash">Delete</a></td>
+                                <a href="<?php echo site_url("staff/delete_level/{$level->staff_level_id}")?>" class="btn btn-danger fa fa-trash">Delete</a></td>
                             </tr>
                             <?php endforeach ;?>
                         </tbody>

@@ -131,7 +131,7 @@ class User_model extends My_Model {
     
     
      
-    public function hashPassword($user_password)
+    public function hashPassword($password= '')
     {
         // leave for now
         if( $this->password_hashed ) return ;
@@ -139,9 +139,11 @@ class User_model extends My_Model {
 
         $this->load->helper('security');
         
-        $this->user_password = do_hash($this->user_password);
+        $this->user_password = do_hash($password);
         
         $this->password_hashed = true ;
+        
+        return $this->user_password;
     }
     
     
@@ -156,6 +158,10 @@ class User_model extends My_Model {
         
          if($this->password_hashed)
          {
+             echo  $this->user_password ;
+             echo '<br>';
+             echo do_hash($password);
+             
              return ($this->user_password == do_hash($password));
          }
          
@@ -177,7 +183,7 @@ class User_model extends My_Model {
         }
         else
         {
-            $url = base_url('assets/img/user_avater.png') ;
+            $url = base_url('uploads/default.jpg');
         }
         return $url;
     }

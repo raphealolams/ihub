@@ -125,6 +125,11 @@ Bootstrap
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url('assets/build/js/custom.min.js')?>"></script>
     
+       <!-- bootstrap-wysiwyg -->
+    <script src="<?php echo base_url('assets/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/vendors/jquery.hotkeys/jquery.hotkeys.js')?>"></script>
+    <script src="<?php echo base_url('assets/vendors/google-code-prettify/src/prettify.js')?>"></script>
+    
 	
   </body>
 </html>

@@ -105,11 +105,29 @@ t	 * Maps to the following URL
         $this->dbforge->add_key('priveledge_id', TRUE);
         $this->dbforge->create_table('priveledge', TRUE);
         
-        //Add Staff Table
-        $this->load->model('staff_model');
-        $this->dbforge->add_field($this->staff_model->columns);
-        $this->dbforge->add_key('staff_id' , TRUE);
-        $this->dbforge->create_table('staff', TRUE);
+        //Add Setup Table
+        $this->load->model('setup_model');
+        $this->dbforge->add_field($this->setup_model->columns);
+        $this->dbforge->add_key('setup_id' , TRUE);
+        $this->dbforge->create_table('setup', TRUE);
+        
+          //Add Sms Table
+        $this->load->model('sentsms');
+        $this->dbforge->add_field($this->sentsms->columns);
+        $this->dbforge->add_key('sentsms_id', TRUE);
+        $this->dbforge->create_table('sentsms', TRUE);
+        
+          //Add Sent Emial Table
+        $this->load->model('sent_mail');
+        $this->dbforge->add_field($this->sent_mail->columns);
+        $this->dbforge->add_key('sentmail_id', TRUE);
+        $this->dbforge->create_table('sent_mail', TRUE);
+        
+          //Add Staff Items
+        $this->load->model('staff_status');
+        $this->dbforge->add_field($this->staff_status->columns);
+        $this->dbforge->add_key('staff_status_id', TRUE);
+        $this->dbforge->create_table('staff_status', TRUE);
         
         //Add Staff Bank Table
         $this->load->model('staff_bank');
@@ -153,7 +171,6 @@ t	 * Maps to the following URL
        $user_data =array(
            'user_name' => 'Admin',
            'user_password' => 'admin',
-           'user_name' => 'Admin',
            'user_fullname' => 'Super Admin',
            'user_priveledge' => 1,
            'create_time' => date('Y m d h:m:s'),
@@ -171,7 +188,6 @@ t	 * Maps to the following URL
            $admin->hashPassword();
 
        }
-       $admin->insert($user_data);
 
 
        $this->_createPriveledges();

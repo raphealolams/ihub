@@ -19,13 +19,21 @@ class Customer extends MY_Controller{
         $this->load->model('customer_model');
         $this->load->model('customer_type');
         $this->load->model('customer_status');
-        $this->output->enable_profiler(true);
+        $this->load->model('setup_model');
+        $this->load->model('user_model');
+        
+        $this->_secure();
        
     }
        
     
     public function index()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
          
          $title = "Customer Home";
          $types = $this->customer_type->getAll();
@@ -33,7 +41,11 @@ class Customer extends MY_Controller{
          $customers = $this->customer_model->getAll();
         
          $this->load->view('layout/header'); 
-         $this->load->view('layout/nav'); 
+         $this->load->view('layout/nav' , [
+             'users' => $this->user_model->getOne(),
+             'set_up' => $this->setup_model->getOne()
+
+         ]); 
          $this->load->view('customer/all_customer', [
          'customers' => $customers,
          'types' => $types,
@@ -46,6 +58,12 @@ class Customer extends MY_Controller{
     
     public function save()
     {    
+       if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         if ($this->input->post('submit')) {
             
              // upload image
@@ -92,10 +110,14 @@ class Customer extends MY_Controller{
         }
     }
     
-    public function edit_customer($id = " ")
+    public function edit_customer($id = "")
     {   
-//        $success = false;
-//        $error = " ";
+
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
          $customer = $this->customer_model->getOne($id);
          $types = $this->customer_type->getAll();
          $status = $this->customer_status->getAll();
@@ -139,6 +161,13 @@ class Customer extends MY_Controller{
     
     public function view($id = "")
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         $customer = $this->customer_model->getOne( $id);
             if(!$customer->customer_id)
             {
@@ -150,13 +179,46 @@ class Customer extends MY_Controller{
         ));
     }
     
+    public function delete_customer($id = '')
+    {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $customer = $this->customer_model->getOne($id);
+
+        if(!$customer->$customer_id)
+        {
+            show_error("Customer does not exist!");
+        }
+
+        $customer->delete($id);
+        $this->session->set_flashdata('mssg', 'Customer Deleted');
+
+        redirect('customer/index');
+    }
+    
     public function manage_type()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
          $title = "Customer Type";
          $data = $this->customer_type->getAll();
         
          $this->load->view('layout/header');
-         $this->load->view('layout/nav'); 
+         $this->load->view('layout/nav' , [
+             'users' => $this->user_model->getOne(),
+             'set_up' => $this->setup_model->getOne()
+
+         ]); 
          $this->load->view('customer/manage_type', [
          'query' => $data,
          'title' => $title,
@@ -167,6 +229,13 @@ class Customer extends MY_Controller{
     
     public function add_type()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         if ($this->input->post('submit')) {
             
             $data = array(
@@ -184,6 +253,15 @@ class Customer extends MY_Controller{
     
     public function edit_type($id = "")
     {
+        
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        
         $data = $this->customer_type->getOne($id);
         $this->load->view('customer/edit_type', [
             'type' => $data
@@ -209,14 +287,45 @@ class Customer extends MY_Controller{
         }   
     }
     
+    public function delete_type($id = '')
+    {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $customer_type = $this->customer_type->getOne($customer_type_id);
+        
+        if(!$customer_type->customer_type_id)
+        {
+            show_error("Customer Type Does not Exist");
+        }
+        
+        $customer_type->delete($id);
+        $this->session->set_flashdata('mssg' , 'Customer Type Deleted');
+        redirect('customer/manage_type');
+    }
+    
     public function manage_status()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
          $title = "Customer Status";
          $title2 = "Manage Customer Status";
          $data = $this->customer_status->getAll();
         
          $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+
+        ]);
          $this->load->view('customer/customer_status', [
          'query' => $data,
          'title' => $title,
@@ -228,6 +337,13 @@ class Customer extends MY_Controller{
     
     public function add_status()
     {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         if($this->input->post('submit'))
         {
             $data = array(
@@ -242,6 +358,12 @@ class Customer extends MY_Controller{
     
     public function edit_status($id = "")
     {
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
         $data = $this->customer_status->getOne($id);
         $this->load->view('customer/edit_status', [
             'type' => $data
@@ -263,6 +385,29 @@ class Customer extends MY_Controller{
            $this->session->set_flashdata('mssg', 'Customer Status Successfully Updated');
             redirect('customer/manage_status');
         }
+    }
+    
+    
+    
+    
+    public function delete_status($id = '')
+    {
+        
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+        
+        
+        $customer_status = $this->customer_status->getOne($customer_status_id);
+        
+        if(!$customer_status->customer_status_id)
+        {
+            show_error('Status Not Found');
+        }
+        
+        $customer_status->delete($id);
+        redirect('customer/manage_status');
     }
 
 }

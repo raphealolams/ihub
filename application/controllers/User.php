@@ -24,6 +24,7 @@ class User extends My_Controller{
         'super_admin'
     );
     
+    
       /**
      * Secure all pages
      */
@@ -32,10 +33,9 @@ class User extends My_Controller{
        
             $this->load->model(array(
             'priveledge',
-            'user_model'
-         
+            'user_model',
+            'setup_model'
         ));
-        $this->output->enable_profiler(true);
        
     }
     
@@ -44,13 +44,8 @@ class User extends My_Controller{
     {
         $title = 'Users ';
         
-        //$this->_current_user();
+        $this->_current_user();
         
-
-        if($this->current_user && $this->current_user->user_id)
-        {
-            redirect(site_url($this->default_redirect_url));
-        }
 
         $login = $this->input->post('login');
         
@@ -65,13 +60,13 @@ class User extends My_Controller{
             if(!$user->validatePassword($this->input->post('password')))
             {
                 $error = lang('invalid_cred');
+                $this->session->set_flashdata('mssg' , $error);
             }
             else
             {
                 $this->session->set_userdata("user_id" , $user->user_id);
                 
-                redirect('staff/index');
-                echo ($user_id);
+                redirect('welcome');
             }
         }  
         $this->load->view('layout/header');
@@ -79,7 +74,7 @@ class User extends My_Controller{
                 'title' => $title,
                 'message' => $this->session->flashdata('mssg')
         ));
-        $this->load->view('layout/footer');
+        //$this->load->view('layout/footer');
     }
     
     
@@ -87,23 +82,22 @@ class User extends My_Controller{
 
     public function profile()
     {
-        //$this->_secure();
-        
-        
+           
         $title = 'Profile Page' ;
         $title2 = 'Edit Profile' ;
         $error = '';
         
-        
+        $this->_secure();
         $prev_pass = $this->current_user->user_password;
         $prev_username = $this->current_user->user_name;
+        $id = $this->current_user->user_id;
         
         
         if($this->input->post('submit') && $this->form_validation->run('profile'))
         {
             $this->load->helper('upload');
            
-            $this->current_user->setProperties($this->input->post(), $this->ignore_fields);
+           // $this->current_user->setProperties($this->input->post(), $this->ignore_fields);
             $new_password = $this->input->post('password');
             $new_username =  $this->input->post('user_name');
 
@@ -121,49 +115,60 @@ class User extends My_Controller{
             $folder = '/uploads/users/';
             $file_name =  'user-'.$this->current_user->user_id.'-'.time();
            
-            $upload = upload_file('photo' , $file_name , $folder  );
+            $upload = upload_file('image' , $file_name , $folder  );
 
-            if ( $upload != -1 && !is_object($upload))
+            if ( !is_object($upload) && $upload != -1)
             {
                 $error = $upload;
-                $this->_alert($error , 'error' );
+                $this->session->set_flashdata('mssg' , $error);
             }
             else if (is_object($upload))
             {
                 $this->current_user->deletePhoto();
-                $this->current_user->photo =  $upload->data('file_name');
+                $this->current_user->image =  $upload->data('file_name');
             }
+                        
             
             if(!$new_password)
             {
                 $this->current_user->user_password = $prev_pass;
             }
-            else if($this->input->post('password') != $this->input->post('password-confirm'))
+            else if($this->input->post('password') != $this->input->post('user_password_confirm'))
             {
                 $error = 'Password not match';
             }
             else if(!$error)
             {
-                $this->current_user->user_password = $new_password;
-                $this->current_user->password_hashed = false;
-                $this->current_user->hashPassword();
+             // $user_password = $this->input->post('password');
+              $new_user_password = $this->user_model->hashPassword($new_password);
+                 $data = array(
+                
+                    'user_name' => $new_username,
+                    'user_password' => $new_user_password,
+                    'photo' => $file_name,
+                    'user_lastloggedin' => date('Y-m-d H:i:s'),
+                    'password_hashed' => true
+                );
+
             }
             if($error) $this->session->set_flashdata('mssg', $error) ; 
             else {
-                $this->current_user->insert();
+                $this->current_user->update($data , $id);
                 $this->session->set_flashdata('mssg' , 'Profile Updated') ; 
             }
         }
         
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav', [
+            'users' => $this->user_model->getOne(),
+            'set_up' => $this->setup_model->getOne()
+        ]);
         $this->load->view('user/profile', array(
             'user' => $this->current_user,
             'error' => $error,
             'title' => $title,
             'title2' => $title2,
             'message' => $this->session->flashdata('mssg'),
-            'user' => $this->current_user
         ));
         $this->load->view('layout/footer');
     }
@@ -368,7 +373,7 @@ class User extends My_Controller{
     protected function _get_login_page()
     {
         
-        return site_url('users/login');
+        return site_url('user');
     }
     /**
      * 
@@ -384,18 +389,23 @@ class User extends My_Controller{
     public function all()
     {
         
-        //$this->_secure();
+        $this->_secure();
 
         $title = 'Users';
         $title2 = 'Add New Users and Edit Existing user';
+        
+         if(!$this->current_user->is(array('Admin' , 'Semi-admin')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
  
         if($this->input->post('submit'))
         {
             $user_password = $this->input->post('user_password');
-            $this->user_model->hashPassword($user_password);
+            $new_password = $this->user_model->hashPassword($user_password);
             $data = array(
             'user_name' => $this->input->post('user_name'),
-            'user_password' => $user_password ,
+            'user_password' => $new_password ,
             'user_priveledge' => $this->input->post('user_priveledge'),
             'password_hashed' => true
             );
@@ -406,7 +416,10 @@ class User extends My_Controller{
         }
 
         $this->load->view('layout/header');
-        $this->load->view('layout/nav');
+        $this->load->view('layout/nav' , [
+            'users' => $this->user_model->getOne('' , array($this->current_user->user_id)),
+            'set_up' => $this->setup_model->getOne()
+        ]);
         $this->load->view('user/all' , array(
             'users' => $this->user_model->getAll(),
             'priveledges' =>  $this->priveledge->getAll(),
@@ -420,13 +433,13 @@ class User extends My_Controller{
 
     public function edit($user_id='')
     {
-         //$this->_secure();
+         $this->_secure();
          
-//        if(!$this->current_user->is(array('Admin' , 'Semi-admin')))
-//        {
-//            show_error('You do not have permission to visit this page!');
-//        }
-//       
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
+       
         $error = '';
         $user = $this->user_model->getOne($user_id);
         
@@ -466,17 +479,15 @@ class User extends My_Controller{
             }
             else
             {
-                $user->user_password = $new_password;
-                $user->password_hashed = false;
-                $user->hashPassword($new_password);
-            }
+                $user_password = $this->user_model->hashPassword($new_password);
+            
             
              $data = array(
                 'user_name' => $new_username,
-                'user_password' => $new_password,
+                'user_password' => $user_password,
                 'user_priveledge' => $this->input->post('user_priveledge')
                     );
-
+            }
 
             if($error) 
             {
@@ -506,12 +517,12 @@ class User extends My_Controller{
     {
      
         
-        //$this->_secure();
+        $this->_secure();
 
-//        if(!$this->current_user->is(array('Admin' , 'Semi-admin')))
-//        {
-//            show_error('You do not have permission to visit this page!');
-//        }
+        if(!$this->current_user->is(array('Admin' , 'Semi-admin')))
+        {
+            show_error('You do not have permission to visit this page!');
+        }
 
         $user = $this->user_model->getOne('' , array(
             'user_id' => $user_id

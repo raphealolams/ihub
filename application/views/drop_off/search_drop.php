@@ -108,14 +108,14 @@
                                 <td colspan="4"></td>
                                 <td>
                     
-                            <strong> <label>Amount Paid</label> <input type="number" id="txt2" class="form-control"  onkeyup="sum()" name="deposit"> </strong>
+            <strong> <label>Amount Paid</label> <input type="number" id="txt2" class="form-control" value="<?php echo $search->deposit?>" onkeyup="sum()" name="deposit"> </strong>
                                     
                                 </td>
                             </tr>
                              <tr>
                                 <td colspan="4"></td>
                                 <td>
-                                    <strong> <label>Balance</label> <input type="number" id="txt3" class="form-control" name="balance" readonly> </strong>
+                                    <strong> <label>Balance</label> <input type="number" id="txt3" value="<?php echo $search->balance?>" class="form-control" name="balance" readonly> </strong>
                                 </td>
                             </tr>
                              <tr>
