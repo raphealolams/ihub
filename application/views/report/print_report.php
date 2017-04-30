@@ -28,8 +28,10 @@
                   </div>
                   <div class="x_content">
                             
-                            <section class="invoice-box">
-        
+                    <section class="invoice-box" id="print-content">
+          <h1><center>Profit And Loss Account For <span class="all-caps-black"><?php echo $month. ' ' .$year ?></span></center></h1>
+             <br>
+
             <br>
              <br>
   <div class="container-panel-md">
@@ -142,7 +144,7 @@
         </tr>
         
         <?php 
-            $tax = 0;
+            $tax = 30 / 100 * $profit_before;
         ?>
         <tr>
         <td><b>Less:: Taxation</b></td>
@@ -156,7 +158,7 @@
         </tr>
         
         <?php
-        $total_profit;
+        $total_profit = $profit_before - $tax;
         ?>
         <tr>
          <td><strong>Profit After Tax</strong></td>
@@ -172,6 +174,9 @@
         </section>              
                         </div>
                           <!-- Ends Here -->
+                    <div>
+                        <center><input type="button" class="btn btn-success btn-print" name="print" value="print"> </center>
+                    </div>
                       </div>
                     </div>
 

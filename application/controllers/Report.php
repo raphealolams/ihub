@@ -94,11 +94,11 @@ class Report extends MY_Controller {
             'message' => $this->session->flashdata('mssg'),
             'title' => 'Generated Report',
             'title2' => 'Print Profit and Loss Report',
-            'months' => $this->months,
-            'years' =>  range(date('Y') - 3 , date('Y') + 2 ),
             'expenses' => $expenses,
             'income' => $income,
-            'payables' => $payables
+            'payables' => $payables,
+            'month' => $month,
+            'year' => $year
         ]);
         $this->load->view('layout/footer');
     }
