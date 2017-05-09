@@ -97,30 +97,55 @@ class Report extends MY_Controller {
             'expenses' => $expenses,
             'income' => $income,
             'payables' => $payables,
-            'month' => $month,
+            'month' => $this->_getMonth($month),
             'year' => $year
         ]);
         $this->load->view('layout/footer');
     }
     
-    public function tax()
+    
+        
+    protected function _getMonth($month)
     {
-        
-        
-        
-        $this->load->view('layout/header');
-        $this->load->view('layout/nav' , [
-            'users' => $this->user_model->getOne(),
-            'set_up' => $this->setup_model->getOne()   
-        ]);
-        $this->load->view('report/tax' , [
-            'message' => $this->session->flashdata('mssg'),
-            'title' => 'Taxation',
-            'title2' => 'Manage Company Taxation',
-            'months' => $this->months,
-            'years' =>  range(date('Y') - 3 , date('Y') + 2 )
-        ]);
-        $this->load->view('layout/footer');
+        switch($month)
+        {
+            case 1:
+                return 'January';
+            
+            case 2;
+                return 'February';
+            
+            case 3;
+                return 'March';
+                
+            case 4;
+                return 'April';
+                
+            case 5;
+                return 'May';
+                
+            case 6; 
+                return 'June';
+                
+            case 7;
+                return 'July';
+            
+            case 8;
+                return 'August';
+                
+            case 9;
+                return 'September';
+                
+            case 10;
+                return 'October';
+                
+            case 11;
+                return 'November';
+                
+            case 12;
+                return 'December';
+            
+        }
     }
 
 }

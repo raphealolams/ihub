@@ -12,27 +12,21 @@
  * @author Ajilore Raphael
  */
 
-class Tax extends MY_Model {
+class Inventory_type extends MY_Model {
 
 
-    public $tax_id;
+    public $inventory_type_id;
     
-    public $tax_amount;
-    
-    public $tax_month;
-    
-    public $tax_year;
-    
-    public $user_id;
+    public $inventory_type_name;
     
     public $create_time;
 
     public $edit_time;
     
     
-    protected $table = 'tax';
+    protected $table = 'inventory_type';
 
-    protected $primary = 'tax_id';
+    protected $primary = 'inventory_type_id';
 
     /**
      * Column definition
@@ -40,7 +34,7 @@ class Tax extends MY_Model {
      * @var array
      */
     public $columns = array(
-        'tax_id' => array(
+        'inventory_type_id' => array(
             'type' => 'INT',
             'constraint' => 11,
             'unsigned' => TRUE,
@@ -48,27 +42,9 @@ class Tax extends MY_Model {
         ),
         
         
-        'tax_amount' => array(
+        'inventory_type_name' => array(
             'type' => 'varchar',
             'constraint' => '250',
-            'null' => true
-        ),
-        
-         'tax_month' => array(
-            'type' => 'varchar',
-            'constraint' => '250',
-            'null' => true
-        ),
-        
-         'tax_year' => array(
-            'type' => 'varchar',
-            'constraint' => '250',
-            'null' => true
-        ),
-        
-         'user_id' => array(
-            'type' => 'int',
-            'constraint' => 11,
             'null' => true
         ),
         

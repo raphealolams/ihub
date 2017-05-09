@@ -35,24 +35,32 @@
                   </li>
                   <li><a href="<?php echo site_url('staff')?>"><i class="fa fa-users"></i>Manage Staff <span class="fa fa-chevron"></span></a>
                   </li>
-                <li><a href="<?php echo site_url('expenses_manager/expenses')?>"><i class="fa fa-money"></i>Expense Manager <span class="fa fa-chevron"></span></a> </li>
-                 <li><a><i class="fa fa-money"></i>Payroll <span class="fa fa-chevron-down"></span></a>                                                <ul class="nav child_menu">
+                <li><a href="<?php echo site_url('expenses_manager/expenses')?>"><i class="fa fa-money"></i>Expense Manager <span class="fa fa-chevron">
+                </span></a> </li>
+                <li><a><i class="fa fa-book"></i>Manage Droped Items <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                         <li><a href="<?php echo site_url("drop_off/drop_items")?>">Add Drop Item</a></li>
+                         <li><a href="<?php echo site_url("drop_off/search_drop")?>">Search Droped Item</a></li>
+                         </ul>
+                      </li>
+                 <li><a><i class="fa fa-money"></i>Payroll <span class="fa fa-chevron-down"></span></a>
+                   <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("payroll/manage")?>">Generate Payroll</a></li>
                           <li><a href="<?php echo site_url("payroll/bill")?>">Generate Payroll Bill</a></li>
                           </ul>
                        </li>
-                
+
                  <li><a><i class="fa fa-mobile"></i>Sms <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("sms")?>">Quick Sms</a></li>
                           <li><a href="<?php echo site_url("sms/select")?>">Select Sms</a></li>
-                          </ul>        
+                          </ul>
                 </li>
-                    
+
                  <li><a><i class="fa fa-book"></i>Reporting<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("report")?>">Profit and Loss</a></li>
-                          </ul>        
+                          </ul>
                 </li>
                 <li><a href="<?php echo site_url('user/all')?>"><i class="fa fa-users"></i>Users <span class="fa fa-chevron"></span></a>
                   </li>
@@ -60,45 +68,59 @@
                   </li>
                   <li><a><i class="fa fa-wrench"></i>Configuration <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        
+
                             <!--Customer Configuration-->
-                      <li><a><i class="fa fa-users"></i>Customer Configuration<span class="fa fa-chevron-down"></span></a>                                         <ul class="nav child_menu">
+                      <li><a><i class="fa fa-users"></i>Customer Configuration<span class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("customer/manage_type")?>">Add Customer Type</a></li>
                           <li><a href="<?php echo site_url("customer/manage_status")?>">Add Customer status</a></li>
                           </ul>
                        </li>
-                        
+
                        <!--Staff Configuration-->
-                         <li><a><i class="fa fa-users"></i>Staff Configuration<span class="fa fa-chevron-down"></span></a>                                         <ul class="nav child_menu">
+                         <li><a><i class="fa fa-users"></i>Staff Configuration<span class="fa fa-chevron-down"></span></a>
+                           <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("staff/manage_type")?>">Add Staff Type</a></li>
                           <li><a href="<?php echo site_url("staff/manage_status")?>">Add Staff status</a></li>
                           <li><a href="<?php echo site_url("staff/manage_level")?>">Add Staff Level</a></li>
                           </ul>
                        </li>
-                        
+
                           <!--Dropoff Configuration-->
-                         <li><a><i class="fa fa-book"></i>Drop Off <span class="fa fa-chevron-down"></span></a>                               <ul class="nav child_menu">
-                          <li><a href="<?php echo site_url("customer/manage_type")?>">Add Items</a></li>                                         <li><a href="<?php echo site_url("customer/manage_type")?>">Add Category</a></li>
+                         <li><a><i class="fa fa-book"></i>Drop Off <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                          <li><a href="<?php echo site_url("drop_off/manage_items")?>">Add Items</a></li>
+                          <li><a href="<?php echo site_url("drop_off/manage_category")?>">Add Category</a></li>
                         </ul>
                        </li>
-                        
+
                           <!--Expenses Configuration-->
-                         <li><a><i class="fa fa-money"></i>Expenses <span class="fa fa-chevron-down"></span></a>                               <ul class="nav child_menu">
+                         <li><a><i class="fa fa-money"></i>Expenses <span class="fa fa-chevron-down"></span></a>
+                           <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("expenses_manager")?>">Add Expenses Type</a></li>
                         </ul>
                        </li>
-                        
+
                           <!--Payroll Configuration-->
-                         <li><a><i class="fa fa-money"></i>Payroll <span class="fa fa-chevron-down"></span></a>                               <ul class="nav child_menu">
+                         <li><a><i class="fa fa-money"></i>Payroll <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
                           <li><a href="<?php echo site_url("payroll")?>">Add Payroll Type</a></li>
                         </ul>
                         </li>
+
+                        <!--Inventory Configuration-->
+                       <li><a><i class="fa fa-book"></i>Inventory <span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                        <li><a href="<?php echo site_url("inventory/inventory")?>">Add Inventory</a></li>
+                        <li><a href="<?php echo site_url("inventory")?>">Add Inventory Type</a></li>
+                      </ul>
+                     </li>
                     </ul>
                     </li>
                 </ul>
               </div>
-             
-               
+
+
 
             </div>
             <!-- /sidebar menu -->
@@ -130,7 +152,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo $users->getPhotoUrl()?>" alt="">John Doe
+                    <img src="<?php echo $users->getPhotoUrl()?>" alt=""><?php echo $users->user_name ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

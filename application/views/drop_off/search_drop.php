@@ -43,13 +43,14 @@
                                 <td>
                                       <div class="form-group">
                                       <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="text" class="form-control" name="invoice_number">
+                                        <input type="text" class="form-control" name="invoice_number" value="<?php echo set_value('invoice_number')?>">
                                    </div>
                                 </div>
                                 </td>
                                 <td></td>
                                 <td>
-                                    <input type="submit" class="btn btn-success" value="search" name="search"/>
+                                    <input type="submit" class="btn btn-success" value="Search" name="search"/>
+                                    <input type="submit" class="btn btn-success" value="Reprint Reciept" name="reprint"/>
                                 </td>
                             </tr>
                         
@@ -72,6 +73,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                      <?php if (count($droped)):?>
                        <table id="responsive" class="datatable table table-bordered table-hover table-striped dt-responsive nowrap" cellspacing="0">
                                     <center></center>
                         <thead>
@@ -127,7 +129,7 @@
                         </tbody>
                       </table>
                       <?php echo form_close()?>
-                      
+                      <?php endif?>
                     </div>
                 </div> 
                 

@@ -28,14 +28,14 @@
                   </div>
                   <div class="x_content">
                             
-                    <section class="invoice-box" id="print-content">
+                    <section class="invoice-box" id="hello">
           <h1><center>Profit And Loss Account For <span class="all-caps-black"><?php echo $month. ' ' .$year ?></span></center></h1>
              <br>
 
             <br>
              <br>
   <div class="container-panel-md">
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="print-content">
          <thead>
         <tr>
           <th></th>
@@ -175,7 +175,7 @@
                         </div>
                           <!-- Ends Here -->
                     <div>
-                        <center><input type="button" class="btn btn-success btn-print" name="print" value="print"> </center>
+                        <center><input type="submit" class="btn btn-success btn-print" name="print" onclick="window.print" value="print"> </center>
                     </div>
                       </div>
                     </div>

@@ -451,7 +451,6 @@ class Drop_off extends MY_Controller{
         
         $droped = $this->drop_off_model->getAll('' , array(  'invoice_number'=>$invoice_number, 'in_basket'=>$this->no));
         
-        
         if($this->input->post('save'))
         {
                    
@@ -473,6 +472,12 @@ class Drop_off extends MY_Controller{
             }
         }
         
+        if($this->input->post('reprint'))
+        {
+            $invoice_number = $this->input->post('invoice_number');
+            redirect(site_url('drop_off/print_recipt/'.$invoice_number));
+        }
+        
         $this->load->view('layout/header');
         $this->load->view('layout/nav' , [
             'users' => $this->user_model->getOne(),
@@ -489,7 +494,7 @@ class Drop_off extends MY_Controller{
     /*
     *@params Prints Recipt 
     */
-       public function print_recipt($invoice_number = ' ')
+       public function print_recipt($invoice_number = '')
     {
         
         if(!$this->current_user->is(array('Admin' , 'Semi-admin' , 'Operator')))

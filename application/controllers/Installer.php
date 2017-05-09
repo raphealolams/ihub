@@ -74,6 +74,17 @@ t	 * Maps to the following URL
         $this->dbforge->add_key('expenses_id', TRUE);
         $this->dbforge->create_table('expenses', TRUE);
         
+        //Add Inentory Type Table
+        $this->load->model('inventory_type');
+        $this->dbforge->add_field($this->inventory_type->columns);
+        $this->dbforge->add_key('inventory_type_id', TRUE);
+        $this->dbforge->create_table('inventory_type', TRUE);
+        
+        //Add Inentory Table
+        $this->load->model('inventory_model');
+        $this->dbforge->add_field($this->inventory_model->columns);
+        $this->dbforge->add_key('inventory_id', TRUE);
+        $this->dbforge->create_table('inventory', TRUE);
         
         //Add Items Table
         $this->load->model('items');
@@ -158,12 +169,6 @@ t	 * Maps to the following URL
         $this->dbforge->add_field($this->staff_status->columns);
         $this->dbforge->add_key('staff_status_id', TRUE);
         $this->dbforge->create_table('staff_status', TRUE);
-    
-        //Add Tax Table
-        $this->load->model('tax');
-        $this->dbforge->add_field($this->tax->columns);
-        $this->dbforge->add_key('tax_id', TRUE);
-        $this->dbforge->create_table('tax', TRUE);
         
         //Add User Table
         $this->load->model('user_model');
